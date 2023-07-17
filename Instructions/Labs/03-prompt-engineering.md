@@ -24,7 +24,7 @@ Necesitará una suscripción de Azure que tenga acceso a Azure OpenAI Service.
 
 Para poder usar modelos de Azure OpenAI, debe aprovisionar un recurso de Azure OpenAI en su suscripción de Azure.
 
-1. Inicie sesión en el [Portal de Azure](https://portal.azure.com).
+1. Inicie sesión en [Azure Portal](https://portal.azure.com).
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
     - **Suscripción**: una suscripción de Azure que tenga acceso a Azure OpenAI Service.
     - **Grupo de recursos**: cree un grupo de recursos con el nombre que prefiera.
@@ -40,7 +40,8 @@ Para usar la API de Azure OpenAI, primero debe implementar un modelo para usarlo
 
 1. En la página **Información general** del recurso de Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador. También puede ir directamente a [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true).
 2. En Azure OpenAI Studio, cree una nueva implementación con la siguiente configuración:
-    - **Nombre del modelo**: gpt-35-turbo
+    - **Modelo**: gpt-35-turbo
+    - **Versión del modelo**: *use la versión predeterminada*
     - **Nombre de implementación**: text-turbo
 
 > **Nota**: Cada modelo de Azure OpenAI está optimizado para un equilibrio de funcionalidad y rendimiento diferente. En este ejercicio usaremos la serie de modelos **3.5 Turbo** en la familia de modelos **GPT-3**, que tiene una alta capacidad de reconocimiento del lenguaje. En este ejercicio se usa solamente un único modelo, pero la implementación y el uso de otros modelos que implemente funcionarán de la misma manera.

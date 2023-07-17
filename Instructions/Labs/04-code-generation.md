@@ -5,7 +5,7 @@ lab:
 
 # Generación y mejora del código con Azure OpenAI Service
 
-Los modelos de Azure OpenAI Service pueden generar código usando mensajes en lenguaje natural, corregir errores en código finalizado y proporcionar comentarios sobre el código. Estos modelos también pueden explicar y simplificar el código para ayudarle a comprender lo que hace y cómo mejorarlo.
+Los modelos de Azure OpenAI Service pueden generar código usando mensajes en lenguaje natural, corrigiendo errores en código finalizado y proporcionado comentarios sobre el código. Estos modelos también pueden explicar y simplificar el código, lo que le ayuda a saber lo que hace y cómo mejorarlo.
 
 Este ejercicio dura aproximadamente **25** minutos.
 
@@ -18,34 +18,35 @@ Necesitará una suscripción de Azure que tenga acceso a Azure OpenAI Service.
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
-Para poder usar modelos de Azure OpenAI, debe aprovisionar un recurso de Azure OpenAI en su suscripción de Azure.
+Para poder usar modelos de Azure OpenAI, es preciso aprovisionar un recurso de Azure OpenAI en una suscripción de Azure.
 
-1. Inicie sesión en el [Portal de Azure](https://portal.azure.com).
+1. Inicie sesión en [Azure Portal](https://portal.azure.com).
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
     - **Suscripción**: una suscripción de Azure que tenga acceso a Azure OpenAI Service.
     - **Grupo de recursos**: cree un grupo de recursos con el nombre que prefiera.
     - **Región**: elija cualquier región disponible.
-    - **Nombre**: elija un nombre único.
+    - **Nombre**: el nombre único que elija.
     - **Plan de tarifa**: estándar S0
-3. Espere a que la implementación finalice. A continuación, vaya al recurso de Azure OpenAI implementado en Azure Portal.
-4. Vaya a la página **Claves y punto de conexión** y guarde esos datos en un archivo de texto para usarlos más adelante.
+3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
+4. Vaya a la página **Claves y punto de conexión**, y guarde esos datos en un archivo de texto para usarlos más adelante.
 
 ## Implementar un modelo
 
-Para generar código con la API de Azure OpenAI, primero debe implementar un modelo para usarlo con **Azure OpenAI Studio**. Una vez implementado, usaremos el modelo con el área de juegos y haremos referencia a ese modelo en la aplicación.
+Para usar Azure OpenAI API para generar código, primero hay que implementar un modelo para usarlo con **Azure OpenAI Studio**. Una vez implementado, usaremos el modelo con el área de juegos y haremos referencia a él en la aplicación.
 
-1. En la página **Información general** del recurso de Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador. También puede ir directamente a [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true).
-2. En Azure OpenAI Studio, cree una nueva implementación con la siguiente configuración:
-    - **Nombre del modelo**: gpt-35-turbo
+1. En la página **Información general** del recurso de Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador. Pero tenga en cuenta que también puede ir directamente a [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true).
+2. En Azure OpenAI Studio, cree una implementación con la siguiente configuración:
+    - **Modelo**: gpt-35-turbo
+    - **Versión del modelo**: *use la versión predeterminada*
     - **Nombre de implementación**: 35turbo
 
-> **Nota**: Cada modelo de Azure OpenAI está optimizado para un equilibrio de funcionalidad y rendimiento diferente. En este ejercicio usaremos la serie de modelos **3.5 Turbo** en la familia de modelos **GPT-3**, que tiene una alta capacidad de reconocimiento tanto del lenguaje como del código.
+> **Nota**: Cada modelo de Azure OpenAI está optimizado para lograr un equilibrio diferente de funcionalidad y rendimiento. En este ejercicio, se usará la serie de modelos **3.5 Turbo** de la familia de modelos **GPT-3**, que tiene una alta capacidad de reconocimiento tanto del lenguaje como del código.
 
 ## Generación de código en el área de juegos de chat
 
-Antes de usarlo en la aplicación, vea cómo Azure OpenAI puede generar y explicar código en el área de juegos de chat.
+Antes de usarlo en la aplicación, examine la forma en que Azure OpenAI puede generar y explicar código en el área de juegos de chat.
 
-1. En [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true), vaya al área de juegos **Chat** del panel izquierdo.
+1. En [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true), vaya al área de juegos de **chat** del panel izquierdo.
 1. En la sección **Configuración del asistente** de la parte superior, seleccione la plantilla de mensaje del sistema **Predeterminado**.
 1. En la sección **Sesión de chat**, escriba el siguiente mensaje y presione *Entrar*.
 
@@ -53,10 +54,10 @@ Antes de usarlo en la aplicación, vea cómo Azure OpenAI puede generar y explic
    Write a function in python that takes a character and string as input, and returns how many times that character appears in the string
     ```
 
-1. Es probable que el modelo responda con una función, con alguna explicación de lo que hace la función y de cómo llamarla.
+1. Es probable que el modelo responda con una función, que explique lo que hace la función y que indique cómo llamarla.
 1. A continuación, envíe el mensaje `Do the same thing, but this time write it in C#`.
-1. Observe la salida. Es probable que el modelo responda de forma muy similar a la primera vez, pero ahora con código de C#. Puede hacer de nuevo la solicitud para otro lenguaje que elija o una función para completar una tarea diferente, como revertir la cadena de entrada.
-1. Ahora vamos a explorar el uso de la inteligencia artificial para comprender el código con este ejemplo de una función aleatoria que vio escrita en Ruby. Envíe lo siguiente como mensaje del usuario.
+1. Observe la salida. Es probable que el modelo responda de forma muy similar a la primera vez, pero esta vez con código de C#. Puede volver a pedirlo para cualquier otro lenguaje o una función para completar una tarea diferente, como revertir la cadena de entrada.
+1. Ahora vamos a explorar el uso de la inteligencia artificial para comprender el código con este ejemplo de una función aleatoria escrita en Ruby. Envíe lo siguiente como mensaje del usuario.
 
     ```code
     What does the following function do?  
@@ -72,11 +73,11 @@ Antes de usarlo en la aplicación, vea cómo Azure OpenAI puede generar y explic
     end
     ```
 
-1. Observe la salida, que explica lo que hace la función en lenguaje natural. Pídale al modelo que vuelva a escribirla en un lenguaje con el que está familiarizado.
+1. Observe la salida, que explica lo que hace la función en lenguaje natural. Pruebe a solicitar al modelo que vuelva a escribirla en un lenguaje que conozca.
 
-## Configuración de una aplicación en Cloud Shell
+## Configuración de aplicaciones en Cloud Shell
 
-Para mostrar cómo integrar un modelo de Azure OpenAI, usaremos una breve aplicación de la línea de comandos que se ejecuta en Cloud Shell en Azure. Abra una nueva pestaña del explorador para trabajar con Cloud Shell.
+Para mostrar cómo realizar la integración con un modelo de Azure OpenAI, usaremos una breve aplicación de la línea de comandos que se ejecuta en Cloud Shell en Azure. Abra una nueva pestaña del explorador para trabajar con Cloud Shell.
 
 1. En [Azure Portal](https://portal.azure.com?azure-portal=true), seleccione el botón **[>_]** (*Cloud Shell*) en la parte superior de la página, a la derecha del cuadro de búsqueda. Se abrirá un panel de Cloud Shell en la parte inferior del portal.
 
@@ -95,15 +96,15 @@ Para mostrar cómo integrar un modelo de Azure OpenAI, usaremos una breve aplica
    git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
     ```
 
-6. Los archivos se descargan en una carpeta denominada **azure-openai**. Vaya a los archivos del laboratorio para este ejercicio con el siguiente comando.
+6. Los archivos se descargan en una carpeta denominada **azure-openai**. Vaya a los archivos del laboratorio de este ejercicio, para lo que debe usar el siguiente comando.
 
     ```bash
    cd azure-openai/Labfiles/04-code-generation
     ```
 
-    Se han proporcionado aplicaciones para C# y Python, así como código de ejemplo que usaremos en este laboratorio.
+    Se han proporcionado aplicaciones para C# y Python, así como el código de ejemplo que se usara en este laboratorio.
 
-    Abra el editor de código integrado, donde puede ver los archivos de código que usaremos en `sample-code`. Use el siguiente comando para abrir los archivos del laboratorio en el editor de código.
+    Abra el editor de código integrado, donde puede ver los archivos de código que se van a usar en `sample-code`. Use el siguiente comando para abrir los archivos del laboratorio en el editor de código.
 
     ```bash
    code .
@@ -115,14 +116,14 @@ En este ejercicio, completará algunas partes clave de la aplicación para habil
 
 1. En el editor de código, expanda la carpeta del lenguaje que prefiera.
 
-2. Abra el archivo de configuración para el lenguaje.
+2. Abra el archivo de configuración de dicho lenguaje.
 
     - **C#** : `appsettings.json`
     - **Python**: `.env`
 
 3. Actualice los valores de configuración para incluir el **punto de conexión** y la **clave** del recurso de Azure OpenAI que ha creado, así como el nombre de la implementación, `35turbo`. Guarde el archivo.
 
-4. Vaya a la carpeta del lenguaje que prefiera e instale los paquetes necesarios.
+4. Vaya a la carpeta del lenguaje que desee usar e instale los paquetes necesarios.
 
     **C#**
 
@@ -139,7 +140,7 @@ En este ejercicio, completará algunas partes clave de la aplicación para habil
    pip install openai
     ```
 
-5. Seleccione el archivo de código de esta carpeta para el lenguaje elegido y agregue las bibliotecas necesarias.
+5. Seleccione en esta carpeta el archivo de código del lenguaje y agregue las bibliotecas necesarias.
 
     **C#**
 
@@ -178,7 +179,7 @@ En este ejercicio, completará algunas partes clave de la aplicación para habil
    openai.api_key = azure_oai_key
     ```
 
-7. En la función que llama al modelo de Azure OpenAI, agregue el código para darle formato a la solicitud y enviársela al modelo.
+7. En la función que llama al modelo de Azure OpenAI, agregue el código para dar formato a la solicitud y enviarla al modelo.
 
     **C#**
 
@@ -230,25 +231,25 @@ Ahora que ha configurado la aplicación, ejecútela para intentar generar códig
 > **Nota**: Algunos usuarios pueden experimentar una limitación de volumen si se llama al modelo con demasiada frecuencia. Si se produce un error relacionado con el límite de volumen de tokens, espere un minuto y vuelva a intentarlo.
 
 1. En el editor de código, expanda la carpeta `sample-code` y observe brevemente la función y la aplicación para el lenguaje. Estos archivos se usarán para las tareas de la aplicación.
-1. En el terminal de Bash en Cloud Shell, vaya a la carpeta del lenguaje que prefiera.
+1. En el terminal de Bash de Cloud Shell, vaya a la carpeta del lenguaje que prefiera.
 1. Ejecute la aplicación.
 
     - **C#** : `dotnet run`
     - **Python**: `python code-generation.py`
 
-1. Elija la opción **1** para agregar comentarios al código. Tenga en cuenta que la respuesta puede tardar unos segundos en cada una de estas tareas.
-1. Los resultados se ponen en `result/app.txt`. Abra ese archivo y compárelo con el archivo de la función que está en `sample-code`.
+1. Elija la opción **1** para agregar comentarios al código. Tenga en cuenta que la respuesta puede tardar unos segundos.
+1. Los resultados se colocarán en `result/app.txt`. Abra ese archivo y compárelo con el archivo de la función que está en `sample-code`.
 1. Después, elija la opción **2** para escribir pruebas unitarias para esa misma función.
-1. Los resultados reemplazan lo que había en `result/app.txt` y detallan cuatro pruebas unitarias para esa función.
-1. A continuación, elija la opción **3** para corregir errores en una aplicación para jugar a Go Fish.
-1. Los resultados reemplazan lo que había en `result/app.txt` y deben tener un código muy similar con algunas cosas corregidas.
+1. Los resultados reemplazarán lo que había en `result/app.txt` e indican que hay cuatro pruebas unitarias para esa función.
+1. Luego, elija la opción **3** para corregir errores en una aplicación para jugar a Go Fish.
+1. Los resultados reemplazarán lo que había en `result/app.txt` y deben tener un código muy similar con algunas cosas corregidas.
 
-    - **C#** : las correcciones están en las líneas 30 y 59.
-    - **Python**: las correcciones están en las líneas 18 y 31.
+    - **C#** : se realizan correcciones en las líneas 30 y 59.
+    - **Python**: se realizan correcciones en las líneas 18 y 31.
 
-La aplicación para jugar a Go Fish que está en `sample-code` se puede ejecutar, si reemplaza las líneas con errores por la respuesta de Azure OpenAI. Si la ejecuta sin las correcciones, no funciona correctamente.
+La aplicación para jugar a Go Fish que está en `sample-code` se puede ejecutar, siempre que reemplace las líneas con errores por la respuesta de Azure OpenAI. Si la ejecuta sin las correcciones, no funcionará correctamente.
 
-Es importante tener en cuenta que, aunque se ha corregido alguna sintaxis en el código de esta aplicación para jugar a Go Fish, no es una representación estrictamente precisa del juego. Si la observa detenidamente, hay problemas porque no comprueba si quedan cartas de la baraja cuando se roban cartas, no les retira las parejas a los jugadores cuando las forman, y algunos errores más que requieren conocer los juegos de cartas para darse cuenta. Este es un excelente ejemplo de lo útil que pueden ser los modelos de inteligencia artificial generativa para ayudar en la generación de código, pero no se puede confiar en que es correcta, el desarrollador debe comprobarla.
+Es importante tener en cuenta que, aunque se ha corregido una parte de la sintaxis en el código de esta aplicación Go Fish, no es una representación estrictamente precisa del juego. Si la observa detenidamente, verá que no se comprueba si quedan cartas en el mazo antes de robar, no desaparecen las parejas a los jugadores cuando las forman, así como algunos errores más que requieren conocer los juegos de cartas para darse cuenta. Este es un excelente ejemplo de lo útiles que pueden ser los modelos de inteligencia artificial generativa como ayuda para la generación de código, pero no se puede confiar en ellos completamente, el desarrollador debe realizar una última comprobación.
 
 Si desea ver la respuesta completa de Azure OpenAI, establezca la variable `printFullResponse` en `True` y vuelva a ejecutar la aplicación.
 
