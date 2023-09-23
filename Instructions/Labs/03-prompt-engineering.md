@@ -22,24 +22,24 @@ Necesitará una suscripción de Azure que tenga acceso a Azure OpenAI Service.
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
-Para poder usar modelos de Azure OpenAI, debe aprovisionar un recurso de Azure OpenAI en su suscripción de Azure.
+Para poder usar modelos de Azure OpenAI, es preciso aprovisionar un recurso de Azure OpenAI en una suscripción de Azure.
 
-1. Inicie sesión en [Azure Portal](https://portal.azure.com).
+1. Inicie sesión en el [Portal de Azure](https://portal.azure.com).
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
     - **Suscripción**: una suscripción de Azure que tenga acceso a Azure OpenAI Service.
     - **Grupo de recursos**: cree un grupo de recursos con el nombre que prefiera.
     - **Región**: elija cualquier región disponible.
-    - **Nombre**: elija un nombre único.
+    - **Nombre**: el nombre único que elija.
     - **Plan de tarifa**: estándar S0
-3. Espere a que la implementación finalice. A continuación, vaya al recurso de Azure OpenAI implementado en Azure Portal.
-4. Vaya a la página **Claves y punto de conexión** y guarde esos datos en un archivo de texto para usarlos más adelante.
+3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
+4. Vaya a la página **Claves y punto de conexión**, y guarde esos datos en un archivo de texto para usarlos más adelante.
 
 ## Implementar un modelo
 
 Para usar la API de Azure OpenAI, primero debe implementar un modelo para usarlo con **Azure OpenAI Studio**. Una vez implementado, haremos referencia a ese modelo en la aplicación.
 
 1. En la página **Información general** del recurso de Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador. También puede ir directamente a [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true).
-2. En Azure OpenAI Studio, cree una nueva implementación con la siguiente configuración:
+2. En Azure OpenAI Studio, cree una implementación con la siguiente configuración:
     - **Modelo**: gpt-35-turbo
     - **Versión del modelo**: *use la versión predeterminada*
     - **Nombre de implementación**: text-turbo
@@ -142,7 +142,7 @@ Antes de usar la aplicación, vea cómo la ingeniería de mensajes mejora la res
 
 ## Configuración de una aplicación en Cloud Shell
 
-Para mostrar cómo integrar un modelo de Azure OpenAI, usaremos una breve aplicación de la línea de comandos que se ejecuta en Cloud Shell en Azure. Abra una nueva pestaña del explorador para trabajar con Cloud Shell.
+Para mostrar cómo realizar la integración con un modelo de Azure OpenAI, usaremos una breve aplicación de la línea de comandos que se ejecuta en Cloud Shell en Azure. Abra una nueva pestaña del explorador para trabajar con Cloud Shell.
 
 1. En [Azure Portal](https://portal.azure.com?azure-portal=true), seleccione el botón **[>_]** (*Cloud Shell*) en la parte superior de la página, a la derecha del cuadro de búsqueda. Se abrirá un panel de Cloud Shell en la parte inferior del portal.
 
@@ -188,7 +188,7 @@ En este ejercicio, completará algunas partes clave de la aplicación para habil
     
 3. Actualice los valores de configuración para incluir el **punto de conexión** y la **clave** del recurso de Azure OpenAI que ha creado, así como el nombre del modelo que ha implementado, `text-turbo`. Guarde el archivo.
 
-4. Vaya a la carpeta del lenguaje que prefiera e instale los paquetes necesarios.
+4. Vaya a la carpeta del lenguaje que desee usar e instale los paquetes necesarios.
 
     **C#**
 
@@ -240,7 +240,7 @@ En este ejercicio, completará algunas partes clave de la aplicación para habil
    openai.api_key = azure_oai_key
     ```
 
-6. En la función que llama al modelo de Azure OpenAI, agregue el código para darle formato a la solicitud y enviársela al modelo.
+6. En la función que llama al modelo de Azure OpenAI, agregue el código para dar formato a la solicitud y enviarla al modelo.
 
     **C#**
 
