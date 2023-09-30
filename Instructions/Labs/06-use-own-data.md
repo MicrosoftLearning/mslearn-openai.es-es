@@ -18,16 +18,16 @@ Necesitará una suscripción de Azure que tenga acceso a Azure OpenAI Service.
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
-Para poder usar modelos de Azure OpenAI, debe aprovisionar un recurso de Azure OpenAI en su suscripción de Azure.
+Para poder usar modelos de Azure OpenAI, es preciso aprovisionar un recurso de Azure OpenAI en una suscripción de Azure.
 
-1. Inicie sesión en [Azure Portal](https://portal.azure.com?azure-portal=true).
+1. Inicie sesión en el [Portal de Azure](https://portal.azure.com?azure-portal=true).
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
     - **Suscripción**: una suscripción de Azure que tenga acceso a Azure OpenAI Service.
     - **Grupo de recursos**: cree un grupo de recursos con el nombre que prefiera.
     - **Región**: elija cualquier región disponible.
-    - **Nombre**: elija un nombre único.
+    - **Nombre**: el nombre único que elija.
     - **Plan de tarifa**: estándar S0
-3. Espere a que la implementación finalice. A continuación, vaya al recurso de Azure OpenAI implementado en Azure Portal.
+3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
 
 ## Implementar un modelo
 
@@ -80,17 +80,19 @@ A continuación, agregue los datos en el área de juegos de chat para ver cómo 
     - **Plan de tarifa**: básico
 
 1. Espere hasta que se haya implementado el recurso de búsqueda y, a continuación, vuelva a Azure AI Studio y actualice la página.
-1. En **Agregar datos**, escriba los valores siguientes para el origen de datos.
+1. En **Agregar datos**, escriba los valores siguientes para el origen de datos y seleccione **Siguiente**.
 
     - **Seleccionar origen de datos**: cargar archivos
     - **Seleccionar recurso de Azure Blob Storage**: *elija el recurso de almacenamiento que ha creado*
         - Activación de CORS cuando se le solicite
     - **Seleccionar el recurso de Azure Cognitive Search**: *elija el recurso de búsqueda que creó*
     - **Escribir el nombre del índice**: margiestravel
-    - Seleccione el cuadro
+    - **Agregar búsqueda vectorial a este recurso de búsqueda**: no comprobado
+    - **Reconozco que la conexión a una cuenta de Azure Cognitive Search conllevará el uso de mi cuenta**: comprobado
 
-1. En la página **Cargar archivos**, cargue los archivos PDF que descargó.
-1. Seleccione **Guardar y cerrar**. Esta acción agregará los datos. Esta operación puede tardar unos minutos, durante los cuales debe dejar abierta la ventana. Una vez completado, verá el origen de datos, el recurso de búsqueda y el índice especificados en el panel **Configuración del asistente**.
+1. En la página **Cargar archivos**, cargue los archivos PDF que descargó y, a continuación, seleccione **Siguiente**.
+1. En la página **Administración de datos**, seleccione el tipo de búsqueda **Palabra clave** en la lista desplegable y, a continuación, seleccione **Siguiente**.
+1. En la página **Revisar y finalizar**, seleccione **Guardar y cerrar**, lo que agregará los datos. Esta operación puede tardar unos minutos, durante los cuales debe dejar abierta la ventana. Una vez completado, verá el origen de datos, el recurso de búsqueda y el índice especificados en el panel **Configuración del asistente**.
 
 ## Chat con un modelo basado en los datos
 
