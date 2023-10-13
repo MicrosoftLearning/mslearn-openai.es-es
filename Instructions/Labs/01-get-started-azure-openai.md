@@ -20,23 +20,23 @@ Necesitará una suscripción de Azure que pueda acceder a Azure OpenAI Service.
 
 Para poder usar modelos de Azure OpenAI, es preciso aprovisionar un recurso de Azure OpenAI en una suscripción de Azure.
 
-1. Inicie sesión en [Azure Portal](https://portal.azure.com).
+1. Inicie sesión en el [Portal de Azure](https://portal.azure.com).
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
     - **Suscripción**: una suscripción de Azure que tenga acceso a Azure OpenAI Service.
     - **Grupo de recursos**: cree un grupo de recursos con el nombre que prefiera.
     - **Región**: elija cualquier región disponible.
     - **Nombre**: el nombre único que elija.
     - **Plan de tarifa**: estándar S0
-3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
+3. Espere a que la implementación finalice. A continuación, vaya al recurso de Azure OpenAI implementado en Azure Portal.
 
 ## Implementar un modelo
 
 Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studio** que se puede usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, use Azure OpenAI Studio para implementar un modelo.
 
-1. En la página **Información general** del recurso de Azure OpenAI, pulse el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
-2. En Azure OpenAI Studio, cree una implementación con la siguiente configuración:
+1. En la página **Información general** del recurso Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
+2. En Azure OpenAI Studio, cree una nueva implementación con la siguiente configuración:
     - **Modelo**: gpt-35-turbo
-    - **Versión de Modev**: actualización automática al valor predeterminado
+    - **Versión de Modev**: actualización automática al valor predeterminado.
     - **Nombre de implementación**: my-gpt-model
 
 > **Nota**: Azure OpenAI incluye varios modelos, cada uno de ellos optimizado para lograr un equilibrio de funcionalidades y rendimiento diferente. En este ejercicio, usará el modelo **GPT-35-Turbo**, que es un buen modelo general para resumir y generar código y lenguaje natural. Para más información sobre los modelos disponibles en Azure OpenAI, consulte [Modelos](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) en la documentación de Azure OpenAI.
