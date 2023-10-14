@@ -18,14 +18,14 @@ Necesitará una suscripción de Azure que tenga acceso a Azure OpenAI Service, i
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
-Para poder usar modelos de Azure OpenAI, debe aprovisionar un recurso de Azure OpenAI en su suscripción de Azure.
+Para poder usar modelos de Azure OpenAI, es preciso aprovisionar un recurso de Azure OpenAI en una suscripción de Azure.
 
 1. Inicie sesión en el [Portal de Azure](https://portal.azure.com).
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
     - **Suscripción**: una suscripción de Azure que tenga acceso a Azure OpenAI Service.
     - **Grupo de recursos**: cree un grupo de recursos con el nombre que prefiera.
-    - **Región**: elija cualquier región disponible.
-    - **Nombre**: elija un nombre único.
+    - **Región**: elija **EastUS** como región.
+    - **Nombre**: el nombre único que elija.
     - **Plan de tarifa**: estándar S0
 3. Espere a que la implementación finalice. A continuación, vaya al recurso de Azure OpenAI implementado en Azure Portal.
 4. Vaya a la página **Claves y punto de conexión**. Puede recuperar el punto de conexión único y las claves de autenticación para el servicio desde aquí; los necesitará más adelante.
