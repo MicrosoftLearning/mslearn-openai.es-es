@@ -9,8 +9,6 @@ Con Azure OpenAI Service, los desarrolladores pueden crear bots de chat, modelos
 
 Cuando se trabaja con Azure OpenAI Service, el modo en el que los desarrolladores dan forma a los mensajes afecta considerablemente a la forma en la responderá el modelo de IA generativa. Los modelos de Azure OpenAI pueden adaptar y dar formato al contenido si se les solicita de forma clara y concisa. En este ejercicio verá cómo diferentes solicitudes de contenido similar ayudan a dar forma a la respuesta del modelo de IA para satisfacer mejor sus requisitos.
 
-Imagine que está intentando enviar información para un nuevo rescate de la fauna silvestre y quiere obtener ayuda de un modelo de IA generativa.
-
 Este ejercicio dura aproximadamente **25** minutos.
 
 ## Antes de comenzar
@@ -31,7 +29,7 @@ Para poder usar modelos de Azure OpenAI, es preciso aprovisionar un recurso de A
     - **Región**: elija cualquier región disponible.
     - **Nombre**: el nombre único que elija.
     - **Plan de tarifa**: estándar S0
-3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
+3. Espere a que la implementación finalice. A continuación, vaya al recurso de Azure OpenAI implementado en Azure Portal.
 4. Vaya a la página **Claves y punto de conexión**, y guarde esos datos en un archivo de texto para usarlos más adelante.
 
 ## Implementar un modelo
@@ -39,7 +37,7 @@ Para poder usar modelos de Azure OpenAI, es preciso aprovisionar un recurso de A
 Para usar la API de Azure OpenAI, primero debe implementar un modelo para usarlo con **Azure OpenAI Studio**. Una vez implementado, haremos referencia a ese modelo en la aplicación.
 
 1. En la página **Información general** del recurso de Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador. También puede ir directamente a [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true).
-2. En Azure OpenAI Studio, cree una implementación con la siguiente configuración:
+2. En Azure OpenAI Studio, cree una nueva implementación con la siguiente configuración:
     - **Modelo**: gpt-35-turbo
     - **Versión del modelo**: *use la versión predeterminada*
     - **Nombre de implementación**: text-turbo
