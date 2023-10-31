@@ -23,7 +23,7 @@ Para poder usar modelos de Azure OpenAI, es preciso aprovisionar un recurso de A
 1. Inicie sesión en el [Portal de Azure](https://portal.azure.com).
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
     - **Suscripción**: una suscripción de Azure que tenga acceso a Azure OpenAI Service.
-    - **Grupo de recursos**: cree un grupo de recursos con el nombre que prefiera.
+    - **Grupo de recursos**: elija un grupo de recursos existente o cree uno nuevo con un nombre de su elección.
     - **Región**: elija cualquier región disponible.
     - **Nombre**: el nombre único que elija.
     - **Plan de tarifa**: estándar S0
