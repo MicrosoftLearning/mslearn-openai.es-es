@@ -25,7 +25,7 @@ Para poder usar modelos de Azure OpenAI, es preciso aprovisionar un recurso de A
 1. Inicie sesión en el [Portal de Azure](https://portal.azure.com).
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
     - **Suscripción**: una suscripción de Azure que tenga acceso a Azure OpenAI Service.
-    - **Grupo de recursos**: cree un grupo de recursos con el nombre que prefiera.
+    - **Grupo de recursos**: elija un grupo de recursos existente o cree uno nuevo con un nombre de su elección.
     - **Región**: elija cualquier región disponible.
     - **Nombre**: el nombre único que elija.
     - **Plan de tarifa**: estándar S0
@@ -148,9 +148,19 @@ Para mostrar cómo realizar la integración con un modelo de Azure OpenAI, usare
 
 2. La primera vez que abra Cloud Shell, es posible que se le pida que elija el tipo de shell que desea usar (*Bash* o *PowerShell*). Seleccione **Bash**. Si no ve esta opción, omita el paso.  
 
-3. Si se le pide que cree almacenamiento para Cloud Shell, asegúrese de que se haya especificado la suscripción y seleccione **Crear almacenamiento**. A continuación, espere un minuto más o menos a que se cree el almacenamiento.
+3. Si se le pide que cree almacenamiento para Cloud Shell, seleccione **Mostrar configuración avanzada** y seleccione la siguiente configuración:
+    - **Suscripción**: Su suscripción
+    - **Regiones de Cloud Shell**: elija cualquier región disponible
+    - No está seleccionado **Mostrar conjuntos de aislamiento de red virtual**
+    - **Grupo de recursos**: use el grupo de recursos existente en el que aprovisionó el recurso de Azure OpenAI
+    - **Cuenta de almacenamiento**: cree una cuenta de almacenamiento nueva con un nombre único
+    - **Recurso compartido de archivos**: cree un nuevo recurso compartido de archivos con un nombre único
 
-4. Asegúrese de que el tipo de shell indicado en la parte superior izquierda del panel de Cloud Shell se cambia a *Bash*. Si es *PowerShell*, cambie a *Bash* mediante el menú desplegable.
+    A continuación, espere un minuto más o menos a que se cree el almacenamiento.
+
+    > **Nota**: Si ya tiene una instancia de Cloud Shell configurada en su suscripción de Azure, es posible que tenga que usar la opción **Restablecer configuración de usuario** en el menú ⚙️ para asegurarse de que están instaladas las versiones más recientes de Python y .NET Framework.
+
+4. Asegúrese de que el tipo de shell indicado en la parte superior izquierda del panel de Cloud Shell sea *Bash*. Si es *PowerShell*, cambie a *Bash* mediante el menú desplegable.
 
 5. Cuando se inicie el terminal, escriba el siguiente comando para descargar la aplicación de ejemplo y guárdela en una carpeta denominada `azure-openai`.
 
