@@ -61,7 +61,7 @@ En este ejercicio, usará una sencilla aplicación de Python o Microsoft C# par
 3. Si se le pide que cree almacenamiento para Cloud Shell, seleccione **Mostrar configuración avanzada** y seleccione la siguiente configuración:
     - **Suscripción**: Su suscripción
     - **Regiones de Cloud Shell**: elija cualquier región disponible
-    - No está seleccionado **Mostrar conjuntos de aislamiento de red virtual**
+    -  **Mostrar configuración de aislamiento de VNET** No está seleccionado
     - **Grupo de recursos**: use el grupo de recursos existente en el que aprovisionó el recurso de Azure OpenAI
     - **Cuenta de almacenamiento**: cree una cuenta de almacenamiento nueva con un nombre único
     - **Recurso compartido de archivos**: cree un nuevo recurso compartido de archivos con un nombre único
@@ -75,8 +75,8 @@ En este ejercicio, usará una sencilla aplicación de Python o Microsoft C# par
 5. Cuando se haya iniciado el terminal, escriba el siguiente comando para descargar el código de la aplicación con el que va a trabajar.
 
     ```bash
-   rm -r azure-openai -f
-   git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
+    rm -r azure-openai -f
+    git clone https://github.com/MicrosoftLearning/mslearn-openai azure-openai
     ```
 
     Los archivos se descargan en una carpeta denominada **azure-openai**. Se han proporcionado aplicaciones para C# y Python. Las dos aplicaciones tienen la misma funcionalidad.
@@ -86,20 +86,22 @@ En este ejercicio, usará una sencilla aplicación de Python o Microsoft C# par
     **Python**
 
     ```bash
-   cd azure-openai/Labfiles/05-image-generation/Python
+    cd azure-openai/Labfiles/05-image-generation/Python
     ```
 
     **C#**
 
     ```bash
-   cd azure-openai/Labfiles/05-image-generation/CSharp
+    cd azure-openai/Labfiles/05-image-generation/CSharp
     ```
 
 7. Use el siguiente comando para abrir el editor de código integrado y ver los archivos de código con los que va a trabajar.
 
     ```bash
-   code .
+    code .
     ```
+
+    > **Sugerencia**: consulta la [documentación del editor de código de Azure Cloud Shell](https://learn.microsoft.com/azure/cloud-shell/using-cloud-shell-editor) para más información sobre cómo usarla para trabajar con archivos en el entorno de Azure Cloud Shell.
 
 ### Configuración de la aplicación
 
@@ -117,7 +119,7 @@ La aplicación usa un archivo de configuración para almacenar los detalles nece
 3. Si usa **Python**, también deberá instalar el paquete **python-dotenv** que se usa para leer el archivo de configuración. En el panel del símbolo del sistema de la consola, asegúrese de que la carpeta actual es **~/azure-openai/Labfiles/05-image-generation/Python**. A continuación, escriba este comando:
 
     ```bash
-   pip install python-dotenv
+    pip install python-dotenv
     ```
 
 ### Visualización del código de la aplicación
@@ -148,13 +150,13 @@ Ahora que ha revisado el código, es el momento de ejecutarlo y generar algunas 
     **Python**
 
     ```bash
-   python generate-image.py
+    python generate-image.py
     ```
 
     **C#**
 
     ```bash
-   dotnet run
+    dotnet run
     ```
 
 2. Cuando se le pida, escriba la descripción de una imagen. Por ejemplo, *A giraffe flying a kite*.
