@@ -34,35 +34,24 @@ Para poder usar modelos de Azure OpenAI, debe aprovisionar un recurso de Azure O
 Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studio** que se puede usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, use Azure OpenAI Studio para implementar un modelo.
 
 1. En la página **Información general** del recurso Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
-2. En Azure OpenAI Studio, cree una nueva implementación con la siguiente configuración:
-    - **Modelo**: gpt-35-turbo
+2. En Azure OpenAI Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+    - **Modelo**: gpt-35-turbo-16k
     - **Versión de Modev**: actualización automática al valor predeterminado.
-    - **Nombre de implementación**: my-gpt-model
+    - **Nombre de implementación**: *nombre único que prefieras*
+    - **Opciones avanzadas**
+        - **Filtro de contenido**: valor predeterminado
+        - **Límite de velocidad de tokens por minuto**: 5000\*
+        - **Habilitación de la cuota dinámica**: habilitado
 
-> **Nota**: Azure OpenAI incluye varios modelos, cada uno de ellos optimizado para lograr un equilibrio de funcionalidades y rendimiento diferente. En este ejercicio, usará el modelo **GPT-35-Turbo**, que es un buen modelo general para resumir y generar código y lenguaje natural. Para más información sobre los modelos disponibles en Azure OpenAI, consulte [Modelos](https://learn.microsoft.com/azure/cognitive-services/openai/concepts/models) en la documentación de Azure OpenAI.
+    > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
-## Exploración de un modelo en el área de juegos Finalizaciones
-
-Las *áreas de juegos* son interfaces de Azure OpenAI Studio muy útiles que puede usar para experimentar con los modelos implementados sin necesidad de desarrollar su propia aplicación cliente.
-
-1. En Azure OpenAI Studio, en el panel izquierdo, en **Área de juegos**, seleccione **Finalizaciones**.
-2. En la página **Finalizaciones**, asegúrese de que esté seleccionada la implementación **my-gpt-model** y, en la lista **Ejemplos**, seleccione **Generar un cuestionario**.
-
-    El ejemplo de texto resumido consta de un *mensaje* que proporciona texto para indicar al modelo qué tipo de respuesta es necesaria e incluir cierta información contextual.
-
-3. Al final de la página, observe el número de *tokens* detectados en el texto. Los tokens son las unidades básicas de un mensaje, fundamentalmente palabras o partes de palabras del texto.
-4. Use el botón **Generar** para enviar el mensaje al modelo y obtener una respuesta.
-
-    La respuesta consta de un cuestionario basado en el ejemplo del mensaje.
-
-5. Use el botón **Regenerar** para volver a enviar el mensaje y observe que la respuesta puede no ser idéntica a la original. Un modelo de inteligencia artificial generativa puede generar un nuevo lenguaje cada vez que se le llama.
-6. Use el botón **Ver código** para ver el código que usaría una aplicación cliente para enviar el mensaje. Puede seleccionar el lenguaje de programación que prefiera. El mensaje contiene el texto que envió al modelo. La solicitud se envía a la API *Completions* de Azure OpenAI Service.
+> **Nota**: en algunas regiones, la nueva interfaz de implementación de modelos no muestra la opción **Versión del modelo**. En este caso, no te preocupes y continúa sin establecer la opción.
 
 ## Uso del área de juegos de chat
 
 El área de juegos de *chat* proporciona una interfaz de bot de chat para los modelos GPT 3.5 y superiores. Usa la API *ChatCompletions*, en lugar de la antigua API *Completions*.
 
-1. En la sección **Área de juegos**, seleccione la página **Chat** y asegúrese de que el modelo **my-gpt-model** está seleccionado en el panel de configuración de la derecha.
+1. En la sección **Área de juegos**, selecciona la página **Chat** y asegúrate de que el modelo está seleccionado en el panel de configuración.
 2. En la sección **Configuración del asistente**, en el cuadro **Mensaje del sistema**, reemplace el texto actual por la siguiente instrucción: `The system is an AI teacher that helps people learn about AI`.
 
 3. Debajo del cuadro **Mensaje del sistema**, haga clic en **Agregar algunos ejemplos** y escriba el mensaje y la respuesta siguientes en los cuadros designados:
@@ -88,7 +77,7 @@ Puede usar el mensaje y los parámetros para maximizar la probabilidad de genera
 
 1. En el panel **Parámetros**, establezca los siguientes valores de los parámetros:
     - **Temperatura**: 0
-    - **Longitud máxima (tokens)** : 500
+    - **Respuesta máxima:**: 500
 
 2. Envíe el siguiente mensaje
 

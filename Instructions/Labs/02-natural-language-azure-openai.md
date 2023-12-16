@@ -35,12 +35,18 @@ Para poder usar modelos de Azure OpenAI, debe aprovisionar un recurso de Azure O
 Para usar la API de Azure OpenAI, primero debe implementar un modelo para usarlo con **Azure OpenAI Studio**. Una vez implementado, haremos referencia a ese modelo en la aplicación.
 
 1. En la página **Información general** del recurso de Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
-2. En Azure OpenAI Studio, cree una nueva implementación con la siguiente configuración:
-    - **Modelo**: gpt-35-turbo
-    - **Versión del modelo**: *use la versión predeterminada*
-    - **Nombre de implementación**: text-turbo
+2. En Azure OpenAI Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+    - **Modelo**: gpt-35-turbo-16k
+    - **Versión de Modev**: actualización automática al valor predeterminado.
+    - **Nombre de implementación**: *nombre único que prefieras*
+    - **Opciones avanzadas**
+        - **Filtro de contenido**: valor predeterminado
+        - **Límite de velocidad de tokens por minuto**: 5000\*
+        - **Habilitación de la cuota dinámica**: habilitado
 
-> **Nota**: Cada modelo de Azure OpenAI está optimizado para un equilibrio de funcionalidad y rendimiento diferente. En este ejercicio usaremos la serie de modelos **3.5 Turbo** en la familia de modelos **GPT-3**, que tiene una alta capacidad de reconocimiento del lenguaje. En este ejercicio se usa solamente un único modelo, pero la implementación y el uso de otros modelos que implemente funcionarán de la misma manera.
+    > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
+
+> **Nota**: en algunas regiones, la nueva interfaz de implementación de modelos no muestra la opción **Versión del modelo**. En este caso, no te preocupes y continúa sin establecer la opción
 
 ## Configuración de una aplicación en Cloud Shell
 
@@ -79,17 +85,19 @@ Para mostrar cómo integrar un modelo de Azure OpenAI, usaremos una breve aplica
    cd azure-openai/Labfiles/02-nlp-azure-openai
     ```
 
-Se han proporcionado aplicaciones para C# y Python, así como un archivo de texto de ejemplo que usará para probar el resumen. Las dos aplicaciones tienen la misma funcionalidad.
+7. Abre el editor de código integrado ejecutando el comando siguiente:
 
-Abra el editor de código integrado, donde verá el archivo de texto que va a resumir con el modelo en `text-files/sample-text.txt`. Use el siguiente comando para abrir los archivos del laboratorio en el editor de código.
+    ```bash
+    code .
+    ```
 
-```bash
-code .
-```
+8. En el editor de código, expande la carpeta **text-files** y selecciona **sample-text.txt** para ver el texto que usará el modelo para el resumen.
+
+    > **Sugerencia**: consulta la [documentación del editor de código de Azure Cloud Shell](https://learn.microsoft.com/azure/cloud-shell/using-cloud-shell-editor) para más información sobre cómo usarla para trabajar con archivos en el entorno de Azure Cloud Shell.
 
 ## Configuración de la aplicación
 
-En este ejercicio, completará algunas partes clave de la aplicación para habilitarla con el recurso de Azure OpenAI.
+En este ejercicio, completará algunas partes clave de la aplicación para habilitarla con el recurso de Azure OpenAI. Se han proporcionado aplicaciones para C# y Python. Las dos aplicaciones tienen la misma funcionalidad.
 
 1. En el editor de código, expanda la carpeta **CSharp** o **Python**, según el lenguaje que prefiera.
 
@@ -98,23 +106,23 @@ En este ejercicio, completará algunas partes clave de la aplicación para habil
     - C#: `appsettings.json`
     - Python: `.env`
     
-3. Actualice los valores de configuración para incluir el **punto de conexión** y la **clave** del recurso de Azure OpenAI que ha creado, así como el nombre del modelo que ha implementado, `text-turbo`. Guarde el archivo.
+3. Actualiza los valores de configuración para incluir el **punto de conexión** y la **clave** del recurso de Azure OpenAI que has creado, así como el nombre del modelo que has implementado. Guarde el archivo.
 
-4. Vaya a la carpeta del lenguaje que prefiera e instale los paquetes necesarios.
+4. En el panel de consola, escribe los siguientes comandos para ir a la carpeta del idioma preferido e instalar los paquetes necesarios
 
     **C#**
 
     ```bash
    cd CSharp
-   dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.5
+   dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.9
     ```
 
     **Python**
 
     ```bash
-   cd Python
-   pip install python-dotenv
-   pip install openai
+    cd Python
+    pip install python-dotenv
+    pip install openai==1.2.0
     ```
 
 5. Vaya a la carpeta del lenguaje que prefiera, seleccione el archivo de código y agregue las bibliotecas necesarias.
@@ -122,68 +130,67 @@ En este ejercicio, completará algunas partes clave de la aplicación para habil
     **C#**
 
     ```csharp
-   // Add Azure OpenAI package
-   using Azure.AI.OpenAI;
+    // Add Azure OpenAI package
+    using Azure.AI.OpenAI;
     ```
 
     **Python**
 
     ```python
-   # Add OpenAI import
-   import openai
+    # Add OpenAI import
+    from openai import AzureOpenAI
     ```
 
-5. Abra el código de la aplicación para el lenguaje y agregue el código necesario para crear la solicitud, que especifica los parámetros del modelo, como `prompt` y `temperature`.
+6. Abra el código de la aplicación para el lenguaje y agregue el código necesario para crear la solicitud, que especifica los parámetros del modelo, como `prompt` y `temperature`.
 
     **C#**
 
     ```csharp
-   // Initialize the Azure OpenAI client
-   OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
-
-   // Build completion options object
-   ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
-   {
-       Messages =
-       {
-          new ChatMessage(ChatRole.System, "You are a helpful assistant. Summarize the following text in 60 words or less."),
-          new ChatMessage(ChatRole.User, text),
-       },
-       MaxTokens = 120,
-       Temperature = 0.7f,
-   };
-
-   // Send request to Azure OpenAI model
-   ChatCompletions response = client.GetChatCompletions(
-       deploymentOrModelName: oaiModelName, 
-       chatCompletionsOptions);
-   string completion = response.Choices[0].Message.Content;
-
-   Console.WriteLine("Summary: " + completion + "\n");
+    // Initialize the Azure OpenAI client
+    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    
+    // Build completion options object
+    ChatCompletionsOptions chatCompletionsOptions = new ChatCompletionsOptions()
+    {
+        Messages =
+        {
+            new ChatMessage(ChatRole.System, "You are a helpful assistant."),
+            new ChatMessage(ChatRole.User, "Summarize the following text in 20 words or less:\n" + text),
+        },
+        MaxTokens = 120,
+        Temperature = 0.7f,
+        DeploymentName = oaiModelName
+    };
+    
+    // Send request to Azure OpenAI model
+    ChatCompletions response = client.GetChatCompletions(chatCompletionsOptions);
+    string completion = response.Choices[0].Message.Content;
+    
+    Console.WriteLine("Summary: " + completion + "\n");
     ```
 
     **Python**
 
     ```python
-   # Set OpenAI configuration settings
-   openai.api_type = "azure"
-   openai.api_base = azure_oai_endpoint
-   openai.api_version = "2023-03-15-preview"
-   openai.api_key = azure_oai_key
-
-   # Send request to Azure OpenAI model
-   print("Sending request for summary to Azure OpenAI endpoint...\n\n")
-   response = openai.ChatCompletion.create(
-       engine=azure_oai_model,
-       temperature=0.7,
-       max_tokens=120,
-       messages=[
-          {"role": "system", "content": "You are a helpful assistant. Summarize the following text in 60 words or less."},
-           {"role": "user", "content": text}
-       ]
-   )
-
-   print("Summary: " + response.choices[0].message.content + "\n")
+    # Initialize the Azure OpenAI client
+    client = AzureOpenAI(
+            azure_endpoint = azure_oai_endpoint, 
+            api_key=azure_oai_key,  
+            api_version="2023-05-15"
+            )
+    
+    # Send request to Azure OpenAI model
+    response = client.chat.completions.create(
+        model=azure_oai_model,
+        temperature=0.7,
+        max_tokens=120,
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": "Summarize the following text in 20 words or less:\n" + text}
+        ]
+    )
+    
+    print("Summary: " + response.choices[0].message.content + "\n")
     ```
 
 ## Ejecución de la aplicación
