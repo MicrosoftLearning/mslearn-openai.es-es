@@ -55,7 +55,7 @@ Para usar la API de Azure OpenAI, primero debe implementar un modelo para usarlo
 Antes de usar la aplicación, vea cómo la ingeniería de mensajes mejora la respuesta del modelo en el área de juegos. En este primer ejemplo, imagine que está intentando escribir una aplicación de Python de animales con nombres divertidos.
 
 1. En [Azure OpenAI Studio](https://oai.azure.com/?azure-portal=true), vaya al área de juegos **Chat** del panel izquierdo.
-1. En **Configuración**, asegúrate de que la implementación del modelo está seleccionada.
+1. En **Configuración**, asegúrate de que la implementación de modelo está seleccionada.
 1. En la sección **Configuración del Asistente** de la parte superior, escriba `You are a helpful AI assistant` como mensaje del sistema.
 1. En la sección **Sesión de chat**, escriba el siguiente mensaje y presione *Entrar*.
 
