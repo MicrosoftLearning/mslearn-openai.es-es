@@ -71,7 +71,7 @@ A continuación, agregue los datos en el área de juegos de chat para ver cómo 
 1. [Descargue los datos](https://aka.ms/own-data-brochures) que usará desde GitHub. Extraiga los archivos PDF del elemento `.zip` proporcionado.
 1. Vaya al área de juegos **Chat** y seleccione *Agregar los datos* en el panel Configuración del asistente.
 1. Seleccione **Agregar un origen de datos** y elija *Cargar archivos* en la lista desplegable.
-1. Deberá crear una cuenta de almacenamiento y un recurso de Azure Cognitive Search. En la lista desplegable del recurso de almacenamiento, seleccione **Crear un nuevo recurso de Azure Blob Storage** y cree una cuenta de almacenamiento con la siguiente configuración. Todo lo que no se especifique se deja con el valor predeterminado.
+1. Deberás crear una cuenta de almacenamiento y un recurso de Azure AI Search. En la lista desplegable del recurso de almacenamiento, seleccione **Crear un nuevo recurso de Azure Blob Storage** y cree una cuenta de almacenamiento con la siguiente configuración. Todo lo que no se especifique se deja con el valor predeterminado.
 
     - **Suscripción**: *la misma suscripción que el recurso de Azure OpenAI*
     - **Grupo de recursos**: *el mismo grupo de recursos que el recurso de Azure Cognitive Search*
@@ -79,7 +79,7 @@ A continuación, agregue los datos en el área de juegos de chat para ver cómo 
     - **Región**: *misma región que el recurso de Azure OpenAI*
     - **Redundancia**: almacenamiento con redundancia local (LRS)
 
-1. Una vez creado el recurso, vuelva a Azure OpenAI Studio y seleccione **Crear un nuevo recurso de Azure Cognitive Search** con la siguiente configuración. Todo lo que no se especifique se deja con el valor predeterminado.
+1. Una vez creado el recurso, vuelve a Azure OpenAI Studio y selecciona **Crear un nuevo recurso de Azure AI Search ** con la siguiente configuración. Todo lo que no se especifique se deja con el valor predeterminado.
 
     - **Suscripción**: *la misma suscripción que el recurso de Azure OpenAI*
     - **Grupo de recursos**: *el mismo grupo de recursos que el recurso de Azure Cognitive Search*
@@ -93,10 +93,10 @@ A continuación, agregue los datos en el área de juegos de chat para ver cómo 
     - **Seleccionar origen de datos**: cargar archivos
     - **Seleccionar recurso de Azure Blob Storage**: *elija el recurso de almacenamiento que ha creado*
         - Activación de CORS cuando se le solicite
-    - **Seleccionar el recurso de Azure Cognitive Search**: *elija el recurso de búsqueda que creó*
+    - **Seleccionar el recurso Azure AI Search **: *elige el recurso de búsqueda que creaste*
     - **Escribir el nombre del índice**: margiestravel
     - **Agregar búsqueda vectorial a este recurso de búsqueda**: no comprobado
-    - **Reconozco que la conexión a una cuenta de Azure Cognitive Search conllevará el uso de mi cuenta**: comprobado
+    - **Reconozco que la conexión a una cuenta de Azure AI Search conllevará el uso de mi cuenta**: comprobado
 
 1. En la página **Cargar archivos**, cargue los archivos PDF que descargó y, a continuación, seleccione **Siguiente**.
 1. En la página **Administración de datos**, seleccione el tipo de búsqueda **Palabra clave** en la lista desplegable y, a continuación, seleccione **Siguiente**.
@@ -236,6 +236,6 @@ Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud a
 
 1. Envía el mensaje `Tell me about London`, tras lo cual, deberías ver la respuesta que hace referencia a los datos.
 
-## Limpieza
+## Limpiar
 
 Cuando haya terminado de usar el recurso de Azure OpenAI, recuerde eliminar el recurso en [Azure Portal](https://portal.azure.com/?azure-portal=true). Asegúrese de incluir también la cuenta de almacenamiento y el recurso de búsqueda, ya que pueden suponer un costo relativamente grande.
