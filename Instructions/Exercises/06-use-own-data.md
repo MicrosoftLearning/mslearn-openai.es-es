@@ -1,70 +1,70 @@
 ---
 lab:
-    title: 'Implement Retrieval Augmented Generation (RAG) with Azure OpenAI Service'
+  title: Implementación de la generación aumentada de recuperación (RAG) con Azure OpenAI Service
 ---
 
-# Implement Retrieval Augmented Generation (RAG) with Azure OpenAI Service
+# Implementación de la generación aumentada de recuperación (RAG) con Azure OpenAI Service
 
-The Azure OpenAI Service enables you to use your own data with the intelligence of the underlying LLM. You can limit the model to only use your data for pertinent topics, or blend it with results from the pre-trained model.
+Azure OpenAI Service le permite usar sus propios datos con la inteligencia de LLM subyacentes. Puede limitar el modelo para que use solamente los datos para temas pertinentes o combinarlos con los resultados del modelo entrenado previamente.
 
-In the scenario for this exercise, you will perform the role of a software developer working for Margie's Travel Agency. You will explore how to use generative AI to make coding tasks easier and more efficient. The techniques used in the exercise can be applied to other code files, programming languages, and use cases.
+En el escenario de este ejercicio, desempeñará el rol de un desarrollador de software que trabaja para la agencia de viajes de Margie. Explorará cómo usar la inteligencia artificial generativa para facilitar y mejorar la eficacia de las tareas de codificación. Las técnicas que se usan en el ejercicio se pueden aplicar a otros archivos de código, lenguajes de programación y casos de uso.
 
-This exercise will take approximately **20** minutes.
+Este ejercicio dura aproximadamente **20** minutos.
 
-## Provision an Azure OpenAI resource
+## Aprovisionamiento de un recurso de Azure OpenAI
 
-If you don't already have one, provision an Azure OpenAI resource in your Azure subscription.
+Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
 
-1. Sign into the **Azure portal** at `https://portal.azure.com`.
-2. Create an **Azure OpenAI** resource with the following settings:
-    - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
-    - **Resource group**: *Choose or create a resource group*
-    - **Region**: *Make a **random** choice from any of the following regions*\*
-        - Australia East
-        - Canada East
-        - East US
-        - East US 2
-        - France Central
-        - Japan East
-        - North Central US
-        - Sweden Central
-        - Switzerland North
-        - UK South
-    - **Name**: *A unique name of your choice*
-    - **Pricing tier**: Standard S0
+1. Inicie sesión en **Azure Portal** en `https://portal.azure.com`.
+2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
+    - **Suscripción**: *Selección de una suscripción de Azure aprobada para acceder al servicio Azure OpenAI*
+    - **Grupo de recursos**: *elija o cree un grupo de recursos*
+    - **Región**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
+        - Este de Australia
+        - Este de Canadá
+        - Este de EE. UU.
+        - Este de EE. UU. 2
+        - Centro de Francia
+        - Japón Oriental
+        - Centro-Norte de EE. UU
+        - Centro de Suecia
+        - Norte de Suiza
+        - Sur de Reino Unido 2
+    - **Nombre**: *nombre único que prefiera*
+    - **Plan de tarifa**: estándar S0
 
-    > \* Azure OpenAI resources are constrained by regional quotas. The listed regions include default quota for the model type(s) used in this exercise. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
+    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
 
-3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
 
-## Deploy a model
+## Implementar un modelo
 
-Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
+Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studio** que se puede usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, use Azure OpenAI Studio para implementar un modelo.
 
-1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
-2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
-    - **Model**: gpt-35-turbo-16k *(must be this model to use the features in this exercise)*
-    - **Model version**: Auto-update to default
-    - **Deployment name**: *A unique name of your choice. You'll use this name later in the lab.*
-    - **Advanced options**
-        - **Content filter**: Default
-        - **Deployment type**: Standard
-        - **Tokens per minute rate limit**: 5K\*
-        - **Enable dynamic quota**: Enabled
+1. En la página **Información general** del recurso Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
+2. En Azure OpenAI Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+    - **Modelo**: gpt-35-turbo-16k *(debe ser este modelo para usar las características de este ejercicio)*
+    - **Versión de Modev**: actualización automática al valor predeterminado.
+    - **Nombre de implementación**: *Un nombre único que prefiera. Usará este valor más adelante en este laboratorio.*
+    - **Opciones avanzadas**
+        - **Filtro de contenido**: valor predeterminado
+        - **Tipo de implementación**: Estándar
+        - **Límite de velocidad de tokens por minuto**: 5000\*
+        - **Habilitación de la cuota dinámica**: habilitado
 
-    > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
+    > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
-## Observe normal chat behavior without adding your own data
+## Observación del comportamiento normal del chat sin agregar sus propios datos
 
-Before connecting Azure OpenAI to your data, let's first observe how the base model responds to queries without any grounding data.
+Antes de conectar Azure OpenAI a los datos, observe primero cómo responde el modelo base a las consultas sin datos de base.
 
-1. In **Azure OpenAI Studio** at `https://oai.azure.com`, in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
-    - **Setup** - used to set the context for the model's responses.
-    - **Chat session** - used to submit chat messages and view responses.
-    - **Configuration** - used to configure settings for the model deployment.
-2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
-4. In the **Chat session**, submit the following queries, and review the responses:
+1. En **Azure OpenAI Studio** en `https://oai.azure.com`, en la sección **Área de juegos**, seleccione la página **Chat**. La página del área de juegos **Chat** consta de tres secciones principales:
+    - **Instalación**: se usa para establecer el contexto de las respuestas del modelo.
+    - **Sesión de chat**: se usa para enviar mensajes de chat y ver respuestas.
+    - **Configuración**: se usa para configurar los valores de la implementación de modelo.
+2. En el panel **Configuración**, asegúrese de que la implementación de modelo esté seleccionada.
+3. En el área **Configuración**, seleccione la plantilla de mensaje del sistema predeterminada para establecer el contexto de la sesión de chat. El mensaje predeterminado del sistema es *Es un asistente de IA que ayuda a las personas a encontrar información*.
+4. En la **sesión de chat**, envíe las siguientes consultas y revise las respuestas:
 
     ```
     I'd like to take a trip to New York. Where should I stay?
@@ -74,52 +74,52 @@ Before connecting Azure OpenAI to your data, let's first observe how the base mo
     What are some facts about New York?
     ```
 
-    Try similar questions about tourism and places to stay for other locations that will be included in our grounding data, such as London, or San Francisco. You'll likely get complete responses about areas or neighborhoods, and some general facts about the city.
+    Pruebe preguntas similares sobre el turismo y los lugares para alojarse en otras ubicaciones que se incluirán en nuestros datos de base, como Londres o San Francisco. Es probable que obtenga respuestas completas sobre áreas o vecindarios y algunos hechos generales sobre la ciudad.
 
-## Connect your data in the chat playground
+## Conexión de los datos en el área de juegos de chat
 
-Now you'll add some data for a fictional travel agent company named *Margie's Travel*. Then you'll see how the Azure OpenAI model responds when using the brochures from Margie's Travel as grounding data.
+Ahora agregará algunos datos para una compañía ficticia de agencia de viajes denominada *Margie's Travel*. A continuación, verá cómo responde el modelo de Azure OpenAI al usar los folletos de Margie's Travel como datos de base.
 
-1. In a new browser tab, download an archive of brochure data from `https://aka.ms/own-data-brochures`. Extract the brochures to a folder on your PC.
-1. In Azure OpenAI Studio, in the **Chat** playground, in the **Setup** section, select **Add your data**.
-1. Select **Add a data source** and choose **Upload files**.
-1. You'll need to create a storage account and Azure AI Search resource. Under the dropdown for the storage resource, select **Create a new Azure Blob storage resource**, and create a storage account with the following settings. Anything not specified leave as the default.
+1. En una nueva pestaña del explorador, descargue un archivo de datos de folletos de `https://aka.ms/own-data-brochures`. Extraiga los folletos en una carpeta del equipo.
+1. En Azure OpenAI Studio, en el área de juegos **Chat**, en la sección **Instalación**, seleccione **Agregar los datos**.
+1. Seleccione **Agregar un origen de datos** y elija **Cargar archivos**.
+1. Deberás crear una cuenta de almacenamiento y un recurso de Azure AI Search. En la lista desplegable del recurso de almacenamiento, seleccione **Crear un nuevo recurso de Azure Blob Storage** y cree una cuenta de almacenamiento con la siguiente configuración. Todo lo que no se especifique se deja con el valor predeterminado.
 
-    - **Subscription**: *Your Azure subscription*
-    - **Resource group**: *Select the same resource group as your Azure OpenAI resource*
-    - **Storage account name**: *Enter a unique name*
-    - **Region**: *Select the same region as your Azure OpenAI resource*
-    - **Redundancy**: Locally-redundant storage (LRS)
+    - **Suscripción**: *suscripción de Azure*
+    - **Grupo de recursos**: *seleccione el mismo grupo de recursos que el recurso de Azure OpenAI*.
+    - **Nombre de la cuenta de almacenamiento**: *escriba un nombre único*
+    - **Región**: *seleccione la misma región que el recurso de Azure OpenAI*.
+    - **Redundancia**: almacenamiento con redundancia local (LRS)
 
-1. While the storage account resource is being created, return to Azure OpenAI Studio and select **Create a new Azure AI Search resource** with the following settings. Anything not specified leave as the default.
+1. Mientras se crea el recurso de la cuenta de almacenamiento, vuelva a Azure OpenAI Studio y seleccione **Crear un nuevo recurso de Azure AI Search** con la siguiente configuración. Todo lo que no se especifique se deja con el valor predeterminado.
 
-    - **Subscription**: *Your Azure subscription*
-    - **Resource group**: *Select the same resource group as your Azure OpenAI resource*
-    - **Service name**: *Enter a unique name*
-    - **Location**: *Select the same location as your Azure OpenAI resource*
-    - **Pricing tier**: Basic
+    - **Suscripción**: *suscripción de Azure*
+    - **Grupo de recursos**: *seleccione el mismo grupo de recursos que el recurso de Azure OpenAI*.
+    - **Nombre del servicio**: *escriba un nombre único*
+    - **Ubicación**: *seleccione la misma ubicación que el recurso de Azure OpenAI*.
+    - **Plan de tarifa**: básico
 
-1. Wait until your search resource has been deployed, then switch back to the Azure AI Studio.
-1. In the **Add data**, enter the following values for your data source, then select **Next**.
+1. Espere hasta que se haya implementado el recurso de búsqueda y, a continuación, vuelva a Azure AI Studio.
+1. En **Agregar datos**, escriba los valores siguientes para el origen de datos y seleccione **Siguiente**.
 
-    - **Select data source**: Upload files
-    - **Subscription**: Your Azure subscription
-    - **Select Azure Blob storage resource**: *Use the **Refresh** button to repopulate the list, and then choose the storage resource you created*
-        - Turn on CORS when prompted
-    - **Select Azure AI Search resource**: *Use the **Refresh** button to repopulate the list, and then choose the search resource you created*
-    - **Enter the index name**: `margiestravel`
-    - **Add vector search to this search resource**: unchecked
-    - **I acknowledge that connecting to an Azure AI Search account will incur usage to my account** : checked
+    - **Seleccionar origen de datos**: cargar archivos
+    - **Suscripción** : su suscripción a Azure.
+    - **Seleccionar recurso de Azure Blob Storage**: *Use el botón **Actualizar** para volver a rellenar la lista y, a continuación, elija el recurso de almacenamiento que creó*.
+        - Activación de CORS cuando se le solicite
+    - **Seleccionar recurso de Azure AI Search**: *Use el botón **Actualizar** para volver a rellenar la lista y, a continuación, elija el recurso de búsqueda que ha creado*.
+    - **Escribir el nombre del índice**: `margiestravel`
+    - **Agregar búsqueda vectorial a este recurso de búsqueda**: no comprobado
+    - **Reconozco que la conexión a una cuenta de Azure AI Search conllevará el uso de mi cuenta**: comprobado
 
-1. On the **Upload files** page, upload the PDFs you downloaded, and then select **Next**.
-1. On the **Data management** page select the **Keyword** search type from the drop-down, and then select **Next**.
-1. On the **Review and finish** page select **Save and close**, which will add your data. This may take a few minutes, during which you need to leave your window open. Once complete, you'll see the data source, search resource, and index specified in the **Setup** section.
+1. En la página **Cargar archivos**, cargue los archivos PDF que descargó y, a continuación, seleccione **Siguiente**.
+1. En la página **Administración de datos**, seleccione el tipo de búsqueda **Palabra clave** en la lista desplegable y, a continuación, seleccione **Siguiente**.
+1. En la página **Revisar y finalizar**, seleccione **Guardar y cerrar**, lo que agregará los datos. Esta operación puede tardar unos minutos, durante los cuales debe dejar abierta la ventana. Una vez completado, verá el origen de datos, el recurso de búsqueda y el índice especificados en la sección **Instalación**.
 
-    > **Tip**: Occasionally the connection between your new search index and Azure OpenAI Studio takes too long. If you've waited for a few minutes and it still hasn't connected, check your AI Search resources in Azure portal. If you see the completed index, you can disconnect the data connection in Azure OpenAI Studio and re-add it by specifying an Azure AI Search data source and selecting your new index.
+    > **Sugerencia**: En ocasiones, la conexión entre el nuevo índice de búsqueda y Azure OpenAI Studio tarda demasiado tiempo. Si ha esperado unos minutos y aún no está conectado, compruebe los recursos de AI Search en Azure Portal. Si ve el índice completado, puede desconectar la conexión de datos en Azure OpenAI Studio y volver a agregarla especificando un origen de datos de Azure AI Search y seleccionando el nuevo índice.
 
-## Chat with a model grounded in your data
+## Chat con un modelo basado en los datos
 
-Now that you've added your data, ask the same questions as you did previously, and see how the response differs.
+Ahora que ha agregado los datos, realice las mismas preguntas que antes y vea cómo difiere la respuesta.
 
 ```
 I'd like to take a trip to New York. Where should I stay?
@@ -129,40 +129,40 @@ I'd like to take a trip to New York. Where should I stay?
 What are some facts about New York?
 ```
 
-You'll notice a very different response this time, with specifics about certain hotels and a mention of Margie's Travel, as well as references to where the information provided came from. If you open the PDF reference listed in the response, you'll see the same hotels as the model provided.
+Esta vez, observará una respuesta muy diferente, con detalles sobre determinados hoteles y una mención de Margie's Travel, así como referencias a donde procede la información proporcionada. Si abre la referencia en PDF que aparece en la respuesta, verá los mismos hoteles que el modelo proporcionó.
 
-Try asking it about other cities included in the grounding data, which are Dubai, Las Vegas, London, and San Francisco.
+Pruebe a preguntar sobre otras ciudades incluidas en los datos de base, que son Dubái, Las Vegas, Londres y San Francisco.
 
-> **Note**: **Add your data** is still in preview and might not always behave as expected for this feature, such as giving the incorrect reference for a city not included in the grounding data.
+> **Nota**: **Agregar los datos** todavía está en versión preliminar y es posible que no siempre se comporte según lo previsto para esta característica, como proporcionar la referencia incorrecta para una ciudad no incluida en los datos de base.
 
-## Connect your app to your own data
+## Vamos a conectar la aplicación a tus propios datos
 
-Next, let's explore how to connect your app to use your own data.
+A continuación, vamos a explorar cómo conectar la aplicación para usar sus propios datos.
 
-### Prepare to develop an app in Visual Studio Code
+### Preparación para desarrollar una aplicación en Visual Studio Code
 
-Now let's explore the use of your own data in an app that uses the Azure OpenAI service SDK. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
+Ahora vamos a explorar el uso de sus propios datos en una aplicación que usa el SDK de Azure OpenAI Service. Desarrollará la aplicación con Visual Studio Code. Los archivos de código de la aplicación se han proporcionado en un repositorio de GitHub.
 
-> **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
+> **Sugerencia**: Si ya ha clonado el repositorio **mslearn-openai**, ábralo en Visual Studio Code. De lo contrario, siga estos pasos para clonarlo en el entorno de desarrollo.
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
+1. Inicie Visual Studio Code.
+2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
+3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
 
-    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+    > **Nota**: Si Visual Studio Code muestra un mensaje emergente para solicitarle que confíe en el código que está abriendo, haga clic en la opción **Sí, confío en los autores** en el elemento emergente.
 
-4. Wait while additional files are installed to support the C# code projects in the repo.
+4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+    > **Nota**: Si se le pide que agregue los recursos necesarios para compilar y depurar, seleccione **Ahora no**.
 
-## Configure your application
+## Configuración de la aplicación
 
-Applications for both C# and Python have been provided, and both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
+Se han proporcionado aplicaciones para C# y Python, y ambas aplicaciones presentan la misma funcionalidad. En este ejercicio, completará algunas partes clave de la aplicación para habilitarla con el recurso de Azure OpenAI.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/06-use-own-data** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're going to integrate Azure OpenAI functionality.
-2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure OpenAI SDK package by running the appropriate command for your language preference:
+1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **Labfiles/06-use-own-data** y expanda la carpeta **CSharp** o **Python** según sus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del lenguaje de una aplicación en la que va a integrar la funcionalidad de Azure OpenAI.
+2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contiene los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
 
-    **C#**:
+    **C#:**
 
     ```
     dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
@@ -174,24 +174,24 @@ Applications for both C# and Python have been provided, and both apps feature th
     pip install openai==1.13.3
     ```
 
-3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
+3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración para su lenguaje preferido.
 
     - **C#**: appsettings.json
     - **Python**: .env
     
-4. Update the configuration values to include:
-    - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
-    - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
-    - The endpoint for your search service (the **Url** value on the overview page for your search resource in the Azure portal).
-    - A **key** for your search resource (available in the **Keys** page for your search resource in the Azure portal - you can use either of the admin keys)
-    - The name of the search index (which should be `margiestravel`).
-1. Save the configuration file.
+4. Actualiza los valores de configuración para incluir:
+    - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
+    - El **nombre de implementación** que especificó para la implementación de modelo (disponible en la página **Implementaciones** de Azure OpenAI Studio).
+    - Punto de conexión del servicio de búsqueda (el valor de dirección **URL** de la página de información general del recurso de búsqueda en Azure Portal).
+    - Una **clave** para el recurso de búsqueda (disponible en la página **Claves** del recurso de búsqueda en Azure Portal: puedes usar cualquiera de las claves de administración).
+    - Nombre del índice de búsqueda (que debe ser `margiestravel`).
+1. Guarde el archivo de configuración.
 
-### Add code to use the Azure OpenAI service
+### Adición de código para usar Azure OpenAI Service
 
-Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
+Ahora está listo para usar el SDK de Azure OpenAI para consumir el modelo implementado.
 
-1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Configure your data source*** with code to add the Azure OpenAI SDK library:
+1. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de código de su idioma preferido y reemplace el comentario ***Configuración del origen de datos*** por código para agregar la biblioteca del SDK de Azure OpenAI:
 
     **C#**: ownData.cs
 
@@ -221,25 +221,25 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
         )
     ```
 
-2. Review the rest of the code, noting the use of the *extensions* in the request body that is used to provide information about the data source settings.
+2. Revise el resto del código, teniendo en cuenta el uso de las *extensiones* en el cuerpo de la solicitud que se usa para proporcionar información sobre la configuración del origen de datos.
 
-3. Save the changes to the code file.
+3. Guarde los cambios en el archivo del código.
 
-## Run your application
+## Ejecución de la aplicación
 
-Now that your app has been configured, run it to send your request to your model and observe the response. You'll notice the only difference between the different options is the content of the prompt, all other parameters (such as token count and temperature) remain the same for each request.
+Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud al modelo y ver la respuesta. Observe que la única diferencia entre las distintas opciones es el contenido del mensaje. Todos los demás parámetros, como el recuento de tokens y la temperatura, son los mismos para todas las solicitudes.
 
-1. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
+1. En el panel de terminal interactivo, asegúrese de que el contexto de la carpeta es la carpeta del lenguaje que prefiera. Después, escriba el siguiente comando para ejecutar la aplicación.
 
     - **C#**: `dotnet run`
     - **Python**: `python ownData.py`
 
-    > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
+    > **Sugerencia**: Puede usar el icono **Maximizar el tamaño del panel** (**^**) en la barra de herramientas del terminal para ver más del texto de la consola.
 
-2. Review the response to the prompt `Tell me about London`, which should include an answer as well as some details of the data used to ground the prompt, which was obtained from your search service.
+2. Revise la respuesta al mensaje `Tell me about London`, que debe incluir una respuesta, así como algunos detalles de los datos usados para fundamentar el mensaje, que se obtuvieron del servicio de búsqueda.
 
-    > **Tip**: If you want to see the citations from your search index, set the variable ***show citations*** near the top of the code file to **true**.
+    > **Sugerencia**: Si desea ver las citas del índice de búsqueda, establezca la variable ***mostrar citas*** cerca de la parte superior del archivo de código en **true**.
 
-## Clean up
+## Limpiar
 
-When you're done with your Azure OpenAI resource, remember to delete the resource in the **Azure portal** at `https://portal.azure.com`. Be sure to also include the storage account and search resource, as those can incur a relatively large cost.
+Cuando haya terminado de usar el recurso de Azure OpenAI, recuerde eliminar el recurso en **Azure Portal** en `https://portal.azure.com`. Asegúrese de incluir también la cuenta de almacenamiento y el recurso de búsqueda, ya que pueden suponer un costo relativamente grande.
