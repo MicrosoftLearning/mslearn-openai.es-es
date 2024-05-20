@@ -1,70 +1,70 @@
 ---
 lab:
-    title: 'Utilize prompt engineering in your app'
+  title: Uso de la ingeniería de mensajes en una aplicación
 ---
 
-# Utilize prompt engineering in your app
+# Uso de la ingeniería de mensajes en una aplicación
 
-When working with the Azure OpenAI Service, how developers shape their prompt greatly impacts how the generative AI model will respond. Azure OpenAI models are able to tailor and format content, if requested in a clear and concise way. In this exercise, you'll learn how different prompts for similar content help shape the AI model's response to better satisfy your requirements.
+Cuando se trabaja con Azure OpenAI Service, el modo en el que los desarrolladores dan forma a los mensajes afecta considerablemente a la forma en la responderá el modelo de IA generativa. Los modelos de Azure OpenAI pueden adaptar y dar formato al contenido si se les solicita de forma clara y concisa. En este ejercicio verá cómo diferentes solicitudes de contenido similar ayudan a dar forma a la respuesta del modelo de IA para satisfacer mejor sus requisitos.
 
-In scenario for this exercise, you will perform the role of a software developer working on a wildlife marketing campaign. You are exploring how to use generative AI to improve advertising emails and categorize articles that might apply to your team. The prompt engineering techniques used in the exercise can be applied similarly for a variety of use cases.
+En el escenario de este ejercicio, realizará el papel de un desarrollador de software que trabaja en una campaña de marketing sobre vida silvestre. Está explorando cómo usar IA generativa para mejorar los correos electrónicos publicitarios y clasificar artículos que se pudieran aplicar al equipo. Las técnicas de ingeniería de solicitud usadas en el ejercicio se aplican de forma similar para una variedad de casos de uso.
 
-This exercise will take approximately **30** minutes.
+Este ejercicio dura aproximadamente **30** minutos.
 
-## Provision an Azure OpenAI resource
+## Aprovisionamiento de un recurso de Azure OpenAI
 
-If you don't already have one, provision an Azure OpenAI resource in your Azure subscription.
+Si aún no tuviera uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
 
-1. Sign into the **Azure portal** at `https://portal.azure.com`.
-2. Create an **Azure OpenAI** resource with the following settings:
-    - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
-    - **Resource group**: *Choose or create a resource group*
-    - **Region**: *Make a **random** choice from any of the following regions*\*
-        - Australia East
-        - Canada East
-        - East US
-        - East US 2
-        - France Central
-        - Japan East
-        - North Central US
-        - Sweden Central
-        - Switzerland North
-        - UK South
-    - **Name**: *A unique name of your choice*
-    - **Pricing tier**: Standard S0
+1. Inicie sesión en **Azure Portal** en `https://portal.azure.com`.
+2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
+    - **Suscripción**: *Seleccione una suscripción de Azure aprobada para acceder al servicio Azure OpenAI*
+    - **Grupo de recursos**: *elija o cree un grupo de recursos*
+    - **Región**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
+        - Este de Australia
+        - Este de Canadá
+        - Este de EE. UU.
+        - Este de EE. UU. 2
+        - Centro de Francia
+        - Japón Oriental
+        - Centro-Norte de EE. UU
+        - Centro de Suecia
+        - Norte de Suiza
+        - Sur de Reino Unido 2
+    - **Nombre**: *nombre único que prefiera*
+    - **Plan de tarifa**: estándar S0
 
-    > \* Azure OpenAI resources are constrained by regional quotas. The listed regions include default quota for the model type(s) used in this exercise. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.
+    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
 
-3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
 
-## Deploy a model
+## Implementar un modelo
 
-Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
+Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studio** que se puede usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, use Azure OpenAI Studio para implementar un modelo.
 
-1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
-2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
-    - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
-    - **Model version**: Auto-update to default
-    - **Deployment name**: *A unique name of your choice. You'll use this name later in the lab.*
-    - **Advanced options**
-        - **Content filter**: Default
-        - **Deployment type**: Standard
-        - **Tokens per minute rate limit**: 5K\*
-        - **Enable dynamic quota**: Enabled
+1. En la página **Información general** del recurso Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
+2. En Azure OpenAI Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+    - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
+    - **Versión de Modev**: actualización automática al valor predeterminado.
+    - **Nombre de implementación**: *Nombre único de su elección. Usará este valor más adelante en el laboratorio.*
+    - **Opciones avanzadas**
+        - **Filtro de contenido**: valor predeterminado
+        - **Tipo de implementación**: Estándar
+        - **Límite de velocidad de tokens por minuto**: 5000\*
+        - **Habilitación de la cuota dinámica**: habilitado
 
-    > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
+    > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
-## Explore prompt engineering techniques
+## Explorar técnicas de ingeniería de solicitudes
 
-Let's start by exploring some prompt engineering techniques in the Chat playground.
+Comencemos explorando algunas técnicas de ingeniería de solicitud en el área de juegos de chat.
 
-1. In **Azure OpenAI Studio** at `https://oai.azure.com`, in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
-    - **Setup** - used to set the context for the model's responses.
-    - **Chat session** - used to submit chat messages and view responses.
-    - **Configuration** - used to configure settings for the model deployment.
-2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Setup** area, select the default system message template to set the context for the chat session. The default system message is *You are an AI assistant that helps people find information*.
-4. In the **Chat session**, submit the following query:
+1. En **Azure OpenAI Studio**, en `https://oai.azure.com`, en la sección **Área de juegos**, seleccione la página **Chat**. La página del área de juegos de **Chat** consta de tres secciones principales:
+    - **Instalación**: se usa para establecer el contexto de las respuestas del modelo.
+    - **Sesión de chat**: se usa para enviar mensajes de chat y ver las respuestas.
+    - **Configuración**: se usa para configurar los valores de la implementación de modelo.
+2. En el panel **Configuración**, asegúrese de que la implementación de modelo esté seleccionada.
+3. En el área **Configuración**, seleccione la plantilla de mensaje del sistema predeterminada para establecer el contexto de la sesión de chat. El mensaje predeterminado del sistema es *Es un asistente de IA que ayuda a las personas a encontrar información*.
+4. En la **sesión de chat**, envíe las siguientes consultas:
 
     ```
     What kind of article is this?
@@ -78,13 +78,13 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     Much remains to be determined about how daily life will change as people adjust to a drier normal. But officials are warning the situation is dire and could lead to even more severe limits later in the year.
     ```
 
-    The response provides a description of the article. However, suppose you want a more specific format for article categorization.
+    La respuesta proporciona una descripción del artículo. Sin embargo, supongamos que desea un formato más específico para la categorización de artículos.
 
-5. In the **Setup** section change the system message to `You are a news aggregator that categorizes news articles.`
+5. En la sección **Configuración** cambie el mensaje del sistema por `You are a news aggregator that categorizes news articles.`
 
-6. Under the new system message, in the **Examples** section, select the **Add** button. Then add the following example.
+6. En el nuevo mensaje del sistema, en la sección **Ejemplos**, seleccione el botón **Agregar**. Después, agregue el siguiente ejemplo.
 
-    **User:**
+    **Usuario:**
     
     ```
     What kind of article is this?
@@ -98,15 +98,15 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     The Chicago Cyclones' two hits came in the 2nd and the 5th innings but were unable to get the runner home to score.
     ```
     
-    **Assistant:**
+    **Asistente:**
     
     ```
     Sports
       ```
 
-7. Add another example with the following text.
+7. Agregue otro ejemplo con el siguiente texto.
 
-    **User:**
+    **Usuario:**
     
     ```
     Categorize this article:
@@ -121,15 +121,15 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
     ```
     
-    **Assistant:**
+    **Asistente:**
     
     ```
     Entertainment
     ```
 
-8. Use the **Apply changes** button at the top of the **Setup** section to update the system message.
+8. Use el botón **Aplicar cambios** que hay situado en la parte superior de la sección **Configuración** para actualizar el mensaje del sistema.
 
-9. In the **Chat session** section, resubmit the following prompt:
+9. En la sección **Sesión de chat**, vuelva a enviar la siguiente solicitud:
 
     ```
     What kind of article is this?
@@ -143,22 +143,11 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     Much remains to be determined about how daily life will change as people adjust to a drier normal. But officials are warning the situation is dire and could lead to even more severe limits later in the year.
     ```
 
-    The combination of a more specific system message and some examples of expected queries and responses results in a consistent format for the results.
+    La combinación de un mensaje del sistema más específico y algunos ejemplos de consultas y respuestas esperadas da como resultado un formato coherente en los resultados.
 
-10. In the **Setup** section, change the system message back to the default template, which should be `You are an AI assistant that helps people find information.` with no examples. Then apply the changes.
+10. En la sección **Configuración**, vuelva a cambiar el mensaje del sistema por la plantilla predeterminada, que debería ser `You are an AI assistant that helps people find information.` sin ejemplos. A continuación, aplique los cambios.
 
-11. In the **Chat session** section, submit the following prompt:
-
-    ```
-    # 1. Create a list of animals
-    # 2. Create a list of whimsical names for those animals
-    # 3. Combine them randomly into a list of 25 animal and name pairs
-    ```
-
-    The model will likely respond with an answer to satisfy the prompt, split into a numbered list. This is an appropriate response, but suppose what you actually wanted was for the model to write a Python program that performs the tasks you described?
-
-12. Change the system message to `You are a coding assistant helping write python code.` and apply the changes.
-13. Resubmit the following prompt to the model:
+11. En la sección **Sesión de chat**, envíe la siguiente solicitud:
 
     ```
     # 1. Create a list of animals
@@ -166,32 +155,43 @@ Let's start by exploring some prompt engineering techniques in the Chat playgrou
     # 3. Combine them randomly into a list of 25 animal and name pairs
     ```
 
-    The model should correctly respond with python code doing what the comments requested.
+    Es probable que el modelo responda con una respuesta para satisfacer el mensaje, dividida en una lista numerada. Se trata de una respuesta adecuada, pero supongamos que lo que realmente quería era que el modelo escribiera un programa de Python que realizase las tareas descritas.
 
-## Prepare to develop an app in Visual Studio Code
+12. Cambie el mensaje del sistema a `You are a coding assistant helping write python code.` y aplique los cambios.
+13. Vuelva a enviar el siguiente mensaje al modelo:
 
-Now let's explore the use of prompt engineering in an app that uses the Azure OpenAI service SDK. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
+    ```
+    # 1. Create a list of animals
+    # 2. Create a list of whimsical names for those animals
+    # 3. Combine them randomly into a list of 25 animal and name pairs
+    ```
 
-> **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
+    El modelo debería responder correctamente con código de Python haciendo lo solicitado en los comentarios.
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
+## Preparación para desarrollar una aplicación en Visual Studio Code
 
-    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+Ahora exploremos el uso de ingeniería de solicitudes en una aplicación que use el SDK del servicio Azure OpenAI. Desarrollará la aplicación con Visual Studio Code. Los archivos de código de la aplicación se han proporcionado en un repositorio de GitHub.
 
-4. Wait while additional files are installed to support the C# code projects in the repo.
+> **Sugerencia**: Si ya clonó el repositorio **mslearn-openai**, ábralo en Visual Studio Code. De lo contrario, siga estos pasos para clonarlo en el entorno de desarrollo.
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+1. Inicie Visual Studio Code.
+2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
+3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
 
-## Configure your application
+    > **Nota**: Si Visual Studio Code mostrase un mensaje emergente solicitando que confíe en el código que está abriendo, haga clic en la opción **Sí, confío en los autores** del elemento emergente.
 
-Applications for both C# and Python have been provided, and both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource with asynchronous API calls.
+4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/03-prompt-engineering** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
-2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure OpenAI SDK package by running the appropriate command for your language preference:
+    > **Nota**: Si se le pide que agregue los recursos necesarios para compilar y depurar, seleccione **Ahora no**.
 
-    **C#**:
+## Configuración de la aplicación
+
+Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma funcionalidad. En primer lugar, completará algunas partes clave de la aplicación para habilitar el uso del recurso Azure OpenAI con llamadas API asincrónicas.
+
+1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **Labfiles/03-prompt-engineering** y expanda las carpetas **CSharp** o **Python**, según sus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del lenguaje de una aplicación en la que va a integrar la funcionalidad de OpenAI de Azure.
+2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contenga los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
+
+    **C#:**
 
     ```
     dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
@@ -203,23 +203,23 @@ Applications for both C# and Python have been provided, and both apps feature th
     pip install openai==1.13.3
     ```
 
-3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
+3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración de su lenguaje preferido
 
     - **C#**: appsettings.json
     - **Python**: .env
     
-4. Update the configuration values to include:
-    - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
-    - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
-5. Save the configuration file.
+4. Actualiza los valores de configuración para incluir:
+    - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
+    - El **nombre de implementación** que especificó en la implementación de modelo (disponible en la página **Implementaciones** de Azure OpenAI Studio).
+5. Guarde el archivo de configuración.
 
-## Add code to use the Azure OpenAI service
+## Adición de código para usar el servicio Azure OpenAI
 
-Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
+Ya está listo para usar el SDK de Azure OpenAI para consumir el modelo implementado.
 
-1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language, and replace the comment ***Add Azure OpenAI package*** with code to add the Azure OpenAI SDK library:
+1. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de código de su idioma preferido y reemplace el comentario ***Agregar paquete de Azure OpenAI*** por código para agregar la biblioteca del SDK de Azure OpenAI:
 
-    **C#**: Program.cs
+    **C#** : Program.cs
 
     ```csharp
     // Add Azure OpenAI package
@@ -233,9 +233,9 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     from openai import AsyncAzureOpenAI
     ```
 
-2. In the code file, find the comment ***Configure the Azure OpenAI client***, and add code to configure the Azure OpenAI client:
+2. En el archivo de código, busque el comentario ***Configurar el cliente de Azure OpenAI*** y agregue código para configurarlo:
 
-    **C#**: Program.cs
+    **C#** : Program.cs
 
     ```csharp
     // Configure the Azure OpenAI client
@@ -253,9 +253,9 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
         )
     ```
 
-3. In the function that calls the Azure OpenAI model, under the comment ***Format and send the request to the model***, add the code to format and send the request to the model.
+3. En la función que llama al modelo de Azure OpenAI, en el comentario ***Dar formato y enviar la solicitud al modelo***, agregue el código para dar formato y enviar la solicitud al modelo.
 
-    **C#**: Program.cs
+    **C#** : Program.cs
 
     ```csharp
     // Format and send the request to the model
@@ -295,44 +295,44 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     )
     ```
 
-4. Save the changes to the code file.
+4. Guarde los cambios en el archivo del código.
 
-## Run your application
+## Ejecución de la aplicación
 
-Now that your app has been configured, run it to send your request to your model and observe the response. You'll notice the only difference between the different options is the content of the prompt, all other parameters (such as token count and temperature) remain the same for each request.
+Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud al modelo y ver la respuesta. Observe que la única diferencia entre las distintas opciones es el contenido del mensaje. Todos los demás parámetros, como el recuento de tokens y la temperatura, son los mismos para todas las solicitudes.
 
-1. In the folder of your preferred language, open `system.txt` in Visual Studio Code. For each of the interations, you'll enter the **System message** in this file and save it. Each iteration will pause first for you to change the system message.
-1. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
+1. En la carpeta del idioma de su preferencia, abra `system.txt` en Visual Studio Code. Para cada una de las intercalaciones, escribirá el **Mensaje del sistema** en este archivo y lo guardará. Cada iteración se pausará primero para que cambie el mensaje del sistema.
+1. En el panel de terminal interactivo, asegúrese de que el contexto de la carpeta es la carpeta del lenguaje que prefiera. Después, escriba el siguiente comando para ejecutar la aplicación.
 
     - **C#**: `dotnet run`
     - **Python**: `python prompt-engineering.py`
 
-    > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
+    > **Sugerencia**: Puede usar el icono **Maximizar el tamaño del panel** (**^**) en la barra de herramientas del terminal para ver más del texto de la consola.
 
-1. For the first iteration, enter the following prompts:
+1. Para la primera iteración, escriba las siguientes indicaciones:
 
-    **System message**
+    **Mensaje del sistema**
 
     ```prompt
     You are an AI assistant
     ```
 
-    **User message:**
+    **Mensaje de usuario:**
 
     ```prompt
     Write an intro for a new wildlife Rescue
     ```
 
-1. Observe the output. The AI model will likely produce a good generic introduction to a wildlife rescue.
-1. Next, enter the following prompts which specify a format for the response:
+1. Observe la salida. Es probable que el modelo de inteligencia artificial produzca una buena introducción genérica a un rescate de la fauna silvestre.
+1. A continuación, escriba las siguientes indicaciones, que especifican un formato para la respuesta:
 
-    **System message**
+    **Mensaje del sistema**
 
     ```prompt
     You are an AI assistant helping to write emails
     ```
 
-    **User message:**
+    **Mensaje de usuario:**
 
     ```prompt
     Write a promotional email for a new wildlife rescue, including the following: 
@@ -341,16 +341,16 @@ Now that your app has been configured, run it to send your request to your model
     - Call for donations to be given at our website
     ```
 
-1. Observe the output. This time, you'll likely see the format of an email with the specific animals included, as well as the call for donations.
-1. Next, enter the following prompts that additionally specify the content:
+1. Observe la salida. Esta vez, es probable que vea el formato de un correo electrónico con animales específicos incluidos, junto con una petición de donaciones.
+1. A continuación, escriba las siguientes indicaciones, que especifican además el contenido:
 
-    **System message**
+    **Mensaje del sistema**
 
     ```prompt
     You are an AI assistant helping to write emails
     ```
 
-    **User message:**
+    **Mensaje de usuario:**
 
     ```prompt
     Write a promotional email for a new wildlife rescue, including the following: 
@@ -360,16 +360,16 @@ Now that your app has been configured, run it to send your request to your model
     \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
-1. Observe the output, and see how the email has changed based on your clear instructions.
-1. Next, enter the following prompts where we add details about tone to the system message:
+1. Observe la salida y vea cómo cambió el correo electrónico en función de sus claras instrucciones.
+1. A continuación, escriba las siguientes indicaciones, en las que se agregan detalles sobre el tono al mensaje del sistema:
 
-    **System message**
+    **Mensaje del sistema**
 
     ```prompt
     You are an AI assistant that helps write promotional emails to generate interest in a new business. Your tone is light, chit-chat oriented and you always include at least two jokes.
     ```
 
-    **User message:**
+    **Mensaje de usuario:**
 
     ```prompt
     Write a promotional email for a new wildlife rescue, including the following: 
@@ -379,12 +379,12 @@ Now that your app has been configured, run it to send your request to your model
     \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
-1. Observe the output. This time you'll likely see the email in a similar format, but with a much more informal tone. You'll likely even see jokes included!
-1. For the final iteration, we're deviating from email generation and exploring *grounding context*. Here you provide a simple system message, and change the app to provide the grounding context as the beginning of the user prompt. The app will then append the user input, and extract information from the grounding context to answer our user prompt.
-1. Open the file `grounding.txt` and briefly read the grounding context you'll be inserting.
-1. In your app immediately after the comment ***Format and send the request to the model*** and before any existing code, add the following code snippet to read text in from `grounding.txt` to augment the user prompt with the grounding context.
+1. Observe la salida. Esta vez es probable que vea el correo electrónico con un formato similar, pero con un tono mucho más informal. Incluso puede que incluya algún chiste.
+1. Para la iteración final, nos desviaremos de la generación de correo electrónico y exploraremos el *contexto base*. Aquí se proporciona un mensaje del sistema sencillo y se cambia la aplicación para proporcionar contexto base al principio del mensaje del usuario. A continuación, la aplicación anexará la entrada de usuario y extraerá información del contexto base para responder a la solicitud del usuario.
+1. Abra el archivo `grounding.txt` y lea brevemente el contexto base que insertará.
+1. En la aplicación inmediatamente posterior al comentario ***Dar formato y enviar la solicitud al modelo*** y antes de cualquier código existente, agregue el siguiente fragmento de código para leer texto desde `grounding.txt` para aumentar las solicitudes de usuario con contexto base.
 
-    **C#**: Program.cs
+    **C#** : Program.cs
 
     ```csharp
     // Format and send the request to the model
@@ -402,23 +402,23 @@ Now that your app has been configured, run it to send your request to your model
     user_message = grounding_text + user_message
     ```
 
-1. Save the file and rerun your app.
-1. Enter the following prompts (with the **system message** still being entered and saved in `system.txt`).
+1. Guarde el archivo y vuelva a ejecutar la aplicación.
+1. Escriba las siguientes indicaciones (con el **mensaje del sistema** aún escribiéndose y guardándose en `system.txt`).
 
-    **System message**
+    **Mensaje del sistema**
 
     ```prompt
     You're an AI assistant who helps people find information. You'll provide answers from the text provided in the prompt, and respond concisely.
     ```
 
-    **User message:**
+    **Mensaje de usuario:**
 
     ```prompt
     What animal is the favorite of children at Contoso?
     ```
 
-> **Tip**: If you would like to see the full response from Azure OpenAI, you can set the **printFullResponse** variable to `True`, and rerun the app.
+> **Sugerencia**: Si quisiera ver la respuesta completa de Azure OpenAI, establezca la variable **printFullResponse** en `True` y vuelva a ejecutar la aplicación.
 
-## Clean up
+## Limpiar
 
-When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the **Azure portal** at `https://portal.azure.com`.
+Cuando haya terminado de usar el recurso de Azure OpenAI, recuerde eliminar la implementación o todo el recurso en **Azure Portal**, en `https://portal.azure.com`.

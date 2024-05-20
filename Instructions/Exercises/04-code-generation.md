@@ -1,82 +1,82 @@
 ---
 lab:
-    title: 'Generate and improve code with Azure OpenAI Service'
+  title: Generación y mejora del código con Azure OpenAI Service
 ---
 
-# Generate and improve code with Azure OpenAI Service
+# Generación y mejora del código con Azure OpenAI Service
 
-The Azure OpenAI Service models can generate code for you using natural language prompts, fixing bugs in completed code, and providing code comments. These models can also explain and simplify existing code to help you understand what it does and how to improve it.
+Los modelos de Azure OpenAI Service pueden generar código usando mensajes en lenguaje natural, corrigiendo errores en código finalizado y proporcionado comentarios sobre el código. Estos modelos también pueden explicar y simplificar el código, lo que le ayuda a saber lo que hace y cómo mejorarlo.
 
-In scenario for this exercise, you will perform the role of a software developer exploring how to use generative AI to make coding tasks easier and more efficient. The techniques used in the exercise can be applied to other code files, programming languages, and use cases.
+En el escenario de este ejercicio, desempeñará el rol de un desarrollador de software que explora cómo usar inteligencia artificial generativa para facilitar y mejorar la eficacia de las tareas de codificación. Las técnicas que se usan en el ejercicio se pueden aplicar a otros archivos de código, lenguajes de programación y casos de uso.
 
-This exercise will take approximately **25** minutes.
+Este ejercicio dura aproximadamente **25** minutos.
 
-## Provision an Azure OpenAI resource
+## Aprovisionamiento de un recurso de Azure OpenAI
 
-If you don't already have one, provision an Azure OpenAI resource in your Azure subscription.
+Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
 
-1. Sign into the **Azure portal** at `https://portal.azure.com`.
-2. Create an **Azure OpenAI** resource with the following settings:
-    - **Subscription**: *Select an Azure subscription that has been approved for access to the Azure OpenAI service*
-    - **Resource group**: *Choose or create a resource group*
-    - **Region**: *Make a **random** choice from any of the following regions*\*
-        - Australia East
-        - Canada East
-        - East US
-        - East US 2
-        - France Central
-        - Japan East
-        - North Central US
-        - Sweden Central
-        - Switzerland North
-        - UK South
-    - **Name**: *A unique name of your choice*
-    - **Pricing tier**: Standard S0
+1. Inicie sesión en **Azure Portal** en `https://portal.azure.com`.
+2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
+    - **Suscripción**: *Selección de una suscripción de Azure aprobada para acceder al servicio Azure OpenAI*
+    - **Grupo de recursos**: *elija o cree un grupo de recursos*
+    - **Región**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
+        - Este de Australia
+        - Este de Canadá
+        - Este de EE. UU.
+        - Este de EE. UU. 2
+        - Centro de Francia
+        - Japón Oriental
+        - Centro-Norte de EE. UU
+        - Centro de Suecia
+        - Norte de Suiza
+        - Sur de Reino Unido 2
+    - **Nombre**: *nombre único que prefiera*
+    - **Plan de tarifa**: estándar S0
 
-    > \* Azure OpenAI resources are constrained by regional quotas. The listed regions include default quota for the model type(s) used in this exercise. Randomly choosing a region reduces the risk of a single region reaching its quota limit in scenarios where you are sharing a subscription with other users. In the event of a quota limit being reached later in the exercise, there's a possibility you may need to create another resource in a different region.need to create another resource in a different region.
+    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
 
-3. Wait for deployment to complete. Then go to the deployed Azure OpenAI resource in the Azure portal.
+3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
 
-## Deploy a model
+## Implementar un modelo
 
-Azure OpenAI provides a web-based portal named **Azure OpenAI Studio**, that you can use to deploy, manage, and explore models. You'll start your exploration of Azure OpenAI by using Azure OpenAI Studio to deploy a model.
+Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studio** que se puede usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, use Azure OpenAI Studio para implementar un modelo.
 
-1. On the **Overview** page for your Azure OpenAI resource, use the **Go to Azure OpenAI Studio** button to open Azure OpenAI Studio in a new browser tab.
-2. In Azure OpenAI Studio, on the **Deployments** page, view your existing model deployments. If you don't already have one, create a new deployment of the **gpt-35-turbo-16k** model with the following settings:
-    - **Model**: gpt-35-turbo-16k *(if the 16k model isn't available, choose gpt-35-turbo)*
-    - **Model version**: Auto-update to default
-    - **Deployment name**: *A unique name of your choice. You'll use this name later in the lab.*
-    - **Advanced options**
-        - **Content filter**: Default
-        - **Deployment type**: Standard
-        - **Tokens per minute rate limit**: 5K\*
-        - **Enable dynamic quota**: Enabled
+1. En la página **Información general** del recurso Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
+2. En Azure OpenAI Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+    - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
+    - **Versión de Modev**: actualización automática al valor predeterminado.
+    - **Nombre de implementación**: *Un nombre único que prefiera. Usará este valor más adelante en este laboratorio.*
+    - **Opciones avanzadas**
+        - **Filtro de contenido**: valor predeterminado
+        - **Tipo de implementación**: Estándar
+        - **Límite de velocidad de tokens por minuto**: 5000\*
+        - **Habilitación de la cuota dinámica**: habilitado
 
-    > \* A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
+    > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
-## Generate code in chat playground
+## Generación de código en el área de juegos de chat
 
-Before using in your app, examine how Azure OpenAI can generate and explain code in the chat playground.
+Antes de usarlo en la aplicación, examine la forma en que Azure OpenAI puede generar y explicar código en el área de juegos de chat.
 
-1. In the **Azure OpenAI Studio** at `https://oai.azure.com`, in the **Playground** section, select the **Chat** page. The **Chat** playground page consists of three main sections:
-    - **Setup** - used to set the context for the model's responses.
-    - **Chat session** - used to submit chat messages and view responses.
-    - **Configuration** - used to configure settings for the model deployment.
-2. In the **Configuration** section, ensure that your model deployment is selected.
-3. In the **Setup** area, set the system message to `You are a programming assistant helping write code` and apply the changes.
-4. In the **Chat session**, submit the following query:
+1. En **Azure OpenAI Studio** en `https://oai.azure.com`, en la sección **Área de juegos**, seleccione la página **Chat**. La página del área de juegos **Chat** consta de tres secciones principales:
+    - **Instalación**: se usa para establecer el contexto de las respuestas del modelo.
+    - **Sesión de chat**: se usa para enviar mensajes de chat y ver respuestas.
+    - **Configuración**: se usa para configurar los valores de la implementación de modelo.
+2. En el panel **Configuración**, asegúrese de que la implementación de modelo esté seleccionada.
+3. En el área **Configuración**, cambie el mensaje del sistema a `You are a programming assistant helping write code` y aplique los cambios.
+4. En la sección **Sesión de chat**, envíe la siguiente consulta:
 
     ```
     Write a function in python that takes a character and a string as input, and returns how many times the character appears in the string
     ```
 
-    The model will likely respond with a function, with some explanation of what the function does and how to call it.
+    Es probable que el modelo responda con una función, que explique lo que hace la función y que indique cómo llamarla.
 
-5. Next, send the prompt `Do the same thing, but this time write it in C#`.
+5. A continuación, envíe el mensaje `Do the same thing, but this time write it in C#`.
 
-    The model likely responded very similarly as the first time, but this time coding in C#. You can ask it again for a different language of your choice, or a function to complete a different task such as reversing the input string.
+    Es probable que el modelo responda de forma muy similar a la primera vez, pero esta vez con código de C#. Puede volver a pedirlo para cualquier otro lenguaje o una función para completar una tarea diferente, como revertir la cadena de entrada.
 
-6. Next, let's explore using AI to understand code. Submit the following prompt as the user message.
+6. Ahora vamos a explorar el uso de inteligencia artificial para comprender el código. Envíe el siguiente mensaje de usuario.
 
     ```
     What does the following function do?  
@@ -102,40 +102,40 @@ Before using in your app, examine how Azure OpenAI can generate and explain code
             return result  
     ```
 
-    The model should describe what the function does, which is to multiply two numbers together by using a loop.
+    El modelo debe describir qué hace la función, que es multiplicar dos números usando un bucle.
 
-7. Submit the prompt `Can you simplify the function?`.
+7. Envíe la solicitud `Can you simplify the function?`.
 
-    The model should write a simpler version of the function.
+    El modelo debe escribir una versión más sencilla de la función.
 
-8. Submit the prompt: `Add some comments to the function.`
+8. Envíe la solicitud: `Add some comments to the function.`
 
-    The model adds comments to the code.
+    El modelo agrega comentarios al código.
 
-## Prepare to develop an app in Visual Studio Code
+## Preparación para desarrollar una aplicación en Visual Studio Code
 
-Now let's explore how you could build a custom app that uses Azure OpenAI service to generate code. You'll develop your app using Visual Studio Code. The code files for your app have been provided in a GitHub repo.
+Ahora vamos a explorar cómo crear una aplicación personalizada que use el servicio Azure OpenAI para generar código. Desarrollará la aplicación con Visual Studio Code. Los archivos de código de la aplicación se han proporcionado en un repositorio de GitHub.
 
-> **Tip**: If you have already cloned the **mslearn-openai** repo, open it in Visual Studio code. Otherwise, follow these steps to clone it to your development environment.
+> **Sugerencia**: Si ya ha clonado el repositorio **mslearn-openai**, ábralo en Visual Studio Code. De lo contrario, siga estos pasos para clonarlo en el entorno de desarrollo.
 
-1. Start Visual Studio Code.
-2. Open the palette (SHIFT+CTRL+P) and run a **Git: Clone** command to clone the `https://github.com/MicrosoftLearning/mslearn-openai` repository to a local folder (it doesn't matter which folder).
-3. When the repository has been cloned, open the folder in Visual Studio Code.
+1. Inicie Visual Studio Code.
+2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
+3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
 
-    > **Note**: If Visual Studio Code shows you a pop-up message to prompt you to trust the code you are opening, click on **Yes, I trust the authors** option in the pop-up.
+    > **Nota**: Si Visual Studio Code muestra un mensaje emergente para solicitarle que confíe en el código que está abriendo, haga clic en la opción **Sí, confío en los autores** en el elemento emergente.
 
-4. Wait while additional files are installed to support the C# code projects in the repo.
+4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
-    > **Note**: If you are prompted to add required assets to build and debug, select **Not Now**.
+    > **Nota**: Si se le pide que agregue los recursos necesarios para compilar y depurar, seleccione **Ahora no**.
 
-## Configure your application
+## Configuración de la aplicación
 
-Applications for both C# and Python have been provided, as well as a sample text file you'll use to test the summarization. Both apps feature the same functionality. First, you'll complete some key parts of the application to enable using your Azure OpenAI resource.
+Se han proporcionado aplicaciones para C# y Python, así como un archivo de texto de ejemplo que usará para probar el resumen. Las dos aplicaciones tienen la misma funcionalidad. En este ejercicio, completará algunas partes clave de la aplicación para habilitarla con el recurso de Azure OpenAI.
 
-1. In Visual Studio Code, in the **Explorer** pane, browse to the **Labfiles/04-code-generation** folder and expand the **CSharp** or **Python** folder depending on your language preference. Each folder contains the language-specific files for an app into which you're you're going to integrate Azure OpenAI functionality.
-2. Right-click the **CSharp** or **Python** folder containing your code files and open an integrated terminal. Then install the Azure OpenAI SDK package by running the appropriate command for your language preference:
+1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **Labfiles/04-code-generation** y expanda la carpeta **CSharp** o **Python** según sus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del lenguaje de una aplicación en la que va a integrar la funcionalidad de OpenAI de Azure.
+2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contiene los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
 
-    **C#**:
+    **C#:**
 
     ```
     dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
@@ -147,23 +147,23 @@ Applications for both C# and Python have been provided, as well as a sample text
     pip install openai==1.13.3
     ```
 
-3. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the configuration file for your preferred language
+3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración para su lenguaje preferido.
 
     - **C#**: appsettings.json
     - **Python**: .env
     
-4. Update the configuration values to include:
-    - The  **endpoint** and a **key** from the Azure OpenAI resource you created (available on the **Keys and Endpoint** page for your Azure OpenAI resource in the Azure portal)
-    - The **deployment name** you specified for your model deployment (available in the **Deployments** page in Azure OpenAI Studio).
-5. Save the configuration file.
+4. Actualiza los valores de configuración para incluir:
+    - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
+    - El **nombre de implementación** que especificó para la implementación de modelo (disponible en la página **Implementaciones** de Azure OpenAI Studio).
+5. Guarde el archivo de configuración.
 
-## Add code to use your Azure OpenAI service model
+## Adición de código para usar el modelo de servicio de Azure OpenAI
 
-Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
+Ahora está listo para usar el SDK de Azure OpenAI para consumir el modelo implementado.
 
-1. In the **Explorer** pane, in the **CSharp** or **Python** folder, open the code file for your preferred language. In the function that calls the Azure OpenAI model, under the comment ***Format and send the request to the model***, add the code to format and send the request to the model.
+1. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de código para su lenguaje preferido. En la función que llama al modelo de Azure OpenAI, en el comentario ***Dar formato y enviar la solicitud al modelo***, agregue el código para dar formato y enviar la solicitud al modelo.
 
-    **C#**: Program.cs
+    **C#** : Program.cs
 
     ```csharp
     // Format and send the request to the model
@@ -204,55 +204,55 @@ Now you're ready to use the Azure OpenAI SDK to consume your deployed model.
     )
     ```
 
-4. Save the changes to the code file.
+4. Guarde los cambios en el archivo del código.
 
-## Run the application
+## Ejecución de la aplicación
 
-Now that your app has been configured, run it to try generating code for each use case. The use case is numbered in the app, and can be run in any order.
+Ahora que ha configurado la aplicación, ejecútela para intentar generar código para cada caso de uso. El caso de uso está numerado en la aplicación y se puede ejecutar en cualquier orden.
 
-> **Note**: Some users may experience rate limiting if calling the model too frequently. If you hit an error about a token rate limit, wait for a minute then try again.
+> **Nota**: Algunos usuarios pueden experimentar una limitación de volumen si se llama al modelo con demasiada frecuencia. Si se produce un error relacionado con el límite de volumen de tokens, espere un minuto y vuelva a intentarlo.
 
-1. In the **Explorer** pane, expand the **Labfiles/04-code-generation/sample-code** folder and review the function and the *go-fish* app for your language. These files will be used for the tasks in the app.
-2. In the interactive terminal pane, ensure the folder context is the folder for your preferred language. Then enter the following command to run the application.
+1. En el panel **Explorador**, expanda la carpeta **Labfiles/04-code-generation/sample-code** y revise la función y la aplicación *go-fish* para su lenguaje. Estos archivos se usarán para las tareas de la aplicación.
+2. En el panel de terminal interactivo, asegúrese de que el contexto de la carpeta es la carpeta del lenguaje que prefiera. Después, escriba el siguiente comando para ejecutar la aplicación.
 
     - **C#**: `dotnet run`
     - **Python**: `python code-generation.py`
 
-    > **Tip**: You can use the **Maximize panel size** (**^**) icon in the terminal toolbar to see more of the console text.
+    > **Sugerencia**: Puede usar el icono **Maximizar el tamaño del panel** (**^**) en la barra de herramientas del terminal para ver más del texto de la consola.
 
-3. Choose option **1** to add comments to your code and enter the following prompt. Note, the response might take a few seconds for each of these tasks.
+3. Elija la opción **1** para agregar comentarios al código y escriba la siguiente solicitud. Tenga en cuenta que la respuesta puede tardar unos segundos.
 
     ```prompt
     Add comments to the following function. Return only the commented code.\n---\n
     ```
 
-    The results will be put into **result/app.txt**. Open that file up, and compare it to the function file in **sample-code**.
+    Los resultados se colocarán en **result/app.txt**. Abra ese archivo y compárelo con el archivo de la función que está en **sample-code**.
 
-4. Next, choose option **2** to write unit tests for that same function and enter the following prompt.
+4. Después, elija la opción **2** para escribir pruebas unitarias para esa misma función y escriba la siguiente indicación.
 
     ```prompt
     Write four unit tests for the following function.\n---\n
     ```
 
-    The results will replace what was in **result/app.txt**, and details four unit tests for that function.
+    Los resultados reemplazarán lo que había en **result/app.txt** e indican que hay cuatro pruebas unitarias para esa función.
 
-5. Next, choose option **3** to fix bugs in an app for playing Go Fish. Enter the following prompt.
+5. Luego, elija la opción **3** para corregir errores en una aplicación para jugar a Go Fish. Escriba lo siguiente.
 
     ```prompt
     Fix the code below for an app to play Go Fish with the user. Return only the corrected code.\n---\n
     ```
 
-    The results will replace what was in **result/app.txt**, and should have very similar code with a few things corrected.
+    Los resultados reemplazarán lo que había en **result/app.txt** y deben tener un código muy similar con algunas cosas corregidas.
 
-    - **C#**: Fixes are made on line 30 and 59
-    - **Python**: Fixes are made on line 18 and 31
+    - **C#** : se realizan correcciones en las líneas 30 y 59.
+    - **Python**: se realizan correcciones en las líneas 18 y 31.
 
-    The app for Go Fish in **sample-code** can be run if you replace the lines that contain bugs with the response from Azure OpenAI. If you run it without the fixes, it will not work correctly.
+    La aplicación para jugar a Go Fish que está en **sample-code** se puede ejecutar, siempre que reemplace las líneas que contienen errores por la respuesta de Azure OpenAI. Si la ejecuta sin las correcciones, no funcionará correctamente.
     
-    > **Note**: It's important to note that even though the code for this Go Fish app was corrected for some syntax, it's not a strictly accurate representation of the game. If you look closely, there are issues with not checking if the deck is empty when drawing cards, not removing pairs from the players hand when they get a pair, and a few other bugs that require understanding of card games to realize. This is a great example of how useful generative AI models can be to assist with code generation, but can't be trusted as correct and need to be verified by the developer.
+    > **Nota**: Es importante tener en cuenta que, aunque se ha corregido una parte de la sintaxis en el código de esta aplicación Go Fish, no es una representación estrictamente precisa del juego. Si la observa detenidamente, verá que no se comprueba si quedan cartas en el mazo antes de robar, no desaparecen las parejas a los jugadores cuando las forman, así como algunos errores más que requieren conocer los juegos de cartas para darse cuenta. Este es un excelente ejemplo de lo útiles que pueden ser los modelos de inteligencia artificial generativa como ayuda para la generación de código, pero no se puede confiar en ellos completamente, el desarrollador debe realizar una última comprobación.
 
-    If you would like to see the full response from Azure OpenAI, you can set the **printFullResponse** variable to `True`, and rerun the app.
+    Si quisiera ver la respuesta completa de Azure OpenAI, establezca la variable **printFullResponse** en `True` y vuelva a ejecutar la aplicación.
 
-## Clean up
+## Limpiar
 
-When you're done with your Azure OpenAI resource, remember to delete the deployment or the entire resource in the **Azure portal** at `https://portal.azure.com`.
+Cuando haya terminado de usar el recurso de Azure OpenAI, recuerde eliminar la implementación o todo el recurso en **Azure Portal**, en `https://portal.azure.com`.
