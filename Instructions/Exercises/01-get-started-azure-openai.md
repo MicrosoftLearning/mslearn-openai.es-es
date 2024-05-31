@@ -13,7 +13,7 @@ Este ejercicio dura aproximadamente **30** minutos.
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
-Si aún no tuviera uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
+Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
 
 1. Inicie sesión en **Azure Portal** en `https://portal.azure.com`.
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
@@ -48,7 +48,7 @@ El servicio Azure OpenAI proporciona un portal basado en web denominado **Azure 
     Una vez que se abra la nueva pestaña, puede cerrar las notificaciones de banner para los nuevos servicios de versión preliminar que se muestran en la parte superior de la página de Azure OpenAI Studio.
 
 1. En Azure OpenAI Studio, en el panel de la izquierda, seleccione la página **Implementaciones** y vea las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
-    - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
+    - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
     - **Versión de Modev**: actualización automática al valor predeterminado.
     - **Nombre de implementación**: *nombre único que prefieras*
     - **Opciones avanzadas**
@@ -101,13 +101,13 @@ Hasta ahora, ha participado en una conversación de chat con el modelo en funci�
 
     **Usuario:**
     
-    ```
+    ```prompt
     Write an advertisement for the lightweight "Ultramop" mop, which uses patented absorbent materials to clean floors.
     ```
     
     **Asistente:**
     
-    ```
+    ```prompt
     Welcome to the future of cleaning!
     
     The Ultramop makes light work of even the dirtiest of floors. Thanks to its patented absorbent materials, it ensures a brilliant shine. Just look at these features:
@@ -155,7 +155,7 @@ Ahora que ha explorado algunas de las funcionalidades de un modelo de IA generat
 1. Una vez que su aplicación web se haya implementado correctamente, use el botón situado en la parte superior derecha de la página del área de juegos **Chat** para iniciar la aplicación web. La aplicación puede tardar unos minutos en iniciarse. Si se le pide, acepte la solicitud de permisos.
 1. En la aplicación web, escriba el siguiente mensaje de chat:
 
-    ```
+    ```prompt
     Write an advertisement for the new "WonderWipe" cloth that attracts dust particulates and can be used to clean any household surface.
     ```
 

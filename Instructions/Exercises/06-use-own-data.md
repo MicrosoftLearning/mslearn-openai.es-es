@@ -58,7 +58,7 @@ Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studi
 
 Antes de conectar Azure OpenAI a los datos, observe primero cómo responde el modelo base a las consultas sin datos de base.
 
-1. En **Azure OpenAI Studio** en `https://oai.azure.com`, en la sección **Área de juegos**, seleccione la página **Chat**. La página del área de juegos **Chat** consta de tres secciones principales:
+1. En **Azure OpenAI Studio** en `https://oai.azure.com`, en la sección **Área de juegos**, seleccione la página **Chat**. La página del área de juegos de **Chat** consta de tres secciones principales:
     - **Instalación**: se usa para establecer el contexto de las respuestas del modelo.
     - **Sesión de chat**: se usa para enviar mensajes de chat y ver respuestas.
     - **Configuración**: se usa para configurar los valores de la implementación de modelo.
@@ -66,11 +66,11 @@ Antes de conectar Azure OpenAI a los datos, observe primero cómo responde el mo
 3. En el área **Configuración**, seleccione la plantilla de mensaje del sistema predeterminada para establecer el contexto de la sesión de chat. El mensaje predeterminado del sistema es *Es un asistente de IA que ayuda a las personas a encontrar información*.
 4. En la **sesión de chat**, envíe las siguientes consultas y revise las respuestas:
 
-    ```
+    ```prompt
     I'd like to take a trip to New York. Where should I stay?
     ```
 
-    ```
+    ```prompt
     What are some facts about New York?
     ```
 
@@ -121,11 +121,11 @@ Ahora agregará algunos datos para una compañía ficticia de agencia de viajes 
 
 Ahora que ha agregado los datos, realice las mismas preguntas que antes y vea cómo difiere la respuesta.
 
-```
+```prompt
 I'd like to take a trip to New York. Where should I stay?
 ```
 
-```
+```prompt
 What are some facts about New York?
 ```
 
@@ -160,7 +160,7 @@ Ahora vamos a explorar el uso de sus propios datos en una aplicación que usa el
 Se han proporcionado aplicaciones para C# y Python, y ambas aplicaciones presentan la misma funcionalidad. En este ejercicio, completará algunas partes clave de la aplicación para habilitarla con el recurso de Azure OpenAI.
 
 1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **Labfiles/06-use-own-data** y expanda la carpeta **CSharp** o **Python** según sus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del lenguaje de una aplicación en la que va a integrar la funcionalidad de Azure OpenAI.
-2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contiene los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
+2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contenga los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
 
     **C#:**
 
@@ -187,7 +187,7 @@ Se han proporcionado aplicaciones para C# y Python, y ambas aplicaciones present
     - Nombre del índice de búsqueda (que debe ser `margiestravel`).
 1. Guarde el archivo de configuración.
 
-### Adición de código para usar Azure OpenAI Service
+### Adición de código para usar el servicio Azure OpenAI
 
 Ahora está listo para usar el SDK de Azure OpenAI para consumir el modelo implementado.
 
