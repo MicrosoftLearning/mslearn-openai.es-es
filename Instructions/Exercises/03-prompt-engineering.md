@@ -13,11 +13,11 @@ Este ejercicio dura aproximadamente **30** minutos.
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
-Si aún no tuviera uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
+Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
 
 1. Inicie sesión en **Azure Portal** en `https://portal.azure.com`.
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
-    - **Suscripción**: *Seleccione una suscripción de Azure aprobada para acceder al servicio Azure OpenAI*
+    - **Suscripción**: *Selección de una suscripción de Azure aprobada para acceder al servicio Azure OpenAI*
     - **Grupo de recursos**: *elija o cree un grupo de recursos*
     - **Región**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
         - Este de Australia
@@ -43,9 +43,9 @@ Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studi
 
 1. En la página **Información general** del recurso Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
 2. En Azure OpenAI Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
-    - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
+    - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
     - **Versión de Modev**: actualización automática al valor predeterminado.
-    - **Nombre de implementación**: *Nombre único de su elección. Usará este valor más adelante en el laboratorio.*
+    - **Nombre de implementación**: *Un nombre único que prefiera. Usará este valor más adelante en este laboratorio.*
     - **Opciones avanzadas**
         - **Filtro de contenido**: valor predeterminado
         - **Tipo de implementación**: Estándar
@@ -60,13 +60,13 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
 1. En **Azure OpenAI Studio**, en `https://oai.azure.com`, en la sección **Área de juegos**, seleccione la página **Chat**. La página del área de juegos de **Chat** consta de tres secciones principales:
     - **Instalación**: se usa para establecer el contexto de las respuestas del modelo.
-    - **Sesión de chat**: se usa para enviar mensajes de chat y ver las respuestas.
+    - **Sesión de chat**: se usa para enviar mensajes de chat y ver respuestas.
     - **Configuración**: se usa para configurar los valores de la implementación de modelo.
 2. En el panel **Configuración**, asegúrese de que la implementación de modelo esté seleccionada.
 3. En el área **Configuración**, seleccione la plantilla de mensaje del sistema predeterminada para establecer el contexto de la sesión de chat. El mensaje predeterminado del sistema es *Es un asistente de IA que ayuda a las personas a encontrar información*.
 4. En la **sesión de chat**, envíe las siguientes consultas:
 
-    ```
+    ```prompt
     What kind of article is this?
     ---
     Severe drought likely in California
@@ -86,7 +86,7 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
     **Usuario:**
     
-    ```
+    ```prompt
     What kind of article is this?
     ---
     New York Baseballers Wins Big Against Chicago
@@ -100,7 +100,7 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
     
     **Asistente:**
     
-    ```
+    ```prompt
     Sports
       ```
 
@@ -108,7 +108,7 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
     **Usuario:**
     
-    ```
+    ```prompt
     Categorize this article:
     ---
     Joyous moments at the Oscars
@@ -123,7 +123,7 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
     
     **Asistente:**
     
-    ```
+    ```prompt
     Entertainment
     ```
 
@@ -131,7 +131,7 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
 9. En la sección **Sesión de chat**, vuelva a enviar la siguiente solicitud:
 
-    ```
+    ```prompt
     What kind of article is this?
     ---
     Severe drought likely in California
@@ -149,7 +149,7 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
 11. En la sección **Sesión de chat**, envíe la siguiente solicitud:
 
-    ```
+    ```prompt
     # 1. Create a list of animals
     # 2. Create a list of whimsical names for those animals
     # 3. Combine them randomly into a list of 25 animal and name pairs
@@ -172,13 +172,13 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
 Ahora exploremos el uso de ingeniería de solicitudes en una aplicación que use el SDK del servicio Azure OpenAI. Desarrollará la aplicación con Visual Studio Code. Los archivos de código de la aplicación se han proporcionado en un repositorio de GitHub.
 
-> **Sugerencia**: Si ya clonó el repositorio **mslearn-openai**, ábralo en Visual Studio Code. De lo contrario, siga estos pasos para clonarlo en el entorno de desarrollo.
+> **Sugerencia**: Si ya ha clonado el repositorio **mslearn-openai**, ábralo en Visual Studio Code. De lo contrario, siga estos pasos para clonarlo en el entorno de desarrollo.
 
 1. Inicie Visual Studio Code.
 2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
 3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
 
-    > **Nota**: Si Visual Studio Code mostrase un mensaje emergente solicitando que confíe en el código que está abriendo, haga clic en la opción **Sí, confío en los autores** del elemento emergente.
+    > **Nota**: Si Visual Studio Code muestra un mensaje emergente para solicitarle que confíe en el código que está abriendo, haga clic en la opción **Sí, confío en los autores** en el elemento emergente.
 
 4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
@@ -189,7 +189,7 @@ Ahora exploremos el uso de ingeniería de solicitudes en una aplicación que use
 Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma funcionalidad. En primer lugar, completará algunas partes clave de la aplicación para habilitar el uso del recurso Azure OpenAI con llamadas API asincrónicas.
 
 1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **Labfiles/03-prompt-engineering** y expanda las carpetas **CSharp** o **Python**, según sus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del lenguaje de una aplicación en la que va a integrar la funcionalidad de OpenAI de Azure.
-2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contenga los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
+2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contiene los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
 
     **C#:**
 
@@ -203,14 +203,14 @@ Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma func
     pip install openai==1.13.3
     ```
 
-3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración de su lenguaje preferido
+3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración para su lenguaje preferido.
 
     - **C#**: appsettings.json
     - **Python**: .env
     
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
-    - El **nombre de implementación** que especificó en la implementación de modelo (disponible en la página **Implementaciones** de Azure OpenAI Studio).
+    - El **nombre de implementación** que especificó para la implementación de modelo (disponible en la página **Implementaciones** de Azure OpenAI Studio).
 5. Guarde el archivo de configuración.
 
 ## Adición de código para usar el servicio Azure OpenAI
