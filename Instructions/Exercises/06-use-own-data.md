@@ -113,6 +113,7 @@ Ahora agregará algunos datos para una compañía ficticia de agencia de viajes 
 
 1. En la página **Cargar archivos**, cargue los archivos PDF que descargó y, a continuación, seleccione **Siguiente**.
 1. En la página **Administración de datos**, seleccione el tipo de búsqueda **Palabra clave** en la lista desplegable y, a continuación, seleccione **Siguiente**.
+1. En la página**Conexión de datos**, seleccione **Clave de API**.
 1. En la página **Revisar y finalizar**, seleccione **Guardar y cerrar**, lo que agregará los datos. Esta operación puede tardar unos minutos, durante los cuales debe dejar abierta la ventana. Una vez completado, verá el origen de datos, el recurso de búsqueda y el índice especificados en la sección **Instalación**.
 
     > **Sugerencia**: En ocasiones, la conexión entre el nuevo índice de búsqueda y Azure OpenAI Studio tarda demasiado tiempo. Si ha esperado unos minutos y aún no está conectado, compruebe los recursos de AI Search en Azure Portal. Si ve el índice completado, puede desconectar la conexión de datos en Azure OpenAI Studio y volver a agregarla especificando un origen de datos de Azure AI Search y seleccionando el nuevo índice.
