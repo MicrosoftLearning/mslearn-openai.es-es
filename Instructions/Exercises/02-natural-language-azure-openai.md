@@ -13,7 +13,7 @@ Este ejercicio dura aproximadamente **30** minutos.
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
-Si aún no tuviera uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
+Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
 
 1. Inicie sesión en **Azure Portal** en `https://portal.azure.com`.
 2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
@@ -43,14 +43,13 @@ Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studi
 
 1. En la página **Información general** del recurso Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
 2. En Azure OpenAI Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
-    - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
+    - **Nombre de implementación**: *nombre único que prefieras*
+    - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
     - **Versión de Modev**: actualización automática al valor predeterminado.
-    - **Nombre de implementación**: *Nombre único de su elección. Usará este valor más adelante en el laboratorio.*
-    - **Opciones avanzadas**
-        - **Filtro de contenido**: valor predeterminado
-        - **Tipo de implementación**: Estándar
-        - **Límite de velocidad de tokens por minuto**: 5000\*
-        - **Habilitación de la cuota dinámica**: habilitado
+    - **Tipo de implementación**: Estándar
+    - **Límite de velocidad de tokens por minuto**: 5000\*
+    - **Filtro de contenido**: valor predeterminado
+    - **Habilitación de la cuota dinámica**: habilitado
 
     > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
@@ -58,13 +57,13 @@ Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studi
 
 Desarrollará la aplicación de Azure OpenAI con Visual Studio Code. Los archivos de código de la aplicación se han proporcionado en un repositorio de GitHub.
 
-> **Sugerencia**: Si ya clonó el repositorio **mslearn-openai**, ábralo en Visual Studio Code. De lo contrario, siga estos pasos para clonarlo en el entorno de desarrollo.
+> **Sugerencia**: Si ya ha clonado el repositorio **mslearn-openai**, ábralo en Visual Studio Code. De lo contrario, siga estos pasos para clonarlo en el entorno de desarrollo.
 
 1. Inicie Visual Studio Code.
 2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
 3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
 
-    > **Nota**: Si Visual Studio Code mostrase un mensaje emergente para solicitarle que confíe en el código que está abriendo, haga clic en la opción **Sí, confío en los creadores** del elemento emergente.
+    > **Nota**: Si Visual Studio Code muestra un mensaje emergente para solicitarle que confíe en el código que está abriendo, haga clic en la opción **Sí, confío en los autores** en el elemento emergente.
 
 4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
@@ -89,14 +88,14 @@ Se han proporcionado aplicaciones para C# y Python. Las dos aplicaciones tienen 
     pip install openai==1.13.3
     ```
 
-3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración de su lenguaje preferido
+3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración para su lenguaje preferido.
 
     - **C#**: appsettings.json
     - **Python**: .env
     
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
-    - El **nombre de implementación** que especificó en la implementación de modelo (disponible en la página **Implementaciones** de Azure OpenAI Studio).
+    - El **nombre de implementación** que especificó para la implementación de modelo (disponible en la página **Implementaciones** de Azure OpenAI Studio).
 5. Guarde el archivo de configuración.
 
 ## Adición de código para usar el servicio Azure OpenAI
@@ -312,4 +311,4 @@ En la mayoría de las aplicaciones del mundo real, la capacidad de hacer referen
 
 ## Limpiar
 
-Cuando haya terminado de usar el recurso de Azure OpenAI, recuerde eliminar la implementación o el recurso entero en **Azure Portal**, en `https://portal.azure.com`.
+Cuando haya terminado de usar el recurso de Azure OpenAI, recuerde eliminar la implementación o todo el recurso en **Azure Portal**, en `https://portal.azure.com`.
