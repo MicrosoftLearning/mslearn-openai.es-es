@@ -43,14 +43,13 @@ Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studi
 
 1. En la página **Información general** del recurso Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
 2. En Azure OpenAI Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+    - **Nombre de implementación**: *nombre único que prefieras*
     - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
     - **Versión de Modev**: actualización automática al valor predeterminado.
-    - **Nombre de implementación**: *Un nombre único que prefiera. Usará este valor más adelante en este laboratorio.*
-    - **Opciones avanzadas**
-        - **Filtro de contenido**: valor predeterminado
-        - **Tipo de implementación**: Estándar
-        - **Límite de velocidad de tokens por minuto**: 5000\*
-        - **Habilitación de la cuota dinámica**: habilitado
+    - **Tipo de implementación**: Estándar
+    - **Límite de velocidad de tokens por minuto**: 5000\*
+    - **Filtro de contenido**: valor predeterminado
+    - **Habilitación de la cuota dinámica**: habilitado
 
     > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
