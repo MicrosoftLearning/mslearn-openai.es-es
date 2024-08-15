@@ -78,6 +78,7 @@ Para implementar los modelos, usarás AI Studio.
 1. En Azure Portal, ve a tu recurso de Azure OpenAI. Después usa el vínculo para abrir el recurso en **Inteligencia artificial de Azure Studio**.
 1. En Inteligencia artificial de Azure Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Luego crea una nueva implementación del modelo base del modelo **text-embedding-ada-002** con la siguiente configuración:
     - **Nombre de implementación**: text-embedding-ada-002
+    - **Modelo**: text-embedding-ada-002
     - **Versión del modelo**: *la versión predeterminada*
     - **Tipo de implementación**: Estándar
     - **Límite de velocidad de tokens por minuto**: 5000\*
