@@ -39,17 +39,19 @@ Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción 
 
 ## Implementar un modelo
 
-Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studio** que se puede usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, use Azure OpenAI Studio para implementar un modelo.
+Azure proporciona un portal basado en web denominado **Inteligencia artificial de Azure Studio** que se puede usar para implementar, administrar y explorar modelos. Comenzarás la exploración de Azure OpenAI usando Inteligencia artificial de Azure Studio para implementar un modelo.
 
-1. En la página **Información general** del recurso Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
-2. En Azure OpenAI Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+> **Nota**: A medida que usas Inteligencia artificial de Azure Studio, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
+
+1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **AI Studio**.
+1. En Inteligencia artificial de Azure Studio, en el panel de la izquierda, selecciona la página **Implementaciones** y visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
     - **Nombre de implementación**: *nombre único que prefieras*
     - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
-    - **Versión de Modev**: actualización automática al valor predeterminado.
+    - **Versión del modelo**: *uso de la versión predeterminada*
     - **Tipo de implementación**: Estándar
     - **Límite de velocidad de tokens por minuto**: 5000\*
     - **Filtro de contenido**: valor predeterminado
-    - **Habilitación de la cuota dinámica**: habilitado
+    - **Habilitación de la cuota dinámica**: deshabilitada
 
     > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
@@ -95,7 +97,7 @@ Se han proporcionado aplicaciones para C# y Python. Las dos aplicaciones tienen 
     
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
-    - El **nombre de implementación** que especificó para la implementación de modelo (disponible en la página **Implementaciones** de Azure OpenAI Studio).
+    - El **nombre de implementación** que especificaste para la implementación del modelo (disponible en la página **Implementaciones** de Inteligencia artificial de Azure Studio).
 5. Guarde el archivo de configuración.
 
 ## Adición de código para usar el servicio Azure OpenAI

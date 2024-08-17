@@ -39,17 +39,19 @@ Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción 
 
 ## Implementar un modelo
 
-Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studio** que se puede usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, use Azure OpenAI Studio para implementar un modelo.
+Azure proporciona un portal basado en web denominado **Inteligencia artificial de Azure Studio** que se puede usar para implementar, administrar y explorar modelos. Comenzarás la exploración de Azure OpenAI usando Inteligencia artificial de Azure Studio para implementar un modelo.
 
-1. En la página **Información general** del recurso Azure OpenAI, use el botón **Explorar** para abrir Azure OpenAI Studio en una nueva pestaña del explorador.
-2. En Azure OpenAI Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+> **Nota**: A medida que usas Inteligencia artificial de Azure Studio, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
+
+1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **AI Studio**.
+1. En Inteligencia artificial de Azure Studio, en el panel de la izquierda, selecciona la página **Implementaciones** y visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
     - **Nombre de implementación**: *nombre único que prefieras*
     - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
-    - **Versión de Modev**: actualización automática al valor predeterminado.
+    - **Versión del modelo**: *uso de la versión predeterminada*
     - **Tipo de implementación**: Estándar
     - **Límite de velocidad de tokens por minuto**: 5000\*
     - **Filtro de contenido**: valor predeterminado
-    - **Habilitación de la cuota dinámica**: habilitado
+    - **Habilitación de la cuota dinámica**: deshabilitada
 
     > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
@@ -57,13 +59,12 @@ Azure OpenAI proporciona un portal basado en web denominado **Azure OpenAI Studi
 
 Antes de usarlo en la aplicación, examine la forma en que Azure OpenAI puede generar y explicar código en el área de juegos de chat.
 
-1. En **Azure OpenAI Studio** en `https://oai.azure.com`, en la sección **Área de juegos**, seleccione la página **Chat**. La página del área de juegos **Chat** consta de tres secciones principales:
-    - **Instalación**: se usa para establecer el contexto de las respuestas del modelo.
+1. En la sección **Área de juego**, seleccione la página **Chat**. La página del área de juegos de **Chat** consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
+    - **Configuración**: se usa para seleccionar la implementación, definir el mensaje del sistema y establecer parámetros para interactuar con la implementación.
     - **Sesión de chat**: se usa para enviar mensajes de chat y ver respuestas.
-    - **Configuración**: se usa para configurar los valores de la implementación de modelo.
-2. En el panel **Configuración**, asegúrese de que la implementación de modelo esté seleccionada.
-3. En el área **Configuración**, cambie el mensaje del sistema a `You are a programming assistant helping write code` y aplique los cambios.
-4. En la sección **Sesión de chat**, envíe la siguiente consulta:
+1. En **Implementaciones**, asegúrate de que la implementación del modelo esté seleccionada.
+1. En el área **Mensaje del sistema**, establece el mensaje del sistema en `You are a programming assistant helping write code` y aplica los cambios.
+1. En la sección **Sesión de chat**, envíe la siguiente consulta:
 
     ```
     Write a function in python that takes a character and a string as input, and returns how many times the character appears in the string
@@ -71,11 +72,11 @@ Antes de usarlo en la aplicación, examine la forma en que Azure OpenAI puede ge
 
     Es probable que el modelo responda con una función, que explique lo que hace la función y que indique cómo llamarla.
 
-5. A continuación, envíe el mensaje `Do the same thing, but this time write it in C#`.
+1. A continuación, envíe el mensaje `Do the same thing, but this time write it in C#`.
 
     Es probable que el modelo responda de forma muy similar a la primera vez, pero esta vez con código de C#. Puede volver a pedirlo para cualquier otro lenguaje o una función para completar una tarea diferente, como revertir la cadena de entrada.
 
-6. Ahora vamos a explorar el uso de inteligencia artificial para comprender el código. Envíe el siguiente mensaje de usuario.
+1. Ahora vamos a explorar el uso de inteligencia artificial para comprender el código. Envíe el siguiente mensaje de usuario.
 
     ```
     What does the following function do?  
@@ -153,7 +154,7 @@ Se han proporcionado aplicaciones para C# y Python, así como un archivo de text
     
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
-    - El **nombre de implementación** que especificó para la implementación de modelo (disponible en la página **Implementaciones** de Azure OpenAI Studio).
+    - El **nombre de implementación** que especificaste para la implementación del modelo (disponible en la página **Implementaciones** de Inteligencia artificial de Azure Studio).
 5. Guarde el archivo de configuración.
 
 ## Adición de código para usar el modelo de servicio de Azure OpenAI
