@@ -39,15 +39,15 @@ Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción 
 
 ## Implementar un modelo
 
-Azure proporciona un portal basado en web denominado **Inteligencia artificial de Azure Studio** que se puede usar para implementar, administrar y explorar modelos. Comenzarás la exploración de Azure OpenAI usando Inteligencia artificial de Azure Studio para implementar un modelo.
+Azure proporciona un portal basado en web denominado **Azure AI Studio** que puedes usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, usa Azure AI Studio para implementar un modelo.
 
-> **Nota**: A medida que usas Inteligencia artificial de Azure Studio, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
+> **Nota**: a medida que usas Azure AI Studio, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
 
-1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **AI Studio**.
-1. En Inteligencia artificial de Azure Studio, en el panel de la izquierda, selecciona la página **Implementaciones** y visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **AI Studio**.
+1. En Azure AI Studio, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
     - **Nombre de implementación**: *nombre único que prefieras*
     - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
-    - **Versión del modelo**: *uso de la versión predeterminada*
+    - **Versión del modelo**: *usar la versión predeterminada*
     - **Tipo de implementación**: Estándar
     - **Límite de velocidad de tokens por minuto**: 5000\*
     - **Filtro de contenido**: valor predeterminado
@@ -59,11 +59,11 @@ Azure proporciona un portal basado en web denominado **Inteligencia artificial d
 
 Comencemos explorando algunas técnicas de ingeniería de solicitud en el área de juegos de chat.
 
-1. En la sección **Área de juego**, seleccione la página **Chat**. La página del área de juegos de **Chat** consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
+1. En la sección **Área de juego**, seleccione la página **Chat**. La página **Chat** del área de juegos consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
     - **Configuración**: se usa para seleccionar la implementación, definir el mensaje del sistema y establecer parámetros para interactuar con la implementación.
     - **Sesión de chat**: se usa para enviar mensajes de chat y ver respuestas.
-2. En **Implementaciones**, asegúrate de que la implementación del modelo gpt-35-turbo-16k esté seleccionada.
-1. Revisa el **Mensaje predeterminado del sistema**, que debería ser *Eres un asistente de IA que ayuda a las personas a encontrar información.*
+2. En **Implementaciones**, asegúrate de que la implementación de modelo gpt-35-turbo-16k esté seleccionada.
+1. Revisa el **Mensaje del sistema** predeterminado, que debería ser *Eres un asistente de inteligencia artificial que ayuda a las personas a encontrar información.*
 4. En la **sesión de chat**, envíe las siguientes consultas:
 
     ```prompt
@@ -80,7 +80,7 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
     La respuesta proporciona una descripción del artículo. Sin embargo, supongamos que desea un formato más específico para la categorización de artículos.
 
-5. En la sección **Configuración**, cambia el mensaje del sistema por `You are a news aggregator that categorizes news articles.`
+5. En la sección **Configuración** cambia el mensaje del sistema por `You are a news aggregator that categorizes news articles.`
 
 6. En el nuevo mensaje del sistema, selecciona el botón **Agregar sección** y elige **Ejemplos**. Después, agregue el siguiente ejemplo.
 
@@ -127,7 +127,7 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
     Entertainment
     ```
 
-8. Usa el botón **Aplicar cambios** de la parte superior de la sección **Configuración** para guardar los cambios.
+8. Usa el botón **Aplicar cambios** en la parte superior de la sección **Configuración** para guardar los cambios.
 
 9. En la sección **Sesión de chat**, vuelva a enviar la siguiente solicitud:
 
@@ -210,7 +210,7 @@ Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma func
     
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
-    - El **nombre de implementación** que especificaste para la implementación del modelo (disponible en la página **Implementaciones** de Inteligencia artificial de Azure Studio).
+    - El **nombre de implementación** que has especificado para la implementación de modelo (disponible en la página **Implementaciones** de Azure AI Studio).
 5. Guarde el archivo de configuración.
 
 ## Adición de código para usar el servicio Azure OpenAI
@@ -301,7 +301,7 @@ Ya está listo para usar el SDK de Azure OpenAI para consumir el modelo implemen
 
 Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud al modelo y ver la respuesta. Observe que la única diferencia entre las distintas opciones es el contenido del mensaje. Todos los demás parámetros, como el recuento de tokens y la temperatura, son los mismos para todas las solicitudes.
 
-1. En la carpeta del idioma de su preferencia, abra `system.txt` en Visual Studio Code. Para cada una de las interacciones, escribirás el **Mensaje del sistema** en este archivo y lo guardarás. Cada iteración se pausará primero para que cambie el mensaje del sistema.
+1. En la carpeta del idioma de su preferencia, abra `system.txt` en Visual Studio Code. Para cada interacción, introducirás el **Mensaje del sistema** en este archivo y lo guardarás. Cada iteración se pausará primero para que cambie el mensaje del sistema.
 1. En el panel de terminal interactivo, asegúrese de que el contexto de la carpeta es la carpeta del lenguaje que prefiera. Después, escriba el siguiente comando para ejecutar la aplicación.
 
     - **C#**: `dotnet run`
@@ -340,6 +340,8 @@ Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud a
     - It specializes in elephants 
     - Call for donations to be given at our website
     ```
+
+    > **Consejo**: puede que la escritura automática en la VM no funcione bien con consultas de varias líneas. Si tienes ese problema, copia toda la consulta y pégala en Visual Studio Code.
 
 1. Observe la salida. Esta vez, es probable que vea el formato de un correo electrónico con animales específicos incluidos, junto con una petición de donaciones.
 1. A continuación, escriba las siguientes indicaciones, que especifican además el contenido:
