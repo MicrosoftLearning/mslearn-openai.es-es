@@ -39,15 +39,15 @@ Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción 
 
 ## Implementar un modelo
 
-Azure proporciona un portal basado en web denominado **Inteligencia artificial de Azure Studio** que se puede usar para implementar, administrar y explorar modelos. Comenzarás la exploración de Azure OpenAI usando Inteligencia artificial de Azure Studio para implementar un modelo.
+Azure proporciona un portal basado en web denominado **Azure AI Studio** que puedes usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, usa Azure AI Studio para implementar un modelo.
 
-> **Nota**: A medida que usas Inteligencia artificial de Azure Studio, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
+> **Nota**: a medida que usas Azure AI Studio, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
 
-1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **AI Studio**.
-1. En Inteligencia artificial de Azure Studio, en el panel de la izquierda, selecciona la página **Implementaciones** y visualiza las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **AI Studio**.
+1. En Azure AI Studio, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
     - **Nombre de implementación**: *nombre único que prefieras*
     - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
-    - **Versión del modelo**: *uso de la versión predeterminada*
+    - **Versión del modelo**: *usar la versión predeterminada*
     - **Tipo de implementación**: Estándar
     - **Límite de velocidad de tokens por minuto**: 5000\*
     - **Filtro de contenido**: valor predeterminado
@@ -61,10 +61,10 @@ Ahora que ha implementado un modelo, puede usarlo para generar respuestas basada
 
 > **Nota:** El área de juegos *Chat* utiliza la API *ChatCompletions* en lugar de la antigua API *Completions* que utiliza el área de juegos *Completions*. El área de juegos Completions se proporciona para la compatibilidad con los modelos anteriores.
 
-1. En la sección **Área de juego**, seleccione la página **Chat**. La página del área de juegos de **Chat** consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
+1. En la sección **Área de juego**, seleccione la página **Chat**. La página **Chat** del área de juegos consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
     - **Configuración**: se usa para seleccionar la implementación, definir el mensaje del sistema y establecer parámetros para interactuar con la implementación.
     - **Sesión de chat**: se usa para enviar mensajes de chat y ver respuestas.
-1. En **Implementaciones**, asegúrate de que la implementación del modelo gpt-35-turbo-16k esté seleccionada.
+1. En **Implementaciones**, asegúrate de que la implementación de modelo gpt-35-turbo-16k esté seleccionada.
 1. Revisa el **Mensaje predeterminado del sistema**, que debería ser *Eres un asistente de IA que ayuda a las personas a encontrar información.* El mensaje del sistema se incluye en las solicitudes enviadas al modelo y proporciona contexto para las respuestas del modelo; establecer expectativas sobre cómo un agente de IA basado en el modelo debe interactuar con el usuario.
 1. En el panel **Sesión de chat**, introduzca la consulta del usuario `How can I use generative AI to help me market a new product?`
 
@@ -136,6 +136,8 @@ Ha explorado cómo el mensaje del sistema, los ejemplos y las indicaciones puede
 ## Implementación del modelo en una aplicación web
 
 Ahora que has explorado algunas de las funcionalidades de un modelo de IA generativa en el área de juegos de Inteligencia artificial de Azure Studio, puedes implementar una aplicación web de Azure para proporcionar una interfaz básica del agente de IA a través de la cual los usuarios podrán chatear con el modelo.
+
+> **Nota**: Inteligencia artificial de Azure Studio todavía está en versión preliminar. Para algunos usuarios, no es posible la implementación en la aplicación web debido a un error en la plantilla de Studio. En ese caso, omite esta sección.
 
 1. En la parte superior derecha de la página del área de juegos de **Chat**, en el menú **Implementar en**, seleccione **Una nueva aplicación web**.
 1. En el cuadro de diálogo **Implementar en una aplicación web**, cree una nueva aplicación web con la siguiente configuración:
