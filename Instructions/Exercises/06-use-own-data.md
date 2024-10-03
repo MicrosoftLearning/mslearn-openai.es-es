@@ -115,7 +115,7 @@ Para facilitar el uso de tus propios datos en una solicitud, los indexarás medi
     - **Implementación de modelo**: text-embedding-ada-002
     - **Tipo de autenticación**: clave de API
     - **Reconozco que la conexión a Azure OpenAI Service conllevará costes adicionales para mi cuenta**: seleccionado
-1. En la página siguiente, <u>no</u> selecciones las opciones para vectorizar imágenes ni extraer datos con habilidades de IA.
+1. En la página siguiente, <u>no</u> selecciones las opciones para vectorizar imágenes ni extraer datos con aptitudes de IA.
 1. En la página siguiente, habilita la clasificación semántica y programa el indizador para que se ejecute una vez.
 1. En la página final, establece el **prefijo de nombre de objetos** en `margies-index` y luego crea el índice.
 
