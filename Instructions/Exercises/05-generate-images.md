@@ -30,7 +30,7 @@ Para poder usar Azure OpenAI para generar imágenes, debe aprovisionar un recurs
 1. En Inteligencia artificial de Azure Studio, en el panel de la izquierda, selecciona la página **Implementaciones** y visualiza las implementaciones de modelos existentes. Si aún no tienes una para DALL-E 3, crea una nueva implementación del modelo **dall-e-3** con la siguiente configuración:
     - **Nombre de implementación**: dalle3
     - **Versión del modelo**: *uso de la versión predeterminada*
-    - **Tipo de implementación**: Estándar
+    - **Tipo de implementación**: estándar
     - **Unidades de capacidad**: 1000
     - **Filtro de contenido**: valor predeterminado
     - **Habilitación de la cuota dinámica**: deshabilitada
