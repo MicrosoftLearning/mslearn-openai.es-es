@@ -161,7 +161,7 @@ Se han proporcionado aplicaciones para C# y Python, y ambas aplicaciones present
     
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
-    - El **nombre de implementación** que especificaste para la implementación del modelo (disponible en la página **Implementaciones** de Inteligencia artificial de Azure Studio).
+    - El **nombre de implementación** que has especificado para la implementación de modelo gpt-35-turbo (disponible en la página **Implementaciones** de Inteligencia artificial de Azure Studio).
     - Punto de conexión del servicio de búsqueda (el valor de dirección **URL** de la página de información general del recurso de búsqueda en Azure Portal).
     - Una **clave** para el recurso de búsqueda (disponible en la página **Claves** del recurso de búsqueda en Azure Portal: puedes usar cualquiera de las claves de administración).
     - Nombre del índice de búsqueda (que debe ser `margies-index`).
