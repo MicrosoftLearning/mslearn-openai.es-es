@@ -26,8 +26,8 @@ Para poder usar Azure OpenAI para generar imágenes, debe aprovisionar un recurs
     > Los modelos DALL-E 3 \* solo están disponibles en los recursos del servicio OpenAI de Azure en las regiones de **Este de EE. UU.** y **Centro de Suecia**.
 
 1. Espere a que la implementación finalice. A continuación, vaya al recurso de Azure OpenAI implementado en Azure Portal.
-1. En la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **AI Studio**.
-1. En Inteligencia artificial de Azure Studio, en el panel de la izquierda, selecciona la página **Implementaciones** y visualiza las implementaciones de modelos existentes. Si aún no tienes una para DALL-E 3, crea una nueva implementación del modelo **dall-e-3** con la siguiente configuración:
+1. En la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir al **portal de Azure AI Foundry** (anteriormente Estudio de IA).
+1. En Portal de Azure AI Foundry, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una para DALL-E 3, crea una nueva implementación del modelo **dall-e-3** con la siguiente configuración:
     - **Nombre de implementación**: dalle3
     - **Versión del modelo**: *uso de la versión predeterminada*
     - **Tipo de implementación**: estándar
@@ -38,16 +38,16 @@ Para poder usar Azure OpenAI para generar imágenes, debe aprovisionar un recurs
 
 ## Exploración de la generación de imágenes en el área de juegos de Imágenes
 
-Puedes usar el área de juegos de Imágenes en **Inteligencia artificial de Azure AI Studio** para experimentar con la generación de imágenes.
+Puedes usar el área de juegos de Imágenes en el **portal de Azure AI Foundry** para experimentar con la generación de imágenes.
 
 1. En la sección **Área de juegos de Imágenes**, la implementación de DALL-E 3 debe seleccionarse automáticamente. En caso contrario, selecciónala en el elemento desplegable de la implementación.
 1. En el cuadro **Mensaje**, escriba una descripción de una imagen que desee generar. Por ejemplo, `An elephant on a skateboard` A continuación, seleccione **Generar** y vea la imagen que se genera.
 
-    ![Área de juegos de Imágenes en Inteligencia artificial de Azure Studio con una imagen generada.](../media/images-playground.png)
+    ![El área de juegos de Imágenes en el portal de Azure AI Foundry con una imagen generada.](../media/images-playground.png)
 
 1. Modifique el mensaje para proporcionar una descripción más específica. Por ejemplo, `An elephant on a skateboard in the style of Picasso`. A continuación, genere la nueva imagen y revise los resultados.
 
-    ![Área de juegos de Imágenes en Inteligencia artificial de Azure Studio con dos imágenes generadas.](../media/images-playground-new-style.png)
+    ![El área de juegos de Imágenes en el portal de Azure AI Foundry con dos imágenes generadas.](../media/images-playground-new-style.png)
 
 ## Uso de la API REST para generar imágenes
 

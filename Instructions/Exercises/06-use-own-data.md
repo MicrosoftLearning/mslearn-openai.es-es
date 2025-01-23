@@ -73,10 +73,10 @@ Usarás dos modelos de IA en este ejercicio:
 - Un modelo de inserción de texto para *vectorizar* el texto de los folletos de modo que se pueda indexar de forma eficaz para su uso en la fundamentación de solicitudes.
 - Un modelo GPT que tu aplicación puede usar para generar respuestas a solicitudes fundamentadas en tus datos.
 
-Para implementar los modelos, usarás AI Studio.
+Para implementar estos modelos, usarás AI Foundry.
 
-1. En Azure Portal, ve a tu recurso de Azure OpenAI. Después usa el vínculo para abrir el recurso en **Inteligencia artificial de Azure Studio**.
-1. En Inteligencia artificial de Azure Studio, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Luego crea una nueva implementación del modelo base del modelo **text-embedding-ada-002** con la siguiente configuración:
+1. En Azure Portal, ve a tu recurso de Azure OpenAI. Después, usa el vínculo para abrir tu recurso en el **portal de Azure AI Foundry**.
+1. En el portal de Azure AI Foundry, en la página **Implementaciones**, visualiza las implementaciones de modelos existentes. Luego crea una nueva implementación del modelo base del modelo **text-embedding-ada-002** con la siguiente configuración:
     - **Nombre de implementación**: text-embedding-ada-002
     - **Modelo**: text-embedding-ada-002
     - **Versión del modelo**: *la versión predeterminada*
@@ -151,7 +151,7 @@ Se han proporcionado aplicaciones para C# y Python, y ambas aplicaciones present
     **Python**:
 
     ```
-    pip install openai==1.13.3
+    pip install openai==1.55.3
     ```
 
 3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración para su lenguaje preferido.
@@ -161,7 +161,7 @@ Se han proporcionado aplicaciones para C# y Python, y ambas aplicaciones present
     
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
-    - El **nombre de implementación** que has especificado para la implementación de modelo gpt-35-turbo (disponible en la página **Implementaciones** de Inteligencia artificial de Azure Studio).
+    - El **nombre de implementación** que has especificado para la implementación de modelo gpt-35-turbo (disponible en la página **Implementaciones** del portal de Azure AI Foundry).
     - Punto de conexión del servicio de búsqueda (el valor de dirección **URL** de la página de información general del recurso de búsqueda en Azure Portal).
     - Una **clave** para el recurso de búsqueda (disponible en la página **Claves** del recurso de búsqueda en Azure Portal: puedes usar cualquiera de las claves de administración).
     - Nombre del índice de búsqueda (que debe ser `margies-index`).
@@ -220,6 +220,6 @@ Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud a
 
     > **Sugerencia**: Si desea ver las citas del índice de búsqueda, establezca la variable ***mostrar citas*** cerca de la parte superior del archivo de código en **true**.
 
-## Limpiar
+## Limpieza
 
 Cuando hayas terminado de usar el recurso de Azure OpenAI, recuerda eliminar los recursos en **Azure Portal** en `https://portal.azure.com`. Asegúrese de incluir también la cuenta de almacenamiento y el recurso de búsqueda, ya que pueden suponer un costo relativamente grande.
