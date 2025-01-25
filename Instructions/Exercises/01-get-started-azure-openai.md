@@ -5,7 +5,7 @@ lab:
 
 # Introducción a Azure OpenAI Service
 
-Azure OpenAI Service proporciona los modelos de inteligencia artificial generativa desarrollados por OpenAI para la plataforma Azure, lo que permite desarrollar eficaces soluciones de inteligencia artificial que se benefician de seguridad, escalabilidad e integración de los servicios que proporciona la plataforma en la nube Azure. En este ejercicio, verás cómo empezar a trabajar con Azure OpenAI. Para ello, aprovisionarás el servicio como un recurso de Azure y usarás Inteligencia artificial de Azure Studio para implementar y explorar modelos de IA generativa.
+Azure OpenAI Service proporciona los modelos de inteligencia artificial generativa desarrollados por OpenAI para la plataforma Azure, lo que permite desarrollar eficaces soluciones de inteligencia artificial que se benefician de seguridad, escalabilidad e integración de los servicios que proporciona la plataforma en la nube Azure. En este ejercicio, aprenderás cómo empezar a trabajar con Azure OpenAI. Para ello, aprovisionarás el servicio como un recurso de Azure y usarás Azure AI Foundry para implementar y explorar modelos de IA generativa.
 
 En el escenario de este ejercicio, desempeñará el rol de un desarrollador de software que se ha encargado de implementar un agente de inteligencia artificial que puede usar inteligencia artificial generativa para ayudar a una organización de marketing a mejorar su eficacia a la hora de llegar a los clientes y anunciar nuevos productos. Las técnicas que se usan en el ejercicio se pueden aplicar a cualquier escenario en el que una organización quiera usar modelos de IA generativas para ayudar a los empleados a ser más eficaces y productivos.
 
@@ -39,12 +39,12 @@ Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción 
 
 ## Implementar un modelo
 
-Azure proporciona un portal basado en web denominado **Azure AI Studio** que puedes usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, usa Azure AI Studio para implementar un modelo.
+Azure proporciona un portal basado en web denominado **Portal de Azure AI Foundry** que puedes usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, usa Portal de Azure AI Foundry para implementar un modelo.
 
-> **Nota**: a medida que usas Azure AI Studio, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
+> **Nota**: a medida que usas Portal de Azure AI Foundry, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
 
-1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **AI Studio**.
-1. En Azure AI Studio, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **Portal de Azure AI Foundry** (anteriormente AI Studio).
+1. En Portal de Azure AI Foundry, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
     - **Nombre de implementación**: *nombre único que prefieras*
     - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
     - **Versión del modelo**: *usar la versión predeterminada*
@@ -57,7 +57,7 @@ Azure proporciona un portal basado en web denominado **Azure AI Studio** que pue
 
 ## Uso del área de juegos de chat
 
-Ahora que ha implementado un modelo, puede usarlo para generar respuestas basadas en mensajes de lenguaje natural. El área de juegos de *Chat* en Inteligencia artificial de Azure Studio proporciona una interfaz de bot de chat para los modelos GPT 3.5 y posteriores.
+Ahora que ha implementado un modelo, puede usarlo para generar respuestas basadas en mensajes de lenguaje natural. El área de juegos de *Chat* en el portal de Azure AI Foundry proporciona una interfaz de bot de chat para los modelos GPT 3.5 y posteriores.
 
 > **Nota:** El área de juegos *Chat* utiliza la API *ChatCompletions* en lugar de la antigua API *Completions* que utiliza el área de juegos *Completions*. El área de juegos Completions se proporciona para la compatibilidad con los modelos anteriores.
 
@@ -135,9 +135,9 @@ Ha explorado cómo el mensaje del sistema, los ejemplos y las indicaciones puede
 
 ## Implementación del modelo en una aplicación web
 
-Ahora que has explorado algunas de las funcionalidades de un modelo de IA generativa en el área de juegos de Inteligencia artificial de Azure Studio, puedes implementar una aplicación web de Azure para proporcionar una interfaz básica del agente de IA a través de la cual los usuarios podrán chatear con el modelo.
+Ahora que has explorado algunas de las funcionalidades de un modelo de IA generativa en el área de juegos de Azure AI Foundry, puedes implementar una aplicación web de Azure para proporcionar una interfaz básica del agente de IA a través de la cual los usuarios podrán chatear con el modelo.
 
-> **Nota**: Inteligencia artificial de Azure Studio todavía está en versión preliminar. Para algunos usuarios, no es posible la implementación en la aplicación web debido a un error en la plantilla de Studio. En ese caso, omite esta sección.
+> **Nota**: para algunos usuarios, no es posible la implementación en la aplicación web debido a un error en la plantilla de Studio. En ese caso, omite esta sección.
 
 1. En la parte superior derecha de la página del área de juegos de **Chat**, en el menú **Implementar en**, seleccione **Una nueva aplicación web**.
 1. En el cuadro de diálogo **Implementar en una aplicación web**, cree una nueva aplicación web con la siguiente configuración:
@@ -160,8 +160,8 @@ Ahora que has explorado algunas de las funcionalidades de un modelo de IA genera
 
     > **Nota**: Ha implementado el *modelo* en una aplicación web, pero esta implementación no incluye la configuración del sistema ni los parámetros que estableció en el área de juegos, por lo que es posible que la respuesta no refleje los ejemplos que especificó en el área de juegos. En un escenario real, agregaría lógica a la aplicación para modificar el símbolo del sistema para que incluya los datos contextuales adecuados para los tipos de respuesta que desea generar. Este tipo de personalización está fuera del ámbito de este ejercicio introductorio, pero puede obtener información sobre las técnicas de ingeniería rápida y las API de Azure OpenAI en otros ejercicios y documentación del producto.
 
-1. Cuando hayas terminado de experimentar con el modelo en la aplicación web, cierra la pestaña de la aplicación web del explorador para volver a Inteligencia artificial de Azure Studio.
+1. Cuando hayas terminado de experimentar con el modelo en la aplicación web, cierra la pestaña de la aplicación web del explorador para volver al Portal de la Fundición de IA de Azure.
 
-## Limpiar
+## Limpieza
 
 Cuando haya terminado de usar el recurso de Azure OpenAI, recuerde eliminar la implementación o todo el recurso en **Azure Portal**, en `https://portal.azure.com`.
