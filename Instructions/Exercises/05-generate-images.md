@@ -23,7 +23,7 @@ Para poder usar Azure OpenAI para generar imágenes, debe aprovisionar un recurs
     - **Nombre**: *nombre único que prefiera*
     - **Plan de tarifa**: estándar S0
 
-    > Los modelos DALL-E 3 \* solo están disponibles en los recursos del servicio OpenAI de Azure en las regiones de **Este de EE. UU.** y **Centro de Suecia**.
+    > \* Los modelos DALL-E 3 solo están disponibles en los recursos de Azure OpenAI Service en las regiones de **Este de EE. UU.**  y **Centro de Suecia**.
 
 1. Espere a que la implementación finalice. A continuación, vaya al recurso de Azure OpenAI implementado en Azure Portal.
 1. En la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir al **portal de Azure AI Foundry** (anteriormente Estudio de IA).
@@ -40,7 +40,7 @@ Para poder usar Azure OpenAI para generar imágenes, debe aprovisionar un recurs
 
 Puedes usar el área de juegos de Imágenes en el **portal de Azure AI Foundry** para experimentar con la generación de imágenes.
 
-1. En la sección **Área de juegos de Imágenes**, la implementación de DALL-E 3 debe seleccionarse automáticamente. En caso contrario, selecciónala en el elemento desplegable de la implementación.
+1. En la sección **Imágenes de Áreas de juegos**, la implementación de DALL-E 3 debería haberse seleccionado automáticamente. En caso contrario, selecciónala en el elemento desplegable de la implementación.
 1. En el cuadro **Mensaje**, escriba una descripción de una imagen que desee generar. Por ejemplo, `An elephant on a skateboard` A continuación, seleccione **Generar** y vea la imagen que se genera.
 
     ![El área de juegos de Imágenes en el portal de Azure AI Foundry con una imagen generada.](../media/images-playground.png)
@@ -93,10 +93,10 @@ Ya está listo para explorar el código que se usa para llamar a la API REST y g
 
 2. Revise el código que contiene el archivo y observe las siguientes características clave:
     - El código realiza una solicitud https al punto de conexión del servicio, incluida la clave del servicio en el encabezado. Estos dos valores se obtienen del archivo de configuración.
-    - La solicitud incluye algunos parámetros, incluida la solicitud de en la imagen, el número de imágenes que se van a generar y el tamaño de las imágenes generadas.
+    - La solicitud incluye algunos parámetros, como la indicación en la que debe basarse la imagen, el número de imágenes que se van a generar y el tamaño de las imágenes generadas.
     - La respuesta incluye una solicitud revisada que el modelo DALL-E extrapola del mensaje proporcionado por el usuario para que sea más descriptivo y la dirección URL de la imagen generada.
     
-    > **Importante**: Si otorgaste a la implementación un nombre distinto del recomendado *dalle3*, deberás actualizar el código con el nombre de la implementación.
+    > **Importante**: Si puso a la implementación un nombre distinto del recomendado *dalle3*, deberás actualizar el código con el nombre de la implementación.
 
 ### Ejecutar la aplicación
 
