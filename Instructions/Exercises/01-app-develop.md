@@ -11,6 +11,17 @@ En el escenario de este ejercicio, asumirás el rol de un desarrollador de softw
 
 Este ejercicio dura aproximadamente **30** minutos.
 
+## Clonación del repositorio para este curso
+
+Si aún no lo ha hecho, debe clonar el repositorio de código para este curso:
+
+1. Inicie Visual Studio Code.
+2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
+3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
+4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
+
+    > **Nota**: Si se le pide que agregue los recursos necesarios para compilar y depurar, seleccione **Ahora no**.
+
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
 Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
@@ -114,13 +125,8 @@ Ya está listo para usar el SDK de Azure OpenAI para consumir el modelo implemen
 
     ```csharp
     // Configure the Azure OpenAI client
-       AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
-        ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
-        ChatCompletion completion = chatClient.CompleteChat(
-        [
-        new SystemChatMessage(systemMessage),
-        new UserChatMessage(userMessage),
-        ]);
+    AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+    ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
     ```
 
     **Python**: application.py
@@ -140,8 +146,21 @@ Ya está listo para usar el SDK de Azure OpenAI para consumir el modelo implemen
 
     ```csharp
     // Get response from Azure OpenAI
-    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
+    ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions()
+    {
+        Temperature = 0.7f,
+        MaxOutputTokenCount = 800
+    };
 
+    ChatCompletion completion = chatClient.CompleteChat(
+        [
+            new SystemChatMessage(systemMessage),
+            new UserChatMessage(userMessage)
+        ],
+        chatCompletionOptions
+    );
+
+    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
     ```
 
     **Python**: application.py
