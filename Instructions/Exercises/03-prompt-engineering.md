@@ -59,12 +59,12 @@ Azure proporciona un portal basado en web denominado **Portal de Azure AI Foundr
 
 Comencemos explorando algunas técnicas de ingeniería de solicitud en el área de juegos de chat.
 
-1. En la sección **Área de juego**, seleccione la página **Chat**. La página **Chat** del área de juegos consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
+1. En el panel lateral izquierdo, en la sección **Áreas de juegos**, selecciona la página **Chat**. La página **Chat** del área de juegos consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
     - **Configuración**: se usa para seleccionar la implementación, definir el mensaje del sistema y establecer parámetros para interactuar con la implementación.
-    - **Sesión de chat**: se usa para enviar mensajes de chat y ver respuestas.
-2. En **Implementaciones**, asegúrate de que la implementación de modelo gpt-35-turbo-16k esté seleccionada.
-1. Revisa el **Mensaje del sistema** predeterminado, que debería ser *Eres un asistente de inteligencia artificial que ayuda a las personas a encontrar información.*
-4. En la **sesión de chat**, envíe las siguientes consultas:
+    - **Historial de chats**: se usa para enviar mensajes de chat y ver respuestas.
+2. En **Implementación**, asegúrate de que la implementación de modelo gpt-35-turbo-16k esté seleccionada.
+1. Revisa el mensaje del sistema predeterminado en el cuadro de texto justo debajo de la implementación seleccionada, que debería ser *Eres un asistente de inteligencia artificial que ayuda a las personas a encontrar información.*
+4. En la sección **Historial de chats**, envía la siguiente consulta:
 
     ```prompt
     What kind of article is this?
@@ -80,7 +80,7 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
     La respuesta proporciona una descripción del artículo. Sin embargo, supongamos que desea un formato más específico para la categorización de artículos.
 
-5. En la sección **Configuración** cambia el mensaje del sistema por `You are a news aggregator that categorizes news articles.`
+5. En la sección **Configuración** cambie el mensaje del sistema por `You are a news aggregator that categorizes news articles.`
 
 6. En el nuevo mensaje del sistema, selecciona el botón **Agregar sección** y elige **Ejemplos**. Después, agregue el siguiente ejemplo.
 
@@ -127,9 +127,9 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
     Entertainment
     ```
 
-8. Usa el botón **Aplicar cambios** en la parte superior de la sección **Configuración** para guardar los cambios.
+8. Use el botón **Aplicar cambios** en el cuadro de texto de mensaje del sistema de la sección **Configuración** para guardar los cambios.
 
-9. En la sección **Sesión de chat**, vuelva a enviar la siguiente solicitud:
+9. En la sección **Historial de chats**, vuelve a enviar la siguiente solicitud:
 
     ```prompt
     What kind of article is this?
@@ -147,7 +147,7 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
 10. Vuelve a cambiar el mensaje del sistema por la plantilla predeterminada, que debería ser `You are an AI assistant that helps people find information.` sin ejemplos. A continuación, aplique los cambios.
 
-11. En la sección **Sesión de chat**, envíe la siguiente solicitud:
+11. En la sección **Historial de chats**, envía la siguiente solicitud:
 
     ```prompt
     # 1. Create a list of animals
@@ -359,7 +359,7 @@ Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud a
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Observe la salida y vea cómo cambió el correo electrónico en función de sus claras instrucciones.
@@ -378,7 +378,7 @@ Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud a
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Observe la salida. Esta vez es probable que vea el correo electrónico con un formato similar, pero con un tono mucho más informal. Incluso puede que incluya algún chiste.
