@@ -43,8 +43,6 @@ Puedes usar el área de juegos de Imágenes en el **portal de Azure AI Foundry**
 1. En la sección **Imágenes de Áreas de juegos**, la implementación de DALL-E 3 debería haberse seleccionado automáticamente. En caso contrario, selecciónala en el elemento desplegable de la implementación.
 1. En el cuadro **Mensaje**, escriba una descripción de una imagen que desee generar. Por ejemplo, `An elephant on a skateboard` A continuación, seleccione **Generar** y vea la imagen que se genera.
 
-    ![El área de juegos de Imágenes en el portal de Azure AI Foundry con una imagen generada.](../media/images-playground.png)
-
 1. Modifique el mensaje para proporcionar una descripción más específica. Por ejemplo, `An elephant on a skateboard in the style of Picasso`. A continuación, genere la nueva imagen y revise los resultados.
 
     ![El área de juegos de Imágenes en el portal de Azure AI Foundry con dos imágenes generadas.](../media/images-playground-new-style.png)
