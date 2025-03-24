@@ -1,6 +1,7 @@
 ---
 lab:
   title: Uso de la ingeniería de mensajes en una aplicación
+  status: stale
 ---
 
 # Uso de la ingeniería de mensajes en una aplicación
