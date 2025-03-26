@@ -1,6 +1,7 @@
 ---
 lab:
   title: Implementación de la generación aumentada de recuperación (RAG) con Azure OpenAI Service
+  status: new
 ---
 
 # Implementación de la generación aumentada de recuperación (RAG) con Azure OpenAI Service
@@ -74,7 +75,7 @@ Usarás dos modelos de IA en este ejercicio:
 - Un modelo GPT que tu aplicación puede usar para generar respuestas a solicitudes fundamentadas en tus datos.
 
 
-## Implementar un modelo
+## Implementación de un modelo
 
 Después, implementarás un recurso de modelo de Azure OpenAI desde la CLI. En Azure Portal, selecciona el icono **Cloud Shell** de la barra de menús superior y asegúrate de que tu terminal está establecido en **Bash**. Consulta este ejemplo y reemplaza las siguientes variables por tus propios valores:
 
