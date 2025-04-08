@@ -62,7 +62,7 @@ Para completar este ejercicio, necesitarás lo siguiente:
 
 Vas a fundamentar las indicaciones que usas con un modelo de IA generativa mediante tus propios datos. En este ejercicio, los datos constan de una colección de folletos de viaje de la empresa ficticia *Margies Travel*.
 
-1. En una nueva pestaña del explorador, descargue un archivo de datos de folletos de `https://aka.ms/own-data-brochures`. Extraiga los folletos en una carpeta del equipo.
+1. En una nueva pestaña del explorador, descarga un archivo de datos de folletos de `https://aka.ms/own-data-brochures`. Extrae los folletos en una carpeta del equipo.
 1. En Azure Portal, navega hasta la cuenta de almacenamiento y visualiza la página del **explorador de almacenamiento**.
 1. Selecciona **Contenedores de blobs** y después agrega un nuevo contenedor con el nombre `margies-travel`.
 1. Selecciona el contenedor **margies-travel** y luego carga los folletos .pdf que extrajiste anteriormente en la carpeta raíz del contenedor de blobs.
@@ -74,15 +74,14 @@ Usarás dos modelos de IA en este ejercicio:
 - Un modelo de inserción de texto para *vectorizar* el texto de los folletos de modo que se pueda indexar de forma eficaz para su uso en la fundamentación de solicitudes.
 - Un modelo GPT que tu aplicación puede usar para generar respuestas a solicitudes fundamentadas en tus datos.
 
-
 ## Implementación de un modelo
 
 Después, implementarás un recurso de modelo de Azure OpenAI desde la CLI. En Azure Portal, selecciona el icono **Cloud Shell** de la barra de menús superior y asegúrate de que tu terminal está establecido en **Bash**. Consulta este ejemplo y reemplaza las siguientes variables por tus propios valores:
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *your resource group* \
-   -n *your Open AI resource* \
+   -g <your_resource_group> \
+   -n <your_OpenAI_resource> \
    --deployment-name text-embedding-ada-002 \
    --model-name text-embedding-ada-002 \
    --model-version "2"  \
@@ -91,31 +90,28 @@ az cognitiveservices account deployment create \
    --sku-capacity 5
 ```
 
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
+> **Nota**: la capacidad de SKU se mide en miles de tokens por minuto. Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
-
-Una vez implementado el modelo de inserción de texto, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+Una vez implementado el modelo de incrustación de texto, crea una nueva implementación del modelo **gpt-4o** con la siguiente configuración:
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *your resource group* \
-   -n *your Open AI resource* \
-   --deployment-name gpt-35-turbo-16k \
-   --model-name gpt-35-turbo-16k \
-   --model-version "0125"  \
+   -g <your_resource_group> \
+   -n <your_OpenAI_resource> \
+   --deployment-name gpt-4o \
+   --model-name gpt-4o \
+   --model-version "2024-05-13" \
    --model-format OpenAI \
    --sku-name "Standard" \
    --sku-capacity 5
 ```
-
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
 
 ## Creación de un índice
 
 Para facilitar el uso de tus propios datos en una solicitud, los indexarás mediante Búsqueda de Azure AI. Usarás el modelo de inserción de texto para *vectorizar* los datos de texto (lo que da como resultado que cada token de texto del índice se represente mediante vectores numéricos, por lo que es compatible con la forma en que un modelo de IA generativa representa texto).
 
 1. En Azure Portal, ve al recurso de Búsqueda de Azure AI.
-1. En la página **Información general**, seleccione **Importar y vectorizar datos**.
+1. En la página **Información general**, selecciona **Importar y vectorizar datos**.
 1. En la página **Configuración de la conexión de datos**, selecciona **Azure Blob Storage** y configura el origen de datos así:
     - **Suscripción**: la suscripción a Azure en la que aprovisionaste la cuenta de almacenamiento.
     - **Cuenta de Blob Storage**: la cuenta de almacenamiento que creaste antes.
@@ -130,127 +126,135 @@ Para facilitar el uso de tus propios datos en una solicitud, los indexarás medi
     - **Implementación de modelo**: text-embedding-ada-002
     - **Tipo de autenticación**: clave de API
     - **Reconozco que la conexión a Azure OpenAI Service conllevará costes adicionales para mi cuenta**: seleccionado
-1. En la página siguiente, <u>no</u> selecciones las opciones para vectorizar imágenes ni extraer datos con aptitudes de IA.
+1. En la página siguiente, **no** selecciones las opciones para vectorizar imágenes ni extraer datos con aptitudes de IA.
 1. En la página siguiente, habilita la clasificación semántica y programa el indizador para que se ejecute una vez.
 1. En la página final, establece el **prefijo de nombre de objetos** en `margies-index` y luego crea el índice.
 
 ## Preparación para desarrollar una aplicación en Visual Studio Code
 
-Ahora vamos a explorar el uso de sus propios datos en una aplicación que usa el SDK de Azure OpenAI Service. Desarrollará la aplicación con Visual Studio Code. Los archivos de código de la aplicación se han proporcionado en un repositorio de GitHub.
+Ahora vamos a explorar el uso de sus propios datos en una aplicación que usa el SDK de Azure OpenAI Service. Desarrollarás la aplicación con Visual Studio Code. Los archivos de código de la aplicación se han proporcionado en un repositorio de GitHub.
 
-> **Sugerencia**: Si ya ha clonado el repositorio **mslearn-openai**, ábralo en Visual Studio Code. De lo contrario, siga estos pasos para clonarlo en el entorno de desarrollo.
+> **Sugerencia**: si ya has clonado el repositorio **mslearn-openai**, ábrelo en Visual Studio Code. De lo contrario, sigue estos pasos para clonarlo en el entorno de desarrollo.
 
-1. Inicie Visual Studio Code.
-2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
-3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
+1. Inicia Visual Studio Code.
+2. Abre la paleta (Mayús + Ctrl + P o **View** > **Command Palette...**) y ejecuta un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
+3. Cuando se haya clonado el repositorio, abre la carpeta en Visual Studio Code.
 
-    > **Nota**: Si Visual Studio Code muestra un mensaje emergente para solicitarle que confíe en el código que está abriendo, haga clic en la opción **Sí, confío en los autores** en el elemento emergente.
+    > **Nota**: si Visual Studio Code muestra un mensaje emergente para solicitarte que confíes en el código que estás abriendo, haz clic en la opción **Yes, I trust the authors** en el elemento emergente.
 
-4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
+4. Espera mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
-    > **Nota**: Si se le pide que agregue los recursos necesarios para compilar y depurar, seleccione **Ahora no**.
+    > **Nota**: si se te pide que agregues los recursos necesarios para compilar y depurar, selecciona **Ahora no**.
 
 ## Configuración de la aplicación
 
-Se han proporcionado aplicaciones para C# y Python, y ambas aplicaciones presentan la misma funcionalidad. En este ejercicio, completará algunas partes clave de la aplicación para habilitarla con el recurso de Azure OpenAI.
+Se han proporcionado aplicaciones para C# y Python, y ambas aplicaciones presentan la misma funcionalidad. En este ejercicio, completarás algunas partes clave de la aplicación para habilitarla con el recurso de Azure OpenAI.
 
 1. En Visual Studio Code, en el panel **Explorador**, ve a la carpeta **Labfiles/02-use-own-data** y expande la carpeta **CSharp** o **Python** según tus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del lenguaje de una aplicación en la que se integrará la funcionalidad de Azure OpenAI.
-2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contenga los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
+2. Haz clic con el botón derecho en la carpeta **CSharp** o **Python** que contenga los archivos de código y abre un terminal integrado. A continuación, instala el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para tu preferencia de idioma:
 
     **C#:**
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.17
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
+    dotnet add package Azure.Search.Documents --version 11.6.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.54.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
-3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración para su lenguaje preferido.
+3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abre el archivo de configuración para tu idioma preferido.
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
-    - El **nombre de implementación** que has especificado para la implementación de tu modelo gpt-35-turbo (debe ser `gpt-35-turbo-16k`.
+    - El **nombre de implementación** que has especificado para la implementación de tu modelo gpt-4o (debe ser `gpt-4o`).
     - Punto de conexión del servicio de búsqueda (el valor de dirección **URL** de la página de información general del recurso de búsqueda en Azure Portal).
     - Una **clave** para el recurso de búsqueda (disponible en la página **Claves** del recurso de búsqueda en Azure Portal: puedes usar cualquiera de las claves de administración).
     - Nombre del índice de búsqueda (que debe ser `margies-index`).
-5. Guarde el archivo de configuración.
+5. Guarda el archivo de configuración.
 
 ### Adición de código para usar el servicio Azure OpenAI
 
-Ahora está listo para usar el SDK de Azure OpenAI para consumir el modelo implementado.
+Ya estás listo para usar el SDK de Azure OpenAI para consumir el modelo implementado.
 
-1. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de código de su idioma preferido y reemplace el comentario ***Configuración del origen de datos*** por código para agregar la biblioteca del SDK de Azure OpenAI:
+1. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abre el archivo de código de tu idioma preferido y reemplaza el comentario ***Configure your data source*** por código para tu índice como origen de datos para la finalización del chat:
 
     **C#**: ownData.cs
 
     ```csharp
     // Configure your data source
-    AzureSearchChatExtensionConfiguration ownDataConfig = new()
+    // Extension methods to use data sources with options are subject to SDK surface changes. Suppress the warning to acknowledge this and use the subject-to-change AddDataSource method.
+    #pragma warning disable AOAI001
+    
+    ChatCompletionOptions chatCompletionsOptions = new ChatCompletionOptions()
     {
-            SearchEndpoint = new Uri(azureSearchEndpoint),
-            Authentication = new OnYourDataApiKeyAuthenticationOptions(azureSearchKey),
-            IndexName = azureSearchIndex
+        MaxOutputTokenCount = 600,
+        Temperature = 0.9f,
     };
+    
+    chatCompletionsOptions.AddDataSource(new AzureSearchChatDataSource()
+    {
+        Endpoint = new Uri(azureSearchEndpoint),
+        IndexName = azureSearchIndex,
+        Authentication = DataSourceAuthentication.FromApiKey(azureSearchKey),
+    });
     ```
 
     **Python**: ownData.py
 
     ```python
-# Configure your data source
-text = input('\nEnter a question:\n')
-
-completion = client.chat.completions.create(
-    model=deployment,
-    messages=[
-        {
-            "role": "user",
-            "content": text,
-        },
-    ],
-    extra_body={
-        "data_sources":[
+    # Configure your data source
+    text = input('\nEnter a question:\n')
+    
+    completion = client.chat.completions.create(
+        model=deployment,
+        messages=[
             {
-                "type": "azure_search",
-                "parameters": {
-                    "endpoint": os.environ["AZURE_SEARCH_ENDPOINT"],
-                    "index_name": os.environ["AZURE_SEARCH_INDEX"],
-                    "authentication": {
-                        "type": "api_key",
-                        "key": os.environ["AZURE_SEARCH_KEY"],
+                "role": "user",
+                "content": text,
+            },
+        ],
+        extra_body={
+            "data_sources":[
+                {
+                    "type": "azure_search",
+                    "parameters": {
+                        "endpoint": os.environ["AZURE_SEARCH_ENDPOINT"],
+                        "index_name": os.environ["AZURE_SEARCH_INDEX"],
+                        "authentication": {
+                            "type": "api_key",
+                            "key": os.environ["AZURE_SEARCH_KEY"],
+                        }
                     }
                 }
-            }
-        ],
-    }
-)
+            ],
+        }
+    )
     ```
 
-2. Revise el resto del código, teniendo en cuenta el uso de las *extensiones* en el cuerpo de la solicitud que se usa para proporcionar información sobre la configuración del origen de datos.
-
-3. Guarde los cambios en el archivo del código.
+1. Guarda los cambios en el archivo del código.
 
 ## Ejecución de la aplicación
 
-Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud al modelo y ver la respuesta. Observe que la única diferencia entre las distintas opciones es el contenido del mensaje. Todos los demás parámetros, como el recuento de tokens y la temperatura, son los mismos para todas las solicitudes.
+Ahora que has configurado la aplicación, ejecútala para enviarle la solicitud al modelo y ver la respuesta. Observa que la única diferencia entre las distintas opciones es el contenido del mensaje. Todos los demás parámetros, como el recuento de tokens y la temperatura, son los mismos para todas las solicitudes.
 
-1. En el panel de terminal interactivo, asegúrese de que el contexto de la carpeta es la carpeta del lenguaje que prefiera. Después, escriba el siguiente comando para ejecutar la aplicación.
+1. En el panel de terminal interactivo, asegúrate de que el contexto de la carpeta es la carpeta del idioma que prefieras. Después, escribe el siguiente comando para ejecutar la aplicación.
 
     - **C#**: `dotnet run`
     - **Python**: `python ownData.py`
 
-    > **Sugerencia**: Puede usar el icono **Maximizar el tamaño del panel** (**^**) en la barra de herramientas del terminal para ver más del texto de la consola.
+    > **Sugerencia**: puedes usar el icono **Maximizar el tamaño del panel** (**^**) en la barra de herramientas del terminal para ver más del texto de la consola.
 
-2. Revise la respuesta al mensaje `Tell me about London`, que debe incluir una respuesta, así como algunos detalles de los datos usados para fundamentar el mensaje, que se obtuvieron del servicio de búsqueda.
+2. Revisa la respuesta a la indicación `Tell me about London`, que debe incluir una respuesta, así como algunos detalles de los datos usados para fundamentar la indicación, que se obtuvieron del servicio de búsqueda.
 
-    > **Sugerencia**: Si desea ver las citas del índice de búsqueda, establezca la variable ***mostrar citas*** cerca de la parte superior del archivo de código en **true**.
+    > **Sugerencia**: si deseas ver las citas del índice de búsqueda, establece la variable ***mostrar citas*** cerca de la parte superior del archivo de código en **true**.
 
 ## Limpieza
 
-Cuando hayas terminado de usar el recurso de Azure OpenAI, recuerda eliminar los recursos en **Azure Portal** en `https://portal.azure.com`. Asegúrese de incluir también la cuenta de almacenamiento y el recurso de búsqueda, ya que pueden suponer un costo relativamente grande.
+Cuando hayas terminado de usar el recurso de Azure OpenAI, recuerda eliminar los recursos en **Azure Portal** en `https://portal.azure.com`. Asegúrate de incluir también la cuenta de almacenamiento y el recurso de búsqueda, ya que pueden suponer un coste relativamente grande.
