@@ -45,9 +45,9 @@ Azure proporciona un portal basado en web denominado **Portal de Azure AI Foundr
 > **Nota**: a medida que usas Portal de Azure AI Foundry, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
 
 1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **Portal de Azure AI Foundry** (anteriormente AI Studio).
-1. En Portal de Azure AI Foundry, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+1. En Portal de Azure AI Foundry, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-4o** con la siguiente configuración:
     - **Nombre de implementación**: *nombre único que prefieras*
-    - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
+    - **Modelo**: gpt-4o
     - **Versión del modelo**: *usar la versión predeterminada*
     - **Tipo de implementación**: Estándar
     - **Límite de velocidad de tokens por minuto**: 5000\*
@@ -63,9 +63,9 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 1. En el panel lateral izquierdo, en la sección **Áreas de juegos**, selecciona la página **Chat**. La página **Chat** del área de juegos consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
     - **Configuración**: se usa para seleccionar la implementación, definir el mensaje del sistema y establecer parámetros para interactuar con la implementación.
     - **Historial de chats**: se usa para enviar mensajes de chat y ver respuestas.
-2. En **Implementación**, asegúrate de que la implementación de modelo gpt-35-turbo-16k esté seleccionada.
+1. En **Implementación**, asegúrate de que la implementación de modelo gpt-4o esté seleccionada.
 1. Revisa el mensaje del sistema predeterminado en el cuadro de texto justo debajo de la implementación seleccionada, que debería ser *Eres un asistente de inteligencia artificial que ayuda a las personas a encontrar información.*
-4. En la sección **Historial de chats**, envía la siguiente consulta:
+1. En la sección **Historial de chats**, envía la siguiente consulta:
 
     ```prompt
     What kind of article is this?
@@ -79,14 +79,14 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
     Much remains to be determined about how daily life will change as people adjust to a drier normal. But officials are warning the situation is dire and could lead to even more severe limits later in the year.
     ```
 
-    La respuesta proporciona una descripción del artículo. Sin embargo, supongamos que desea un formato más específico para la categorización de artículos.
+    La respuesta proporciona una descripción del artículo. Sin embargo, supongamos que deseas un formato más específico para la categorización de artículos.
 
-5. En la sección **Configuración** cambie el mensaje del sistema por `You are a news aggregator that categorizes news articles.`
+1. En la sección **Configuración** cambia el mensaje del sistema por `You are a news aggregator that categorizes news articles.`
 
-6. En el nuevo mensaje del sistema, selecciona el botón **Agregar sección** y elige **Ejemplos**. Después, agregue el siguiente ejemplo.
+1. En el nuevo mensaje del sistema, selecciona el botón **Agregar sección** y elige **Ejemplos**. Después, agrega el siguiente ejemplo.
 
     **Usuario:**
-    
+
     ```prompt
     What kind of article is this?
     ---
@@ -98,17 +98,17 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
     
     The Chicago Cyclones' two hits came in the 2nd and the 5th innings but were unable to get the runner home to score.
     ```
-    
+
     **Asistente:**
-    
+
     ```prompt
     Sports
       ```
 
-7. Agregue otro ejemplo con el siguiente texto.
+1. Agrega otro ejemplo con el siguiente texto.
 
     **Usuario:**
-    
+
     ```prompt
     Categorize this article:
     ---
@@ -121,16 +121,16 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
     
     From Robin Kline's history-making win to a full performance by none other than Casey Jensen herself, don't miss tomorrows rerun of all the festivities.
     ```
-    
+
     **Asistente:**
-    
+
     ```prompt
     Entertainment
     ```
 
-8. Use el botón **Aplicar cambios** en el cuadro de texto de mensaje del sistema de la sección **Configuración** para guardar los cambios.
+1. Usa el botón **Aplicar cambios** en el cuadro de texto de mensaje del sistema de la sección **Configuración** para guardar los cambios.
 
-9. En la sección **Historial de chats**, vuelve a enviar la siguiente solicitud:
+1. En la sección **Historial de chats**, vuelve a enviar la siguiente solicitud:
 
     ```prompt
     What kind of article is this?
@@ -146,9 +146,9 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
     La combinación de un mensaje del sistema más específico y algunos ejemplos de consultas y respuestas esperadas da como resultado un formato coherente en los resultados.
 
-10. Vuelve a cambiar el mensaje del sistema por la plantilla predeterminada, que debería ser `You are an AI assistant that helps people find information.` sin ejemplos. A continuación, aplique los cambios.
+1. Vuelve a cambiar el mensaje del sistema por la plantilla predeterminada, que debería ser `You are an AI assistant that helps people find information.` sin ejemplos. A continuación, aplica los cambios.
 
-11. En la sección **Historial de chats**, envía la siguiente solicitud:
+1. En la sección **Historial de chats**, envía la siguiente solicitud:
 
     ```prompt
     # 1. Create a list of animals
@@ -158,10 +158,10 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
     Es probable que el modelo responda con una respuesta para satisfacer el mensaje, dividida en una lista numerada. Se trata de una respuesta adecuada, pero supongamos que lo que realmente quería era que el modelo escribiera un programa de Python que realizase las tareas descritas.
 
-12. Cambie el mensaje del sistema a `You are a coding assistant helping write python code.` y aplique los cambios.
-13. Vuelva a enviar el siguiente mensaje al modelo:
+1. Cambia el mensaje del sistema a `You are a coding assistant helping write python code.` y aplica los cambios.
+1. Vuelve a enviar la siguiente indicación al modelo:
 
-    ```
+    ```prompt
     # 1. Create a list of animals
     # 2. Create a list of whimsical names for those animals
     # 3. Combine them randomly into a list of 25 animal and name pairs
@@ -171,44 +171,44 @@ Comencemos explorando algunas técnicas de ingeniería de solicitud en el área 
 
 ## Preparación para desarrollar una aplicación en Visual Studio Code
 
-Ahora exploremos el uso de ingeniería de solicitudes en una aplicación que use el SDK del servicio Azure OpenAI. Desarrollará la aplicación con Visual Studio Code. Los archivos de código de la aplicación se han proporcionado en un repositorio de GitHub.
+Ahora exploremos el uso de ingeniería de indicaciones en una aplicación que use el SDK del servicio Azure OpenAI. Desarrollarás la aplicación con Visual Studio Code. Los archivos de código de la aplicación se han proporcionado en un repositorio de GitHub.
 
-> **Sugerencia**: Si ya ha clonado el repositorio **mslearn-openai**, ábralo en Visual Studio Code. De lo contrario, siga estos pasos para clonarlo en el entorno de desarrollo.
+> **Sugerencia**: si ya has clonado el repositorio **mslearn-openai**, ábrelo en Visual Studio Code. De lo contrario, sigue estos pasos para clonarlo en el entorno de desarrollo.
 
-1. Inicie Visual Studio Code.
-2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
-3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
+1. Inicia Visual Studio Code.
+2. Abre la paleta (Mayús + Ctrl + P o **View** > **Command Palette...**) y ejecuta un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
+3. Cuando se haya clonado el repositorio, abre la carpeta en Visual Studio Code.
 
-    > **Nota**: Si Visual Studio Code muestra un mensaje emergente para solicitarle que confíe en el código que está abriendo, haga clic en la opción **Sí, confío en los autores** en el elemento emergente.
+    > **Nota**: si Visual Studio Code muestra un mensaje emergente para solicitarte que confíes en el código que estás abriendo, haz clic en la opción **Yes, I trust the authors** en el elemento emergente.
 
-4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
+4. Espera mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
-    > **Nota**: Si se le pide que agregue los recursos necesarios para compilar y depurar, seleccione **Ahora no**.
+    > **Nota**: si se te pide que agregues los recursos necesarios para compilar y depurar, selecciona **Ahora no**.
 
 ## Configuración de la aplicación
 
-Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma funcionalidad. En primer lugar, completará algunas partes clave de la aplicación para habilitar el uso del recurso Azure OpenAI con llamadas API asincrónicas.
+Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma funcionalidad. En primer lugar, completarás algunas partes clave de la aplicación para habilitar el uso del recurso Azure OpenAI con llamadas API asincrónicas.
 
-1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **Labfiles/03-prompt-engineering** y expanda las carpetas **CSharp** o **Python**, según sus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del lenguaje de una aplicación en la que va a integrar la funcionalidad de OpenAI de Azure.
-2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contiene los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
+1. En Visual Studio Code, en el panel **Explorador**, ve a la carpeta **Labfiles/03-prompt-engineering** y expanda las carpetas **CSharp** o **Python**, según tu preferencia de idioma. Cada carpeta contiene los archivos específicos del idioma de una aplicación en la que vas a integrar la funcionalidad de OpenAI de Azure.
+2. Haz clic con el botón derecho en la carpeta **CSharp** o **Python** que contiene los archivos de código y abre un terminal integrado. A continuación, instala el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para tu preferencia de idioma:
 
     **C#:**
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 1.0.0-beta.14
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.55.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración para su lenguaje preferido.
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
     - El **nombre de implementación** que especificaste para la implementación del modelo (disponible en la página **Implementaciones** de Inteligencia artificial de Portal de Azure AI Foundry).
@@ -225,6 +225,7 @@ Ya está listo para usar el SDK de Azure OpenAI para consumir el modelo implemen
     ```csharp
     // Add Azure OpenAI package
     using Azure.AI.OpenAI;
+    using OpenAI.Chat;
     ```
 
     **Python**: prompt-engineering.py
@@ -240,7 +241,8 @@ Ya está listo para usar el SDK de Azure OpenAI para consumir el modelo implemen
 
     ```csharp
     // Configure the Azure OpenAI client
-    OpenAIClient client = new OpenAIClient(new Uri(oaiEndpoint), new AzureKeyCredential(oaiKey));
+    AzureOpenAIClient azureClient = new (new Uri(oaiEndpoint), new ApiKeyCredential(oaiKey));
+    ChatClient chatClient = azureClient.GetChatClient(oaiDeploymentName);
     ```
 
     **Python**: prompt-engineering.py
@@ -260,20 +262,19 @@ Ya está listo para usar el SDK de Azure OpenAI para consumir el modelo implemen
 
     ```csharp
     // Format and send the request to the model
-    var chatCompletionsOptions = new ChatCompletionsOptions()
+    var chatCompletionsOptions = new ChatCompletionOptions()
     {
-        Messages =
-        {
-            new ChatRequestSystemMessage(systemMessage),
-            new ChatRequestUserMessage(userMessage)
-        },
         Temperature = 0.7f,
-        MaxTokens = 800,
-        DeploymentName = oaiDeploymentName
+        MaxOutputTokenCount = 800
     };
     
     // Get response from Azure OpenAI
-    Response<ChatCompletions> response = await client.GetChatCompletionsAsync(chatCompletionsOptions);
+    ChatCompletion response = await chatClient.CompleteChatAsync(
+        [
+            new SystemChatMessage(systemMessage),
+            new UserChatMessage(userMessage),
+        ],
+        chatCompletionsOptions);
     ```
 
     **Python**: prompt-engineering.py

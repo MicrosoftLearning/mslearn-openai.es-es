@@ -17,11 +17,11 @@ Este ejercicio dura aproximadamente **30** minutos.
 Si aún no lo ha hecho, debe clonar el repositorio de código para este curso:
 
 1. Inicie Visual Studio Code.
-2. Abra la paleta (Mayús + Ctrl + P) y ejecute un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
+2. Abre la paleta de comandos (Mayús + Ctrl + P) o **View** > **Command Palette...**) y ejecuta un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
 3. Cuando se haya clonado el repositorio, abra la carpeta en Visual Studio Code.
 4. Espere mientras se instalan archivos adicionales para admitir los proyectos de código de C# en el repositorio.
 
-    > **Nota**: Si se le pide que agregue los recursos necesarios para compilar y depurar, seleccione **Ahora no**.
+    > **Nota**: si se te pide que agregues los recursos necesarios para compilar y depurar, selecciona **Ahora no**.
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
@@ -47,7 +47,7 @@ Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción 
 
     > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
 
-3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
+1. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
 
 ## Implementar un modelo
 
@@ -55,20 +55,17 @@ Después, implementarás un recurso de modelo de Azure OpenAI desde la CLI. Cons
 
 ```dotnetcli
 az cognitiveservices account deployment create \
-   -g *Your resource group* \
-   -n *Name of your OpenAI service* \
-   --deployment-name gpt-35-turbo \
-   --model-name gpt-35-turbo \
-   --model-version 0125  \
+   -g <your_resource_group> \
+   -n <your_OpenAI_service> \
+   --deployment-name gpt-4o \
+   --model-name gpt-4o \
+   --model-version 2024-05-13 \
    --model-format OpenAI \
    --sku-name "Standard" \
    --sku-capacity 5
 ```
 
-    > \* Sku-capacity is measured in thousands of tokens per minute. A rate limit of 5,000 tokens per minute is more than adequate to complete this exercise while leaving capacity for other people using the same subscription.
-
-> [!NOTE]
-> Ignora las advertencias sobre la falta de soporte técnico del framework net7.0 en este ejercicio.
+> **Nota**: la capacidad de SKU se mide en miles de tokens por minuto. Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
 ## Configuración de la aplicación
 
@@ -79,21 +76,21 @@ Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma func
 
     **C#:**
 
-    ```
-    dotnet add package Azure.AI.OpenAI --version 2.0.0
+    ```powershell
+    dotnet add package Azure.AI.OpenAI --version 2.1.0
     ```
 
     **Python**:
 
-    ```
-    pip install openai==1.54.3
+    ```powershell
+    pip install openai==1.65.2
     ```
 
 3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración para su lenguaje preferido.
 
     - **C#**: appsettings.json
     - **Python**: .env
-    
+
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
     - El **nombre de implementación** que has especificado para la implementación de tu modelo.
@@ -138,7 +135,7 @@ Ya está listo para usar el SDK de Azure OpenAI para consumir el modelo implemen
         azure_endpoint = azure_oai_endpoint, 
         api_key=azure_oai_key,  
         api_version="2024-02-15-preview"
-        )
+    )
     ```
 
 3. En la función que llama al modelo de Azure OpenAI, en el comentario ***Obtener respuesta de Azure OpenAI***, agrega el código para darle formato a la solicitud y enviársela al modelo.
@@ -251,8 +248,8 @@ Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud a
     \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
-1. Observe la salida y vea cómo cambió el correo electrónico en función de sus claras instrucciones.
-1. A continuación, escriba las siguientes indicaciones, en las que se agregan detalles sobre el tono al mensaje del sistema:
+1. Observa la salida y mira cómo cambió el correo electrónico en función de tus claras instrucciones.
+1. A continuación, escribe las siguientes indicaciones, en las que se agregan detalles sobre el tono al mensaje del sistema:
 
     **Mensaje del sistema**
 
@@ -270,31 +267,115 @@ Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud a
     \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
-1. Observe la salida. Esta vez es probable que vea el correo electrónico con un formato similar, pero con un tono mucho más informal. Incluso puede que incluya algún chiste.
-1. Para la iteración final, nos desviaremos de la generación de correo electrónico y exploraremos el *contexto base*. Aquí se proporciona un mensaje del sistema sencillo y se cambia la aplicación para proporcionar contexto base al principio del mensaje del usuario. A continuación, la aplicación anexará la entrada de usuario y extraerá información del contexto base para responder a la solicitud del usuario.
-1. Abra el archivo `grounding.txt` y lea brevemente el contexto base que insertará.
-1. En la aplicación inmediatamente posterior al comentario ***Dar formato y enviar la solicitud al modelo*** y antes de cualquier código existente, agregue el siguiente fragmento de código para leer texto desde `grounding.txt` para aumentar las solicitudes de usuario con contexto base.
+1. Observa la salida. Esta vez es probable que veas el correo electrónico con un formato similar, pero con un tono mucho más informal. Incluso puede que incluya algún chiste.
 
-    **C#** : Program.cs
+## Uso del contexto de fundamentación y mantenimiento del historial de chats
+
+1. Para la iteración final, nos desviaremos de la generación de correo electrónico y exploraremos el *contexto de fundamentación* y mantendremos el historial de chats. Aquí se proporciona un mensaje del sistema sencillo y se cambia la aplicación para proporcionar contexto de fundamentación al principio del historial de chats. A continuación, la aplicación anexará la entrada de usuario y extraerá información del contexto base para responder a la indicación del usuario.
+1. Abre el archivo `grounding.txt` y lee brevemente el contexto de fundamentación que insertarás.
+1. En la aplicación inmediatamente posterior al comentario ***Inicializar lista de mensajes*** y antes de cualquier código existente, agrega el siguiente fragmento de código para leer texto desde `grounding.txt` e inicializar el historial de chats con contexto de fundamentación.
+
+    **C#**: Program.cs
 
     ```csharp
-    // Format and send the request to the model
+    // Initialize messages list
     Console.WriteLine("\nAdding grounding context from grounding.txt");
     string groundingText = System.IO.File.ReadAllText("grounding.txt");
-    userMessage = groundingText + userMessage;
+    var messagesList = new List<ChatMessage>()
+    {
+        new UserChatMessage(groundingText),
+    };
+    ```
+
+    **Python**: application.py
+
+    ```python
+    # Initialize messages array
+    print("\nAdding grounding context from grounding.txt")
+    grounding_text = open(file="grounding.txt", encoding="utf8").read().strip()
+    messages_array = [{"role": "user", "content": grounding_text}]
+    ```
+
+1. En el comentario ***Dar formato y enviar la solicitud al modelo***, reemplaza todo el código del comentario al final del bucle **while** por el código siguiente. El código es principalmente el mismo, pero ahora usa la matriz de mensajes para enviar la solicitud al modelo.
+
+    **C#**: Program.cs
+   
+    ```csharp
+    // Format and send the request to the model
+    messagesList.Add(new SystemChatMessage(systemMessage));
+    messagesList.Add(new UserChatMessage(userMessage));
+    GetResponseFromOpenAI(messagesList);
     ```
 
     **Python**: application.py
 
     ```python
     # Format and send the request to the model
-    print("\nAdding grounding context from grounding.txt")
-    grounding_text = open(file="grounding.txt", encoding="utf8").read().strip()
-    user_message = grounding_text + user_message
+    messages_array.append({"role": "system", "content": system_text})
+    messages_array.append({"role": "user", "content": user_text})
+    await call_openai_model(messages=messages_array, 
+        model=azure_oai_deployment, 
+        client=client
+    )
     ```
 
-1. Guarde el archivo y vuelva a ejecutar la aplicación.
-1. Escriba las siguientes indicaciones (con el **mensaje del sistema** aún escribiéndose y guardándose en `system.txt`).
+1. En el comentario ***Definir la función que obtendrá la respuesta del punto de conexión de Azure OpenAI***, reemplaza la declaración de función por el código siguiente para usar el historial de chats al llamar a la función `GetResponseFromOpenAI` para C# o `call_openai_model` para Python.
+
+    **C#**: Program.cs
+   
+    ```csharp
+    // Define the function that gets the response from Azure OpenAI endpoint
+    private static void GetResponseFromOpenAI(List<ChatMessage> messagesList)
+    ```
+
+    **Python**: application.py
+
+    ```python
+    # Define the function that will get the response from Azure OpenAI endpoint
+    async def call_openai_model(messages, model, client):
+    ```
+    
+1. Por último, reemplaza todo el código en ***Obtener respuesta de Azure OpenAI***. El código es principalmente el mismo, pero ahora usa la matriz de mensajes para almacenar el historial de conversaciones.
+
+    **C#** : Program.cs
+   
+    ```csharp
+    // Get response from Azure OpenAI
+    ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions()
+    {
+        Temperature = 0.7f,
+        MaxOutputTokenCount = 800
+    };
+
+    ChatCompletion completion = chatClient.CompleteChat(
+        messagesList,
+        chatCompletionOptions
+    );
+
+    Console.WriteLine($"{completion.Role}: {completion.Content[0].Text}");
+    messagesList.Add(new AssistantChatMessage(completion.Content[0].Text));
+    ```
+
+    **Python**: application.py
+
+    ```python
+    # Get response from Azure OpenAI
+    print("\nSending request to Azure OpenAI model...\n")
+
+    # Call the Azure OpenAI model
+    response = await client.chat.completions.create(
+        model=model,
+        messages=messages,
+        temperature=0.7,
+        max_tokens=800
+    )   
+
+    print("Response:\n" + response.choices[0].message.content + "\n")
+    messages.append({"role": "assistant", "content": response.choices[0].message.content})
+    ```
+    
+1. Guarda el archivo y vuelve a ejecutar la aplicación.
+1. Escribe las siguientes indicaciones (con el **mensaje del sistema** aun escribiéndose y guardándose en `system.txt`).
 
     **Mensaje del sistema**
 
@@ -308,8 +389,18 @@ Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud a
     What animal is the favorite of children at Contoso?
     ```
 
-> **Sugerencia**: Si quisiera ver la respuesta completa de Azure OpenAI, establezca la variable **printFullResponse** en `True` y vuelva a ejecutar la aplicación.
+   Ten en cuenta que el modelo usa la información de texto de fundamentación para responder a tu pregunta.
 
-## Limpiar
+1. Sin cambiar el mensaje del sistema, escribe la siguiente indicación para el mensaje de usuario:
 
-Cuando haya terminado de usar el recurso de Azure OpenAI, recuerde eliminar la implementación o todo el recurso en **Azure Portal**, en `https://portal.azure.com`.
+    **Mensaje de usuario:**
+
+    ```prompt
+    How can they interact with it at Contoso?
+    ```
+
+    Observa que el modelo reconoce "they" como los niños e "it" como su animal favorito, ya que ahora tiene acceso a tu pregunta anterior en el historial de chats.
+   
+## Limpieza
+
+Cuando hayas terminado de usar el recurso de Azure OpenAI, recuerda eliminar la implementación o todo el recurso en **Azure Portal**, en `https://portal.azure.com`.

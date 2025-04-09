@@ -45,9 +45,9 @@ Azure proporciona un portal basado en web denominado **Portal de Azure AI Foundr
 > **Nota**: a medida que usas Portal de Azure AI Foundry, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
 
 1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **Portal de Azure AI Foundry** (anteriormente AI Studio).
-1. En Portal de Azure AI Foundry, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-35-turbo-16k** con la siguiente configuración:
+1. En Portal de Azure AI Foundry, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-4o** con la siguiente configuración:
     - **Nombre de implementación**: *nombre único que prefieras*
-    - **Modelo**: gpt-35-turbo-16k *(si el modelo 16k no estuviera disponible, elija gpt-35-turbo)*
+    - **Modelo**: gpt-4o
     - **Versión del modelo**: *usar la versión predeterminada*
     - **Tipo de implementación**: Estándar
     - **Límite de velocidad de tokens por minuto**: 5000\*
@@ -58,51 +58,51 @@ Azure proporciona un portal basado en web denominado **Portal de Azure AI Foundr
 
 ## Uso del área de juegos de chat
 
-Ahora que ha implementado un modelo, puede usarlo para generar respuestas basadas en mensajes de lenguaje natural. El área de juegos de *Chat* en el portal de Azure AI Foundry proporciona una interfaz de bot de chat para los modelos GPT 3.5 y posteriores.
+Ahora que ha implementado un modelo, puede usarlo para generar respuestas basadas en mensajes de lenguaje natural. El área de juegos *Chat* en el Portal de la Fundición de IA de Azure proporciona una interfaz de bot de chat para los modelos GPT 4 y posteriores.
 
-> **Nota:** El área de juegos *Chat* utiliza la API *ChatCompletions* en lugar de la antigua API *Completions* que utiliza el área de juegos *Completions*. El área de juegos Completions se proporciona para la compatibilidad con los modelos anteriores.
+> **Nota:** el área de juegos *Chat* utiliza la API *ChatCompletions* en lugar de la antigua API *Completions* que utiliza el área de juegos *Completions*. El área de juegos Completions se proporciona para la compatibilidad con los modelos anteriores.
 
-1. En la sección **Área de juego**, seleccione la página **Chat**. La página **Chat** del área de juegos consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
+1. En la sección **Área de juego**, selecciona la página **Chat**. La página **Chat** del área de juegos consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
     - **Configuración**: se usa para seleccionar la implementación, definir el mensaje del sistema y establecer parámetros para interactuar con la implementación.
     - **Sesión de chat**: se usa para enviar mensajes de chat y ver respuestas.
-1. En **Implementaciones**, asegúrate de que la implementación de modelo gpt-35-turbo-16k esté seleccionada.
-1. Revisa el **Mensaje predeterminado del sistema**, que debería ser *Eres un asistente de IA que ayuda a las personas a encontrar información.* El mensaje del sistema se incluye en las solicitudes enviadas al modelo y proporciona contexto para las respuestas del modelo; establecer expectativas sobre cómo un agente de IA basado en el modelo debe interactuar con el usuario.
-1. En el panel **Sesión de chat**, introduzca la consulta del usuario `How can I use generative AI to help me market a new product?`
+1. En **Implementaciones**, asegúrate de que la implementación del modelo gpt-4o esté seleccionada.
+1. Revisa el **Mensaje predeterminado del sistema**, que debería ser *Eres un asistente de IA que ayuda a las personas a encontrar información.* El mensaje del sistema se incluye en las indicaciones enviadas al modelo y proporciona contexto para las respuestas del modelo; establecer expectativas sobre cómo un agente de IA basado en el modelo debe interactuar con el usuario.
+1. En el panel **Sesión de chat**, introduce la consulta del usuario `How can I use generative AI to help me market a new product?`
 
-    > **Nota**: Puede recibir una respuesta en la que se indica que la implementación de la API aún no está lista. En ese caso, espere unos minutos y vuelva a intentarlo.
+    > **Nota**: puedes recibir una respuesta en la que se indica que la implementación de la API aún no está lista. En ese caso, espera unos minutos y vuelve a intentarlo.
 
-1. Revise la respuesta, teniendo en cuenta que el modelo ha generado una respuesta de lenguaje natural cohesivo que es relevante para la consulta con la que se le solicita.
-1. Escriba la consulta de usuario `What skills do I need if I want to develop a solution to accomplish this?`.
-1. Revise la respuesta, teniendo en cuenta que la sesión de chat ha conservado el contexto conversacional (por lo que "esto" se interpreta como una solución de IA generativa para el marketing). Esta contextualización se logra mediante la inclusión del historial de conversaciones reciente en cada envío sucesivo de solicitud, por lo que la solicitud enviada al modelo para la segunda consulta incluía la consulta original y la respuesta, así como la nueva entrada del usuario.
-1. En la barra de herramientas del panel **Sesión de chat**, seleccione **Borrar chat** y confirme que desea reiniciar la sesión de chat.
-1. Escriba la consulta `Can you help me find resources to learn those skills?` y revise la respuesta, que debe ser una respuesta de lenguaje natural válida, pero, dado que se ha perdido el historial de chat anterior, es probable que la respuesta se trate de buscar recursos genéricos de aptitudes en lugar de estar relacionados con las aptitudes específicas necesarias para crear una solución de marketing de IA generativa.
+1. Revisa la respuesta, teniendo en cuenta que el modelo ha generado una respuesta de lenguaje natural cohesivo que es relevante para la consulta con la que se le solicita.
+1. Escribe la consulta de usuario `What skills do I need if I want to develop a solution to accomplish this?`.
+1. Revisa la respuesta, teniendo en cuenta que la sesión de chat ha conservado el contexto conversacional (por lo que "esto" se interpreta como una solución de IA generativa para el marketing). Esta contextualización se logra mediante la inclusión del historial de conversaciones reciente en cada envío sucesivo de indicación, por lo que la indicación enviada al modelo para la segunda consulta incluía la consulta original y la respuesta, así como la nueva entrada del usuario.
+1. En la barra de herramientas del panel **Sesión de chat**, selecciona **Borrar chat** y confirma que deseas reiniciar la sesión de chat.
+1. Escribe la consulta `Can you help me find resources to learn those skills?` y revisa la respuesta, que debe ser una respuesta de lenguaje natural válida, pero, dado que se ha perdido el historial de chat anterior, es probable que la respuesta se trate de buscar recursos genéricos de aptitudes en lugar de estar relacionados con las aptitudes específicas necesarias para crear una solución de marketing de IA generativa.
 
-## Experimentar con mensajes del sistema, mensajes y ejemplos de pocas capturas
+## Experimentar con mensajes del sistema, indicaciones y ejemplos de pocas capturas
 
-Hasta ahora, ha participado en una conversación de chat con el modelo en función del mensaje predeterminado del sistema. Puede personalizar la configuración del sistema para tener más control sobre los tipos de respuestas generadas por el modelo.
+Hasta ahora, has participado en una conversación de chat con el modelo en función del mensaje predeterminado del sistema. Puedes personalizar la configuración del sistema para tener más control sobre los tipos de respuestas generadas por el modelo.
 
 1. En la barra de herramientas principal, selecciona los **ejemplos de solicitudes** y usa la plantilla de solicitudes **Asistente de escritura de marketing**.
-1. Revise el nuevo mensaje del sistema, que describe cómo un agente de IA debe usar el modelo para responder.
-1. En el panel **Sesión de chat**, introduzca la consulta del usuario `Create an advertisement for a new scrubbing brush`.
-1. Revise la respuesta, que debe incluir la copia de publicidad para un pincel de limpieza. La copia puede ser bastante extensa y creativa.
+1. Revisa el nuevo mensaje del sistema, que describe cómo un agente de IA debe usar el modelo para responder.
+1. En el panel **Sesión de chat**, introduce la consulta del usuario `Create an advertisement for a new scrubbing brush`.
+1. Revisa la respuesta, que debe incluir la copia de publicidad para un pincel de limpieza. La copia puede ser bastante extensa y creativa.
 
     En un escenario real, es probable que un profesional de marketing ya conozca el nombre del producto de pincel de limpieza, así como algunas ideas sobre las características clave que deben resaltarse en un anuncio. Para obtener los resultados más útiles de un modelo de IA generativa, los usuarios deben diseñar sus indicaciones para incluir la mayor cantidad de información pertinente posible.
 
-1. Escriba el símbolo del sistema `Revise the advertisement for a scrubbing brush named "Scrubadub 2000", which is made of carbon fiber and reduces cleaning times by half compared to ordinary scrubbing brushes`.
-1. Revise la respuesta, que debe tener en cuenta la información adicional que proporcionó sobre el producto de pincel de limpieza.
+1. Escribe el símbolo del sistema `Revise the advertisement for a scrubbing brush named "Scrubadub 2000", which is made of carbon fiber and reduces cleaning times by half compared to ordinary scrubbing brushes`.
+1. Revisa la respuesta, que debe tener en cuenta la información adicional que proporcionaste sobre el producto de pincel de limpieza.
 
-    La respuesta debería ser ahora más útil, pero para tener aún más control sobre la salida del modelo, puede proporcionar uno o varios ejemplos *cortos* en los que se basen las respuestas.
+    La respuesta debería ser ahora más útil, pero para tener aún más control sobre la salida del modelo, puedes proporcionar uno o varios ejemplos *cortos* en los que se basen las respuestas.
 
-1. En el cuadro de texto **Mensaje del sistema**, expande el elemento desplegable de **Agregar sección** y selecciona **Ejemplos**. A continuación, escriba el mensaje y la respuesta siguientes en los cuadros designados:
+1. En el cuadro de texto **Mensaje del sistema**, expande el elemento desplegable de **Agregar sección** y selecciona **Ejemplos**. A continuación, escribe el mensaje y la respuesta siguientes en los cuadros designados:
 
     **Usuario:**
-    
+
     ```prompt
     Write an advertisement for the lightweight "Ultramop" mop, which uses patented absorbent materials to clean floors.
     ```
-    
+
     **Asistente:**
-    
+
     ```prompt
     Welcome to the future of cleaning!
     
@@ -114,20 +114,20 @@ Hasta ahora, ha participado en una conversación de chat con el modelo en funci�
     Check out this and other products on our website at www.contoso.com.
     ```
 
-1. Use el botón **Aplicar cambios** para guardar los ejemplos e iniciar una nueva sesión.
-1. En la sección **Sesión de chat**, introduzca la consulta del usuario `Create an advertisement for the Scrubadub 2000 - a new scrubbing brush made of carbon fiber that reduces cleaning time by half`.
-1. Revise la respuesta, que debe ser un anuncio nuevo para el "Scrubadub 2000" que se modela en el ejemplo "Ultramop" proporcionado en la configuración del sistema.
+1. Usa el botón **Aplicar cambios** para guardar los ejemplos e iniciar una nueva sesión.
+1. En la sección **Sesión de chat**, introduce la consulta del usuario `Create an advertisement for the Scrubadub 2000 - a new scrubbing brush made of carbon fiber that reduces cleaning time by half`.
+1. Revisa la respuesta, que debe ser un anuncio nuevo para el "Scrubadub 2000" que se modela en el ejemplo "Ultramop" proporcionado en la configuración del sistema.
 
 ## Experimento con parámetros
 
-Ha explorado cómo el mensaje del sistema, los ejemplos y las indicaciones pueden ayudar a refinar las respuestas devueltas por el modelo. También puede usar parámetros para controlar el comportamiento del modelo.
+Has explorado cómo el mensaje del sistema, los ejemplos y las indicaciones pueden ayudar a refinar las respuestas devueltas por el modelo. También puedes usar parámetros para controlar el comportamiento del modelo.
 
-1. En el panel **Configuración**, seleccione la pestaña **Parámetros** y ajuste los siguientes valores de los parámetros:
+1. En el panel **Configuración**, selecciona la pestaña **Parámetros** y ajusta los siguientes valores de los parámetros:
     - **Respuesta máx.**: 1000
     - **Temperatura**: 1
 
-1. En la sección **Sesión de chat**, use el botón **Borrar chat** para restablecer la sesión de chat. A continuación, introduzca la consulta del usuario `Create an advertisement for a cleaning sponge` y revise la respuesta. La copia del anuncio resultante debe incluir un máximo de 1000 tokens de texto e incluir algunos elementos creativos; por ejemplo, el modelo puede haber inventado un nombre de producto para la esponja y hacer algunas afirmaciones sobre sus características.
-1. Use el botón **Borrar chat** para restablecer la sesión de chat de nuevo y, a continuación, vuelva a escribir la misma consulta que antes (`Create an advertisement for a cleaning sponge`) y revise la respuesta. La respuesta puede ser diferente de la respuesta anterior.
+1. En la sección **Sesión de chat**, usa el botón **Borrar chat** para restablecer la sesión de chat. A continuación, introduce la consulta del usuario `Create an advertisement for a cleaning sponge` y revisa la respuesta. La copia del anuncio resultante debe incluir un máximo de 1000 tokens de texto e incluir algunos elementos creativos; por ejemplo, el modelo puede haber inventado un nombre de producto para la esponja y hacer algunas afirmaciones sobre sus características.
+1. Usa el botón **Borrar chat** para restablecer la sesión de chat de nuevo y, a continuación, vuelve a escribir la misma consulta que antes (`Create an advertisement for a cleaning sponge`) y revisa la respuesta. La respuesta puede ser diferente de la respuesta anterior.
 1. En el panel **Configuración**, en la pestaña **Parámetros**, cambie el valor del parámetro **Temperatura** a 0.
 1. En la sección **Sesión de chat**, use el botón **Borrar chat** para restablecer de nuevo la sesión de chat y, a continuación, vuelva a introducir la misma consulta que antes (`Create an advertisement for a cleaning sponge`) y revise la respuesta. Esta vez, es posible que la respuesta no sea tan creativa.
 1. Use el botón **Borrar chat** para restablecer la sesión de chat una vez más y, a continuación, vuelva a escribir la misma consulta que antes (`Create an advertisement for a cleaning sponge`) y revise la respuesta; que debe ser muy similar (si no es idéntica) a la respuesta anterior.
@@ -147,7 +147,7 @@ Ahora que has explorado algunas de las funcionalidades de un modelo de IA genera
     - **Grupo de recursos**: *El grupo de recursos en el que aprovisionó el recurso de Azure OpenAI*
     - **Ubicaciones**: *La región en la que aprovisionó el recurso de Azure OpenAI*
     - **Plan de precios**: Gratis (F1): *Si no está disponible, seleccione Básico (B1)*
-    - **Habilitar el historial de chats en la aplicación web**: <u>No</u> seleccionada
+    - **Habilitar el historial de chats en la aplicación web**: **No** seleccionada
     - **Confirmo que las aplicaciones web incurrirán en el uso de mi cuenta**: seleccionado.
 1. Implemente la nueva aplicación web y espere a que se complete la implementación (lo que puede tardar 10 minutos o así)
 1. Una vez que su aplicación web se haya implementado correctamente, use el botón situado en la parte superior derecha de la página del área de juegos **Chat** para iniciar la aplicación web. La aplicación puede tardar unos minutos en iniciarse. Si se le pide, acepte la solicitud de permisos.
