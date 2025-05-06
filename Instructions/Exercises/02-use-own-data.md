@@ -20,24 +20,22 @@ Para completar este ejercicio, necesitarás lo siguiente:
 - Un recurso de Azure AI Search.
 - Un recurso de cuenta de Azure Storage.
 
-1. Inicie sesión en **Azure Portal** en `https://portal.azure.com`.
-2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
-    - **Suscripción**: *Selección de una suscripción de Azure aprobada para acceder al servicio Azure OpenAI*
-    - **Grupo de recursos**: *elija o cree un grupo de recursos*
-    - **Región**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Canadá
+1. Inicia sesión en **Azure Portal** en `https://portal.azure.com`.
+2. Crea un recurso de **Azure OpenAI** con la siguiente configuración:
+    - **Suscripción**: *selecciona una suscripción a Azure aprobada para acceder al servicio Azure OpenAI*
+    - **Grupo de recursos**: *elige o crea un grupo de recursos*
+    - **Región**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
         - Este de EE. UU.
         - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
         - Centro-Norte de EE. UU
+        - Centro-sur de EE. UU.
         - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
-    - **Nombre**: *nombre único que prefiera*
+        - Oeste de EE. UU.
+        - Oeste de EE. UU. 3
+    - **Nombre**: *nombre único que prefieras*
     - **Plan de tarifa**: estándar S0
 
-    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
 3. Mientras se aprovisiona el recurso de Azure OpenAI, crea un recurso de **Búsqueda de Azure AI** con la siguiente configuración:
     - **Suscripción**: *la suscripción en la que aprovisionaste el recurso de Azure OpenAI*
@@ -76,7 +74,11 @@ Usarás dos modelos de IA en este ejercicio:
 
 ## Implementación de un modelo
 
-Después, implementarás un recurso de modelo de Azure OpenAI desde la CLI. En Azure Portal, selecciona el icono **Cloud Shell** de la barra de menús superior y asegúrate de que tu terminal está establecido en **Bash**. Consulta este ejemplo y reemplaza las siguientes variables por tus propios valores:
+Después, implementarás los modelos de Azure OpenAI desde Cloud Shell.
+
+1. Usa el botón **[\>_]** situado a la derecha de la barra de búsqueda en la parte superior de la página para crear una nueva instancia de Cloud Shell en Azure Portal. Para ello, deberás seleccionar un entorno de ***Bash***. Cloud Shell proporciona una interfaz de la línea de comandos en un panel situado en la parte inferior de Azure Portal.
+
+    > **Nota**: si has creado anteriormente una instancia de Cloud Shell que usa un entorno de *PowerShell*, cámbiala a ***Bash***.
 
 ```dotnetcli
 az cognitiveservices account deployment create \
@@ -150,7 +152,7 @@ Ahora vamos a explorar el uso de sus propios datos en una aplicación que usa el
 
 Se han proporcionado aplicaciones para C# y Python, y ambas aplicaciones presentan la misma funcionalidad. En este ejercicio, completarás algunas partes clave de la aplicación para habilitarla con el recurso de Azure OpenAI.
 
-1. En Visual Studio Code, en el panel **Explorador**, ve a la carpeta **Labfiles/02-use-own-data** y expande la carpeta **CSharp** o **Python** según tus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del lenguaje de una aplicación en la que se integrará la funcionalidad de Azure OpenAI.
+1. En Visual Studio Code, en el panel **Explorador**, ve a la carpeta **Labfiles/02-use-own-data** y expande la carpeta **CSharp** o **Python** según tus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del idioma de una aplicación en la que se integrará la funcionalidad de Azure OpenAI.
 2. Haz clic con el botón derecho en la carpeta **CSharp** o **Python** que contenga los archivos de código y abre un terminal integrado. A continuación, instala el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para tu preferencia de idioma:
 
     **C#:**
