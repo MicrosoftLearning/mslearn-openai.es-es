@@ -25,54 +25,58 @@ Si aún no lo ha hecho, debe clonar el repositorio de código para este curso:
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
-Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
+Si aún no tienes uno, aprovisiona un recurso de Azure OpenAI en la suscripción a Azure.
 
-1. Inicie sesión en **Azure Portal** en `https://portal.azure.com`.
+1. Inicia sesión en **Azure Portal** en `https://portal.azure.com`.
 
-1. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
-    - **Suscripción**: *Selección de una suscripción de Azure aprobada para acceder al servicio Azure OpenAI*
-    - **Grupo de recursos**: *elija o cree un grupo de recursos*
-    - **Región**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Canadá
+1. Crea un recurso de **Azure OpenAI** con la siguiente configuración:
+    - **Suscripción**: *selecciona una suscripción a Azure aprobada para acceder al servicio Azure OpenAI*
+    - **Grupo de recursos**: *elige o crea un grupo de recursos*
+    - **Región**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
         - Este de EE. UU.
         - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
         - Centro-Norte de EE. UU
+        - Centro-sur de EE. UU.
         - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
-    - **Nombre**: *nombre único que prefiera*
+        - Oeste de EE. UU.
+        - Oeste de EE. UU. 3
+    - **Nombre**: *nombre único que prefieras*
     - **Plan de tarifa**: estándar S0
 
-    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-1. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
+1. Espera a que la implementación finalice. Luego, ve al recurso de Azure OpenAI implementado en Azure Portal.
 
 ## Implementar un modelo
 
-Después, implementarás un recurso de modelo de Azure OpenAI desde la CLI. Consulta este ejemplo y reemplaza las siguientes variables por tus propios valores:
+Después, implementarás un recurso de modelo de Azure OpenAI desde Cloud Shell.
 
-```dotnetcli
-az cognitiveservices account deployment create \
-   -g <your_resource_group> \
-   -n <your_OpenAI_service> \
-   --deployment-name gpt-4o \
-   --model-name gpt-4o \
-   --model-version 2024-05-13 \
-   --model-format OpenAI \
-   --sku-name "Standard" \
-   --sku-capacity 5
-```
+1. Usa el botón **[\>_]** situado a la derecha de la barra de búsqueda en la parte superior de la página para crear una nueva instancia de Cloud Shell en Azure Portal. Para ello, deberás seleccionar un entorno de ***Bash***. Cloud Shell proporciona una interfaz de la línea de comandos en un panel situado en la parte inferior de Azure Portal.
+
+    > **Nota**: si has creado anteriormente una instancia de Cloud Shell que usa un entorno de *PowerShell*, cámbiala a ***Bash***.
+
+1. Consulta este ejemplo y reemplaza las siguientes variables por tus propios valores:
+
+    ```dotnetcli
+    az cognitiveservices account deployment create \
+       -g <your_resource_group> \
+       -n <your_OpenAI_service> \
+       --deployment-name gpt-4o \
+       --model-name gpt-4o \
+       --model-version 2024-05-13 \
+       --model-format OpenAI \
+       --sku-name "Standard" \
+       --sku-capacity 5
+    ```
 
 > **Nota**: la capacidad de SKU se mide en miles de tokens por minuto. Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
 
 ## Configuración de la aplicación
 
-Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma funcionalidad. En primer lugar, completará algunas partes clave de la aplicación para habilitar el uso del recurso Azure OpenAI con llamadas API asincrónicas.
+Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma funcionalidad. En primer lugar, completarás algunas partes clave de la aplicación para habilitar el uso del recurso Azure OpenAI con llamadas API asincrónicas.
 
-1. En Visual Studio Code, en el panel **Explorador**, ve a la carpeta **Labfiles/01-app-develop** y expande la carpeta **CSharp** o **Python** según tus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del lenguaje de una aplicación en la que va a integrar la funcionalidad de OpenAI de Azure.
-2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contiene los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
+1. En Visual Studio Code, en el panel **Explorador**, ve a la carpeta **Labfiles/01-app-develop** y expande la carpeta **CSharp** o **Python** según tus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del idioma de una aplicación en la que vas a integrar la funcionalidad de OpenAI de Azure.
+2. Haz clic con el botón derecho en la carpeta **CSharp** o **Python** que contiene los archivos de código y abre un terminal integrado. A continuación, instala el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para tu preferencia de idioma:
 
     **C#:**
 
@@ -86,7 +90,7 @@ Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma func
     pip install openai==1.65.2
     ```
 
-3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración para su lenguaje preferido.
+3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abre el archivo de configuración para tu idioma preferido.
 
     - **C#**: appsettings.json
     - **Python**: .env
@@ -94,13 +98,13 @@ Se proporcionaron aplicaciones para C# y Python, y ambas presentan la misma func
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
     - El **nombre de implementación** que has especificado para la implementación de tu modelo.
-5. Guarde el archivo de configuración.
+5. Guarda el archivo de configuración.
 
 ## Adición de código para usar el servicio Azure OpenAI
 
-Ya está listo para usar el SDK de Azure OpenAI para consumir el modelo implementado.
+Ya estás listo para usar el SDK de Azure OpenAI para consumir el modelo implementado.
 
-1. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de código de su idioma preferido y reemplace el comentario ***Agregar paquete de Azure OpenAI*** por código para agregar la biblioteca del SDK de Azure OpenAI:
+1. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abre el archivo de código de tu idioma preferido y reemplaza el comentario ***Agregar paquete de Azure OpenAI*** por código para agregar la biblioteca del SDK de Azure OpenAI:
 
     **C#** : Program.cs
 
@@ -181,14 +185,14 @@ Ya está listo para usar el SDK de Azure OpenAI para consumir el modelo implemen
     )
     ```
 
-4. Guarde los cambios en el archivo del código.
+4. Guarda los cambios en el archivo del código.
 
 ## Ejecución de la aplicación
 
-Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud al modelo y ver la respuesta. Observe que la única diferencia entre las distintas opciones es el contenido del mensaje. Todos los demás parámetros, como el recuento de tokens y la temperatura, son los mismos para todas las solicitudes.
+Ahora que has configurado la aplicación, ejecútala para enviarle la solicitud al modelo y ver la respuesta. Observe que la única diferencia entre las distintas opciones es el contenido del mensaje. Todos los demás parámetros, como el recuento de tokens y la temperatura, son los mismos para todas las solicitudes.
 
 1. En la carpeta del idioma de su preferencia, abra `system.txt` en Visual Studio Code. Para cada interacción, introducirás el **Mensaje del sistema** en este archivo y lo guardarás. Cada iteración se pausará primero para que cambie el mensaje del sistema.
-1. En el panel de terminal interactivo, asegúrese de que el contexto de la carpeta es la carpeta del lenguaje que prefiera. Después, escriba el siguiente comando para ejecutar la aplicación.
+1. En el panel de terminal interactivo, asegúrese de que el contexto de la carpeta es la carpeta del lenguaje que prefiera. Después, escribe el siguiente comando para ejecutar la aplicación.
 
     - **C#**: `dotnet run`
     - **Python**: `python application.py`
@@ -245,7 +249,7 @@ Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud a
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Observa la salida y mira cómo cambió el correo electrónico en función de tus claras instrucciones.
@@ -264,7 +268,7 @@ Ahora que ha configurado la aplicación, ejecútela para enviarle la solicitud a
     - Rescue name is Contoso 
     - It specializes in elephants, as well as zebras and giraffes 
     - Call for donations to be given at our website 
-    \n Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
+    Include a list of the current animals we have at our rescue after the signature, in the form of a table. These animals include elephants, zebras, gorillas, lizards, and jackrabbits.
     ```
 
 1. Observa la salida. Esta vez es probable que veas el correo electrónico con un formato similar, pero con un tono mucho más informal. Incluso puede que incluya algún chiste.

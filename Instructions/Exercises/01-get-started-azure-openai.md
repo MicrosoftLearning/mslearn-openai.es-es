@@ -14,47 +14,44 @@ Este ejercicio dura aproximadamente **30** minutos.
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
-Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
+Si aún no tienes uno, aprovisiona un recurso de Azure OpenAI en la suscripción a Azure.
 
-1. Inicie sesión en **Azure Portal** en `https://portal.azure.com`.
-2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
-    - **Suscripción**: *Selección de una suscripción de Azure aprobada para acceder al servicio Azure OpenAI*
-    - **Grupo de recursos**: *elija o cree un grupo de recursos*
-    - **Región**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Australia
-        - Este de Canadá
+1. Inicia sesión en **Azure Portal** en `https://portal.azure.com`.
+2. Crea un recurso de **Azure OpenAI** con la siguiente configuración:
+    - **Suscripción**: *selecciona una suscripción a Azure aprobada para acceder al servicio Azure OpenAI*
+    - **Grupo de recursos**: *elige o crea un grupo de recursos*
+    - **Región**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
         - Este de EE. UU.
         - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
         - Centro-Norte de EE. UU
+        - Centro-sur de EE. UU.
         - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
-    - **Nombre**: *nombre único que prefiera*
+        - Oeste de EE. UU.
+        - Oeste de EE. UU. 3
+    - **Nombre**: *nombre único que prefieras*
     - **Plan de tarifa**: estándar S0
 
-    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
+    > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tengas que crear otro recurso en otra región.
 
-3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
+3. Espera a que la implementación finalice. Luego, ve al recurso de Azure OpenAI implementado en Azure Portal.
 
 ## Implementar un modelo
 
 Azure proporciona un portal basado en web denominado **Portal de Azure AI Foundry** que puedes usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, usa Portal de Azure AI Foundry para implementar un modelo.
 
-> **Nota**: a medida que usas Portal de Azure AI Foundry, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
+> **Nota**: a medida que usas Portal de Azure AI Foundry, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puedes cerrarlos y seguir los pasos descritos en este ejercicio.
 
 1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **Portal de Azure AI Foundry** (anteriormente AI Studio).
 1. En Portal de Azure AI Foundry, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-4o** con la siguiente configuración:
     - **Nombre de implementación**: *nombre único que prefieras*
     - **Modelo**: gpt-4o
-    - **Versión del modelo**: *usar la versión predeterminada*
+    - **Versión del modelo**: *usa la versión predeterminada*
     - **Tipo de implementación**: Estándar
     - **Límite de velocidad de tokens por minuto**: 5000\*
     - **Filtro de contenido**: valor predeterminado
     - **Habilitación de la cuota dinámica**: deshabilitada
 
-    > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
+    > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que dejas capacidad para otras personas que usan la misma suscripción.
 
 ## Uso del área de juegos de chat
 
@@ -165,4 +162,4 @@ Ahora que has explorado algunas de las funcionalidades de un modelo de IA genera
 
 ## Limpieza
 
-Cuando haya terminado de usar el recurso de Azure OpenAI, recuerde eliminar la implementación o todo el recurso en **Azure Portal**, en `https://portal.azure.com`.
+Cuando hayas terminado de usar el recurso de Azure OpenAI, recuerda eliminar la implementación o todo el recurso en **Azure Portal**, en `https://portal.azure.com`.

@@ -14,53 +14,50 @@ Este ejercicio dura aproximadamente **25** minutos.
 
 ## Aprovisionamiento de un recurso de Azure OpenAI
 
-Si aún no tiene uno, aprovisione un recurso de Azure OpenAI en la suscripción de Azure.
+Si aún no tienes uno, aprovisiona un recurso de Azure OpenAI en la suscripción a Azure.
 
-1. Inicie sesión en **Azure Portal** en `https://portal.azure.com`.
-2. Cree un recurso de **Azure OpenAI** con la siguiente configuración:
-    - **Suscripción**: *Selección de una suscripción de Azure aprobada para acceder al servicio Azure OpenAI*
-    - **Grupo de recursos**: *elija o cree un grupo de recursos*
-    - **Región**: *Elija de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Australia
-        - Este de Canadá
+1. Inicia sesión en **Azure Portal** en `https://portal.azure.com`.
+2. Crea un recurso de **Azure OpenAI** con la siguiente configuración:
+    - **Suscripción**: *selecciona una suscripción a Azure aprobada para acceder al servicio Azure OpenAI*
+    - **Grupo de recursos**: *elige o crea un grupo de recursos*
+    - **Región**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
         - Este de EE. UU.
         - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
         - Centro-Norte de EE. UU
+        - Centro-sur de EE. UU.
         - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
-    - **Nombre**: *nombre único que prefiera*
+        - Oeste de EE. UU.
+        - Oeste de EE. UU. 3
+    - **Nombre**: *nombre único que prefieras*
     - **Plan de tarifa**: estándar S0
 
     > \* Los recursos de Azure OpenAI están restringidos por cuotas regionales. Las regiones enumeradas incluyen la cuota predeterminada para los tipos de modelo usados en este ejercicio. Elegir aleatoriamente una región reduce el riesgo de que una sola región alcance su límite de cuota en escenarios en los que se comparte una suscripción con otros usuarios. En caso de que se alcance un límite de cuota más adelante en el ejercicio, es posible que tenga que crear otro recurso en otra región.
 
-3. Espere a que la implementación finalice. Luego, vaya al recurso de Azure OpenAI implementado en Azure Portal.
+3. Espere a que la implementación finalice. Luego, ve al recurso de Azure OpenAI implementado en Azure Portal.
 
 ## Implementar un modelo
 
 Azure proporciona un portal basado en web denominado **Portal de Azure AI Foundry** que puedes usar para implementar, administrar y explorar modelos. Para iniciar la exploración de Azure OpenAI, usa Portal de Azure AI Foundry para implementar un modelo.
 
-> **Nota**: a medida que usas Portal de Azure AI Foundry, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puede cerrarlos y seguir los pasos descritos en este ejercicio.
+> **Nota**: a medida que usas Portal de Azure AI Foundry, es posible que se muestren cuadros de mensaje que sugieren tareas que se van a realizar. Puedes cerrarlos y seguir los pasos descritos en este ejercicio.
 
 1. En Azure Portal, en la página **Información general** del recurso de Azure OpenAI, desplázate hacia abajo hasta la sección **Comenzar** y selecciona el botón para ir a **Portal de Azure AI Foundry** (anteriormente AI Studio).
 1. En Portal de Azure AI Foundry, en el panel de la izquierda, selecciona la página **Implementaciones** y consulta las implementaciones de modelos existentes. Si aún no tienes una, crea una nueva implementación del modelo **gpt-4o** con la siguiente configuración:
     - **Nombre de implementación**: *nombre único que prefieras*
     - **Modelo**: gpt-4o
-    - **Versión del modelo**: *usar la versión predeterminada*
+    - **Versión del modelo**: *usa la versión predeterminada*
     - **Tipo de implementación**: Estándar
     - **Límite de velocidad de tokens por minuto**: 5000\*
     - **Filtro de contenido**: valor predeterminado
     - **Habilitación de la cuota dinámica**: deshabilitada
 
-    > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que deja capacidad para otras personas que usan la misma suscripción.
+    > \* Un límite de velocidad de 5000 tokens por minuto es más que adecuado para completar este ejercicio, al tiempo que dejas capacidad para otras personas que usan la misma suscripción.
 
 ## Generación de código en el área de juegos de chat
 
 Antes de usarlo en la aplicación, examine la forma en que Azure OpenAI puede generar y explicar código en el área de juegos de chat.
 
-1. En la sección **Área de juego**, seleccione la página **Chat**. La página **Chat** del área de juegos consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
+1. En la sección **Área de juego**, selecciona la página **Chat**. La página **Chat** del área de juegos consta de una fila de botones y dos paneles principales (que se pueden organizar horizontalmente de derecha a izquierda o verticalmente de arriba a abajo en función de la resolución de pantalla):
     - **Configuración**: se usa para seleccionar la implementación, definir el mensaje del sistema y establecer parámetros para interactuar con la implementación.
     - **Sesión de chat**: se usa para enviar mensajes de chat y ver respuestas.
 1. En **Implementaciones**, asegúrate de que la implementación del modelo esté seleccionada.
@@ -117,9 +114,9 @@ Antes de usarlo en la aplicación, examine la forma en que Azure OpenAI puede ge
 
 Ahora vamos a explorar cómo crear una aplicación personalizada que use el servicio Azure OpenAI para generar código. Desarrollará la aplicación con Visual Studio Code. Los archivos de código de la aplicación se han proporcionado en un repositorio de GitHub.
 
-> **Sugerencia**: Si ya ha clonado el repositorio **mslearn-openai**, ábralo en Visual Studio Code. De lo contrario, siga estos pasos para clonarlo en el entorno de desarrollo.
+> **Sugerencia**: si ya has clonado el repositorio **mslearn-openai**, ábrelo en Visual Studio Code. De lo contrario, sigue estos pasos para clonarlo en el entorno de desarrollo.
 
-1. Inicie Visual Studio Code.
+1. Inicia Visual Studio Code.
 2. Abre la paleta de comandos (Mayús + Ctrl + P) o **View** > **Command Palette...**) y ejecuta un comando **Git: Clone** para clonar el repositorio `https://github.com/MicrosoftLearning/mslearn-openai` en una carpeta local (no importa qué carpeta).
 3. Cuando se haya clonado el repositorio, abre la carpeta en Visual Studio Code.
 
@@ -134,7 +131,7 @@ Ahora vamos a explorar cómo crear una aplicación personalizada que use el serv
 Se han proporcionado aplicaciones para C# y Python, así como un archivo de texto de ejemplo que usará para probar el resumen. Las dos aplicaciones tienen la misma funcionalidad. En este ejercicio, completará algunas partes clave de la aplicación para habilitarla con el recurso de Azure OpenAI.
 
 1. En Visual Studio Code, en el panel **Explorador**, vaya a la carpeta **Labfiles/04-code-generation** y expanda la carpeta **CSharp** o **Python** según sus preferencias de lenguaje. Cada carpeta contiene los archivos específicos del lenguaje de una aplicación en la que va a integrar la funcionalidad de OpenAI de Azure.
-2. Haga clic con el botón derecho en la carpeta **CSharp** o **Python** que contiene los archivos de código y abra un terminal integrado. A continuación, instale el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para sus preferencias de lenguaje:
+2. Haz clic con el botón derecho en la carpeta **CSharp** o **Python** que contiene los archivos de código y abre un terminal integrado. A continuación, instala el paquete del SDK de Azure OpenAI mediante la ejecución del comando adecuado para tu preferencia de idioma:
 
     **C#:**
 
@@ -148,7 +145,7 @@ Se han proporcionado aplicaciones para C# y Python, así como un archivo de text
     pip install openai==1.65.2
     ```
 
-3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abra el archivo de configuración para su lenguaje preferido.
+3. En el panel **Explorador**, en la carpeta **CSharp** o **Python**, abre el archivo de configuración para tu idioma preferido.
 
     - **C#**: appsettings.json
     - **Python**: .env
@@ -156,7 +153,7 @@ Se han proporcionado aplicaciones para C# y Python, así como un archivo de text
 4. Actualiza los valores de configuración para incluir:
     - El **punto de conexión** y una **clave** del recurso de Azure OpenAI que has creado (disponible en la página **Claves y punto de conexión** del recurso de Azure OpenAI en Azure Portal)
     - El **nombre de implementación** que especificaste para la implementación del modelo (disponible en la página **Implementaciones** de Inteligencia artificial de Portal de Azure AI Foundry).
-5. Guarde el archivo de configuración.
+5. Guarda el archivo de configuración.
 
 ## Adición de código para usar el modelo de servicio de Azure OpenAI
 
@@ -210,7 +207,7 @@ Ahora que ha configurado la aplicación, ejecútela para intentar generar códig
 > **Nota**: Algunos usuarios pueden experimentar una limitación de volumen si se llama al modelo con demasiada frecuencia. Si se produce un error relacionado con el límite de volumen de tokens, espere un minuto y vuelva a intentarlo.
 
 1. En el panel **Explorador**, expanda la carpeta **Labfiles/04-code-generation/sample-code** y revise la función y la aplicación *go-fish* para su lenguaje. Estos archivos se usarán para las tareas de la aplicación.
-2. En el panel de terminal interactivo, asegúrese de que el contexto de la carpeta es la carpeta del lenguaje que prefiera. Después, escriba el siguiente comando para ejecutar la aplicación.
+2. En el panel de terminal interactivo, asegúrese de que el contexto de la carpeta es la carpeta del lenguaje que prefiera. Después, escribe el siguiente comando para ejecutar la aplicación.
 
     - **C#**: `dotnet run`
     - **Python**: `python code-generation.py`
@@ -252,4 +249,4 @@ Ahora que ha configurado la aplicación, ejecútela para intentar generar códig
 
 ## Limpiar
 
-Cuando haya terminado de usar el recurso de Azure OpenAI, recuerde eliminar la implementación o todo el recurso en **Azure Portal**, en `https://portal.azure.com`.
+Cuando hayas terminado de usar el recurso de Azure OpenAI, recuerda eliminar la implementación o todo el recurso en **Azure Portal**, en `https://portal.azure.com`.

@@ -21,16 +21,13 @@ Si aún no tienes uno, aprovisiona un recurso de Azure OpenAI en la suscripción
     - **Suscripción**: *selecciona una suscripción a Azure aprobada para acceder al servicio Azure OpenAI*
     - **Grupo de recursos**: *elige o crea un grupo de recursos*
     - **Región**: *elige de forma **aleatoria** cualquiera de las siguientes regiones*\*
-        - Este de Australia
-        - Este de Canadá
         - Este de EE. UU.
         - Este de EE. UU. 2
-        - Centro de Francia
-        - Japón Oriental
         - Centro-Norte de EE. UU
+        - Centro-sur de EE. UU.
         - Centro de Suecia
-        - Norte de Suiza
-        - Sur de Reino Unido 2
+        - Oeste de EE. UU.
+        - Oeste de EE. UU. 3
     - **Nombre**: *nombre único que prefieras*
     - **Plan de tarifa**: estándar S0
 
