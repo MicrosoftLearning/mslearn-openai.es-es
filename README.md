@@ -1,3 +1,5 @@
+**⚠️ This GitHub repo will retire on 28th November 2025.** 
+
 # Desarrollo de soluciones de inteligencia artificial con Azure OpenAI
 
 > **NOTA**: Este repositorio se va a archivar y ya no se mantiene. Visite la ruta de aprendizaje [Aplicaciones de inteligencia artificial generativa](https://learn.microsoft.com/en-us/training/paths/create-custom-copilots-ai-studio/) y el [repositorio de laboratorio asociado](https://github.com/MicrosoftLearning/mslearn-ai-studio) o la [documentación de Fundición de IA de Azure](https://learn.microsoft.com/en-us/azure/ai-foundry/)
